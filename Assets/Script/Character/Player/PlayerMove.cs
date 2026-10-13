@@ -79,7 +79,23 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // 移動方向に合わせてキャラクターの向きを変える
-        if (spriteRenderer != null)
+
+
+        // 攻撃中かどうかを確認
+        bool isAttacking = false;
+
+        if (animator != null)
+        {
+            AnimatorStateInfo state =
+                animator.GetCurrentAnimatorStateInfo(0);
+
+            isAttacking =
+                state.IsName("Attack") ||
+                state.IsName("Attack2");
+        }
+
+        // 攻撃中でなければ、移動方向に合わせて向きを変える
+        if (!isAttacking && spriteRenderer != null)
         {
             if (moveInput < 0f)
             {
@@ -132,6 +148,25 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
         }
 
+        AnimatorStateInfo state =
+        animator.GetCurrentAnimatorStateInfo(0);
+
+        bool isAttacking =
+            state.IsName("Attack") ||
+            state.IsName("Attack2");
+
+        if (isAttacking)
+        {
+            rb.linearVelocity = new Vector2(
+                0f,
+                rb.linearVelocity.y
+            );
+
+            //攻撃中にジャンプ入力を保持しない
+            jumpRequested = false;
+
+            return;
+        }
 
         // -------------------------
         // 2. 左右移動
