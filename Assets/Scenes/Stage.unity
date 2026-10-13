@@ -497,6 +497,8 @@ GameObject:
   - component: {fileID: 1154564497}
   - component: {fileID: 1154564496}
   - component: {fileID: 1154564499}
+  - component: {fileID: 1154564500}
+  - component: {fileID: 1154564501}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -685,6 +687,35 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1154564500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154564493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23cef54842a270458537d81d8791605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
+--- !u!114 &1154564501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154564493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f48e22c345e9d54c929a0e43aab0c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  maxHP: 100
+  currentHP: 100
+  attackPower: 10
+  maxExplorationTime: 60
+  currentExplorationTime: 60
 --- !u!1 &1310222035
 GameObject:
   m_ObjectHideFlags: 0
