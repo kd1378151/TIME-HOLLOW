@@ -41,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;       // 地面にいるかどうか
 
 
+    //プレイヤーのパラメータ
+    private PlayerStatus playerStatus;
+
+
     // =========================
     // 初期設定
     // =========================
@@ -55,6 +59,9 @@ public class PlayerMovement : MonoBehaviour
 
         // 子オブジェクトにあるSpriteRendererを取得
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        //プレイヤーのパラメータ取得
+        playerStatus = GetComponent<PlayerStatus>();
     }
 
 
@@ -64,6 +71,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        //死んでいるときまたは移動中はそうさできない
+        if (playerStatus != null && !playerStatus.CanControl)
+        {
+            return;
+        }
+
         // 攻撃中は移動・ジャンプ・反転の入力を受け付けない
         if (IsAttacking())
         {

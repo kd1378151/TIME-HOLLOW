@@ -3,24 +3,57 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    // 攻撃アニメーションを再生するAnimator
-    private Animator animator;
+    [Header("攻撃設定")]
+    public int attackPower = 10;
 
-    void Start()
+    [Header("攻撃判定のコライダー")]
+    public BoxCollider2D attackCollider;
+
+    // 1回の攻撃でダメージを与えたか
+    private bool hasHit = false;
+
+    // 攻撃判定を開始
+    public void StartAttack()
     {
-        // このオブジェクトに付いているAnimatorを取得
-        animator = GetComponent<Animator>();
+        hasHit = false;
+
+        if (attackCollider != null)
+        {
+            attackCollider.enabled = true;
+        }
     }
 
-    void Update()
+    // 攻撃判定を終了
+    public void EndAttack()
     {
-        // Lキーを押した瞬間に攻撃する
-        if (Input.GetKeyDown(KeyCode.L))
+        if (attackCollider != null)
         {
-            if (animator != null)
-            {
-                animator.SetTrigger("Attack");
-            }
+            attackCollider.enabled = false;
         }
+    }
+
+    // 攻撃判定が何かに触れたとき
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (hasHit)
+        {
+            return;
+        }
+
+        // 接触した相手からPlayerStatusを探す
+        PlayerStatus playerStatus =
+            other.GetComponentInParent<PlayerStatus>();
+
+        if (playerStatus == null)
+        {
+            return;
+        }
+
+        // 1回の攻撃で1回だけダメージを与える
+        hasHit = true;
+
+        // 敵の攻撃力をプレイヤーに与える
+        playerStatus.TakeDamage(attackPower);
+
     }
 }

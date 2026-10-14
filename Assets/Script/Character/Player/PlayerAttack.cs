@@ -8,8 +8,8 @@ public class PlayerAttack : MonoBehaviour
     [Header("攻撃判定")]
     public BoxCollider2D attackCollider;
 
-    [Header("攻撃力")]
-    public int attackPower = 10;
+    // プレイヤーのパラメータを管理するスクリプト
+    private PlayerStatus playerStatus;
 
     // 攻撃判定が有効な間、同じ敵への連続ヒットを防ぐ
     private bool hasHit = false;
@@ -18,6 +18,9 @@ public class PlayerAttack : MonoBehaviour
     {
         // 子オブジェクトにあるAnimatorを取得
         animator = GetComponentInChildren<Animator>();
+
+        //プレイヤーのパラメータ
+        playerStatus = GetComponent<PlayerStatus>();
 
         // ゲーム開始時は攻撃判定を無効にする
         if (attackCollider != null)
@@ -28,6 +31,11 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
+        if (playerStatus != null && !playerStatus.CanControl)
+        {
+            return;
+        }
+
         if (animator == null) return;
 
         // 現在のアニメーションステートを取得
@@ -87,8 +95,8 @@ public class PlayerAttack : MonoBehaviour
 
         if (enemy != null)
         {
-            enemy.TakeDamage(attackPower);
-
+            // 敵にダメージを与える
+            enemy.TakeDamage(playerStatus.attackPower);
             // 1回の攻撃で同じ敵に何度もダメージを与えない
             hasHit = true;
         }

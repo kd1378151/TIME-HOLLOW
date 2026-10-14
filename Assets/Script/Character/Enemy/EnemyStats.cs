@@ -66,9 +66,9 @@ public class EnemyStats : MonoBehaviour
         );
     }
 
-    // 死亡モーションが終わったら呼び出す
+    // 死亡モーションが終わったらスライムを削除する
     public void FinishDeath()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
