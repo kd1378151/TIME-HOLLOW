@@ -18,6 +18,9 @@ public class EnemyAI : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
+    // 攻撃判定の処理
+    public EnemyAttack enemyAttack;
+
     // 攻撃中かどうか
     private bool isAttacking = false;
 
@@ -147,6 +150,24 @@ public class EnemyAI : MonoBehaviour
         if (animator != null)
         {
             animator.SetFloat("Speed", 0f);
+        }
+    }
+
+    // Animation Event：攻撃判定を開始
+    public void StartAttackHit()
+    {
+        if (enemyAttack != null)
+        {
+            enemyAttack.StartAttack();
+        }
+    }
+
+    // Animation Event：攻撃判定を終了
+    public void EndAttackHit()
+    {
+        if (enemyAttack != null)
+        {
+            enemyAttack.EndAttack();
         }
     }
 }
