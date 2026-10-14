@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {
+    #region Prefabs
+    [SerializeField] private GameObject m_appRootPrefab;
+    #endregion
+
     #region Variables
     public bool m_timerEnabled = true;
     [SerializeField] private float m_timerMaxTime;
@@ -24,10 +28,20 @@ public class GameMaster : MonoBehaviour
 
     [SerializeField] private GameObject m_spawnPoint;
     #endregion
+    #region GUI
+    [SerializeField] private GameObject m_selectMenu;
+    #endregion
 
     #region Unity Methods
     void Start()
     {
+        SceneFlowManager _manager = FindAnyObjectByType<SceneFlowManager>();
+
+        if (_manager == null)
+        {
+            CreateAppRoot();
+        }
+
         NewGameStart();
     }
 
@@ -35,8 +49,7 @@ public class GameMaster : MonoBehaviour
     {
         if (m_isTimeOver)
         {
-            RestartGame();
-            return;
+            ShowSelectMenu();
         }
 
         if (m_timerEnabled)
@@ -78,9 +91,10 @@ public class GameMaster : MonoBehaviour
         }
     }
 
-    void RestartGame()
+    public void RestartGame()
     {
         NewGameStart();
+        ShowSelectMenu(false);
     }
 
     void NewGameStart()
@@ -101,6 +115,22 @@ public class GameMaster : MonoBehaviour
         {
             m_playerController.transform.position =
                 m_spawnPoint.transform.position;
+        }
+    }
+
+    void CreateAppRoot()
+    {
+      if (m_appRootPrefab != null)
+        {
+            Instantiate(m_appRootPrefab);
+        }
+    }
+
+    void ShowSelectMenu(bool isShow = true)
+    {
+        if (m_selectMenu != null)
+        {
+            m_selectMenu.SetActive(isShow);
         }
     }
 }
