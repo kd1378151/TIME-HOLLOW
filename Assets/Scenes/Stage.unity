@@ -374,7 +374,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329555984}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -845,59 +845,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
---- !u!1 &776712493
-=======
---- !u!1 &886221717
->>>>>>> dd30622c508386c182b731c603ac4a2b84c9bcd4
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 776712494}
-  - component: {fileID: 776712495}
-  m_Layer: 5
-  m_Name: SelectMenu
-=======
-  - component: {fileID: 886221718}
-  m_Layer: 9
-  m_Name: GroundCheck
->>>>>>> dd30622c508386c182b731c603ac4a2b84c9bcd4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-<<<<<<< HEAD
-  m_IsActive: 0
 --- !u!224 &776712494
 RectTransform:
-=======
-  m_IsActive: 1
---- !u!4 &886221718
-Transform:
->>>>>>> dd30622c508386c182b731c603ac4a2b84c9bcd4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 776712493}
-=======
   m_GameObject: {fileID: 886221717}
-  serializedVersion: 2
->>>>>>> dd30622c508386c182b731c603ac4a2b84c9bcd4
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-<<<<<<< HEAD
   m_Children:
-  - {fileID: 1516379805}
   - {fileID: 329555985}
+  - {fileID: 1516379805}
   m_Father: {fileID: 1311799633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -911,17 +872,29 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 776712493}
+  m_GameObject: {fileID: 886221717}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 141bdfb3739f81841a8e8dc43206d0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverSelectMenuUI
-=======
-  m_Children: []
-  m_Father: {fileID: 1191793007}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> dd30622c508386c182b731c603ac4a2b84c9bcd4
+--- !u!1 &886221717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 776712494}
+  - component: {fileID: 776712495}
+  m_Layer: 5
+  m_Name: SelectMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1154564493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,8 +1246,7 @@ Transform:
   m_LocalPosition: {x: 2.87, y: -2.93, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 886221718}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1191793008
@@ -2467,7 +2439,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516379804}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2874,7 +2846,7 @@ MonoBehaviour:
   m_dispayTime: 0
   m_playerController: {fileID: 1154564499}
   m_spawnPoint: {fileID: 394192162}
-  m_selectMenu: {fileID: 776712493}
+  m_selectMenu: {fileID: 886221717}
 --- !u!4 &1699736972
 Transform:
   m_ObjectHideFlags: 0
@@ -3217,11 +3189,8 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1990717887}
   - {fileID: 1154564495}
-<<<<<<< HEAD
   - {fileID: 1191793007}
-=======
   - {fileID: 1699736972}
   - {fileID: 394192161}
   - {fileID: 1311799633}
   - {fileID: 173576125}
->>>>>>> b776fc2771057deae2086f82581e8063bf815f13

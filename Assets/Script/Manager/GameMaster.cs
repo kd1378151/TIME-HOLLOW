@@ -75,6 +75,7 @@ public class GameMaster : MonoBehaviour
         if (m_times >= m_timerMaxTime)
         {
             m_isTimeOver = true;
+            
         }
 
         if (m_timeSlider != null)
@@ -131,6 +132,10 @@ public class GameMaster : MonoBehaviour
         if (m_selectMenu != null)
         {
             m_selectMenu.SetActive(isShow);
+        }
+        else
+        {
+            Debug.LogWarning("Select Menu is not assigned.");
         }
     }
 }
