@@ -64,38 +64,28 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // 最初に入力をリセット
+        // 攻撃中は移動・ジャンプ・反転の入力を受け付けない
+        if (IsAttacking())
+        {
+            moveInput = 0f;
+            jumpRequested = false;
+            return;
+        }
+
         moveInput = 0f;
 
-        // Aキーで左に移動
+        // 左右移動
         if (Input.GetKey(KeyCode.A))
         {
             moveInput = -1f;
         }
-        // Dキーで右に移動
         else if (Input.GetKey(KeyCode.D))
         {
             moveInput = 1f;
         }
 
-        // 移動方向に合わせてキャラクターの向きを変える
-
-
-        // 攻撃中かどうかを確認
-        bool isAttacking = false;
-
-        if (animator != null)
-        {
-            AnimatorStateInfo state =
-                animator.GetCurrentAnimatorStateInfo(0);
-
-            isAttacking =
-                state.IsName("Attack") ||
-                state.IsName("Attack2");
-        }
-
-        // 攻撃中でなければ、移動方向に合わせて向きを変える
-        if (!isAttacking && spriteRenderer != null)
+        // 移動方向に合わせて向きを変更
+        if (spriteRenderer != null)
         {
             if (moveInput < 0f)
             {
@@ -107,14 +97,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Spaceキーを押した瞬間にジャンプを記録
-        // 実際にジャンプできるかはFixedUpdateで判定する
+        // ジャンプ入力
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jumpRequested = true;
         }
     }
-
 
     // =========================
     // 移動・地面判定・アニメーション
@@ -148,12 +136,7 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
         }
 
-        AnimatorStateInfo state =
-        animator.GetCurrentAnimatorStateInfo(0);
-
-        bool isAttacking =
-            state.IsName("Attack") ||
-            state.IsName("Attack2");
+        bool isAttacking = IsAttacking();
 
         if (isAttacking)
         {
@@ -249,5 +232,36 @@ public class PlayerMovement : MonoBehaviour
             groundCheck.position,
             groundCheckRadius
         );
+    }
+
+    // 攻撃中、または攻撃ステートへの遷移中か確認する
+    private bool IsAttacking()
+    {
+        if (animator == null) return false;
+
+        // 現在再生しているステートを確認
+        AnimatorStateInfo current =
+            animator.GetCurrentAnimatorStateInfo(0);
+
+        if (current.IsName("Attack") ||
+            current.IsName("Attack2"))
+        {
+            return true;
+        }
+
+        // 攻撃アニメーションへの切り替え中も操作を止める
+        if (animator.IsInTransition(0))
+        {
+            AnimatorStateInfo next =
+                animator.GetNextAnimatorStateInfo(0);
+
+            if (next.IsName("Attack") ||
+                next.IsName("Attack2"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
