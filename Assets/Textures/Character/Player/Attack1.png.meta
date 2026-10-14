@@ -401,50 +401,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Attack1_8
-      rect:
-        serializedVersion: 2
-        x: 578
-        y: 83
-        width: 63
-        height: 77
-      alignment: 9
-      pivot: {x: 0.6570221, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c48a1f6eacc909a47a5a40168857bada
-      internalID: 3650157944247549718
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack1_9
-      rect:
-        serializedVersion: 2
-        x: 323
-        y: 83
-        width: 62
-        height: 70
-      alignment: 9
-      pivot: {x: 0.7249928, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 345ef1cc5674c0548a5c10d83de88731
-      internalID: -1935618983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
