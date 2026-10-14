@@ -1,10 +1,17 @@
 
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {
     #region Variables
+    public bool m_timerEnabled = true;
     [SerializeField] private float m_timerMaxTime;
+    public Slider m_timeSlider;
+    public Image m_timeSliderColor;
+
+    public TextMeshProUGUI m_timeText;
 
     public float m_dispayTime;
 
@@ -32,7 +39,10 @@ public class GameMaster : MonoBehaviour
             return;
         }
 
-        TimerUpdate();
+        if (m_timerEnabled)
+        {
+            TimerUpdate();
+        }
     }
     #endregion
 
@@ -52,6 +62,19 @@ public class GameMaster : MonoBehaviour
         if (m_times >= m_timerMaxTime)
         {
             m_isTimeOver = true;
+        }
+
+        if (m_timeSlider != null)
+        {
+            m_timeSlider.value = m_dispayTime / m_timerMaxTime;
+        }
+        if(m_timeSliderColor != null)
+        {
+            m_timeSliderColor.color = Color.Lerp(Color.red, Color.green, m_dispayTime / m_timerMaxTime);
+        }
+        if (m_timeText != null)
+        {
+            m_timeText.text = m_dispayTime.ToString("F0");
         }
     }
 
