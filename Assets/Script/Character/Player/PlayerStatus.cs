@@ -8,7 +8,8 @@ public class PlayerStatus : MonoBehaviour
     public int currentHP = 100;
 
     [Header("攻撃力")]
-    public int attackPower = 10;
+    public int attackPower1 = 10;  // 攻撃1の攻撃力
+    public int attackPower2 = 25;  // 攻撃2の攻撃力
 
     [Header("探索時間")]
     public float maxExplorationTime = 60f;
@@ -22,6 +23,9 @@ public class PlayerStatus : MonoBehaviour
 
     // 死亡したかどうか
     private bool isDead = false;
+
+    //プレイヤーの攻撃ヒット
+    private DamageFlash damageFlash;
 
     // 移動・攻撃が可能かをほかのスクリプトから確認する
     public bool CanControl
@@ -44,6 +48,9 @@ public class PlayerStatus : MonoBehaviour
 
         // Rigidbody2Dを取得する
         rb = GetComponent<Rigidbody2D>();
+
+        //プレイヤーが攻撃を受けた時の演出
+        damageFlash = GetComponentInChildren<DamageFlash>();
     }
 
     // 敵からダメージを受けたときに呼ばれる
@@ -76,6 +83,12 @@ public class PlayerStatus : MonoBehaviour
             {
                 animator.SetTrigger("TakeHit");
             }
+        }
+
+        // ダメージを受けたら白く点滅する
+        if (damageFlash != null)
+        {
+            damageFlash.Flash();
         }
     }
 

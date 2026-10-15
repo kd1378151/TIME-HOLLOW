@@ -12,6 +12,9 @@ public class EnemyStats : MonoBehaviour
     private Animator animator;
     private bool isDead = false;
 
+    //攻撃を受けた時の演出
+    private DamageFlash damageFlash;
+
     void Start()
     {
         // 初期HPを最大HPにする
@@ -19,6 +22,9 @@ public class EnemyStats : MonoBehaviour
 
         // Animatorを取得する
         animator = GetComponent<Animator>();
+
+        //攻撃を受けた時の演出
+        damageFlash = GetComponentInChildren<DamageFlash>();
     }
 
     // プレイヤーの攻撃を受けたときに呼び出す
@@ -34,8 +40,6 @@ public class EnemyStats : MonoBehaviour
         currentHP -= damage;
         currentHP = Mathf.Max(currentHP, 0);
 
-        Debug.Log(gameObject.name + " のHP：" + currentHP);
-
         // HPが0になったら死亡
         if (currentHP <= 0)
         {
@@ -49,6 +53,12 @@ public class EnemyStats : MonoBehaviour
                 animator.SetTrigger("Hurt");
             }
         }
+
+        // ダメージを受けたら白く点滅する
+        if (damageFlash != null)
+        {
+            damageFlash.Flash();
+        }
     }
 
     void Die()
@@ -60,13 +70,9 @@ public class EnemyStats : MonoBehaviour
         {
             animator.SetTrigger("Death");
         }
-
-        Debug.Log(
-            gameObject.name + " を倒した！獲得経験値：" + experienceReward
-        );
     }
 
-    // 死亡モーションが終わったらスライムを削除する
+    // 死亡モーションが終わったら敵を削除する
     public void FinishDeath()
     {
         Destroy(gameObject);
