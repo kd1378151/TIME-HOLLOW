@@ -95,9 +95,29 @@ public class PlayerAttack : MonoBehaviour
 
         if (enemy != null)
         {
+
+            if (playerStatus == null) return;
+
+            // 現在の攻撃アニメーションを取得
+            AnimatorStateInfo state =
+                animator.GetCurrentAnimatorStateInfo(0);
+
+            int damage;
+
+            // 攻撃2なら攻撃力2、それ以外は攻撃力1
+            if (state.IsName("Attack2"))
+            {
+                damage = playerStatus.attackPower2;
+            }
+            else
+            {
+                damage = playerStatus.attackPower1;
+            }
+
             // 敵にダメージを与える
-            enemy.TakeDamage(playerStatus.attackPower);
-            // 1回の攻撃で同じ敵に何度もダメージを与えない
+            enemy.TakeDamage(damage);
+
+            // 1回の攻撃で何度もダメージを与えない
             hasHit = true;
         }
     }
