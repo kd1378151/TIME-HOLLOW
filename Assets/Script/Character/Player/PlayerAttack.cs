@@ -81,6 +81,8 @@ public class PlayerAttack : MonoBehaviour
     }
 
     // 攻撃判定が敵に触れたとき
+
+    // 攻撃判定が敵に触れたとき
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (attackCollider == null ||
@@ -90,35 +92,45 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
-        // 接触した相手、または親オブジェクトから敵のHPを取得
+        if (playerStatus == null) return;
+
+        // 現在の攻撃アニメーションを取得
+        AnimatorStateInfo state =
+            animator.GetCurrentAnimatorStateInfo(0);
+
+        // 攻撃1か攻撃2かでダメージを決める
+        int damage;
+
+        if (state.IsName("Attack2"))
+        {
+            damage = playerStatus.attackPower2;
+        }
+        else
+        {
+            damage = playerStatus.attackPower1;
+        }
+
+        // ゴーレム専用のステータスを取得
+        GolemStats golem = other.GetComponentInParent<GolemStats>();
+
+        if (golem != null)
+        {
+            // ゴーレムにダメージを与える
+            golem.TakeDamage(damage);
+
+            hasHit = true;
+            return;
+        }
+
+        // 既存の敵ステータスも引き続き利用する
         EnemyStats enemy = other.GetComponentInParent<EnemyStats>();
 
         if (enemy != null)
         {
-
-            if (playerStatus == null) return;
-
-            // 現在の攻撃アニメーションを取得
-            AnimatorStateInfo state =
-                animator.GetCurrentAnimatorStateInfo(0);
-
-            int damage;
-
-            // 攻撃2なら攻撃力2、それ以外は攻撃力1
-            if (state.IsName("Attack2"))
-            {
-                damage = playerStatus.attackPower2;
-            }
-            else
-            {
-                damage = playerStatus.attackPower1;
-            }
-
-            // 敵にダメージを与える
             enemy.TakeDamage(damage);
 
-            // 1回の攻撃で何度もダメージを与えない
             hasHit = true;
         }
     }
+
 }
