@@ -7,7 +7,13 @@ public class EnemyStats : MonoBehaviour
     public int maxHP = 30;
     public int currentHP;
     public int attackPower = 5;
-    public int experienceReward = 10;
+
+    [Header("よろけ設定")]
+    public bool canFlinch = true;
+    public bool IsTakingHit { get; private set; } = false;
+
+    //スライムのAIスクリプト
+    private EnemyAI enemyAI;
 
     private Animator animator;
     private bool isDead = false;
@@ -25,6 +31,9 @@ public class EnemyStats : MonoBehaviour
 
         //攻撃を受けた時の演出
         damageFlash = GetComponentInChildren<DamageFlash>();
+
+        //スライムのAIスクリプト
+        enemyAI = GetComponent<EnemyAI>();
     }
 
     // プレイヤーの攻撃を受けたときに呼び出す
@@ -40,18 +49,21 @@ public class EnemyStats : MonoBehaviour
         currentHP -= damage;
         currentHP = Mathf.Max(currentHP, 0);
 
+        // 攻撃されたらプレイヤーを発見する
+        if (enemyAI != null)
+        {
+            enemyAI.DetectPlayerWhenAttacked();
+        }
+
         // HPが0になったら死亡
         if (currentHP <= 0)
         {
             Die();
         }
-        else
+        else if (canFlinch && animator != null)
         {
-            // 生きていればよろけモーションを再生
-            if (animator != null)
-            {
-                animator.SetTrigger("Hurt");
-            }
+            IsTakingHit = true;
+            animator.SetTrigger("Hurt");
         }
 
         // ダメージを受けたら白く点滅する
@@ -76,5 +88,13 @@ public class EnemyStats : MonoBehaviour
     public void FinishDeath()
     {
         Destroy(gameObject);
+    }
+
+    // よろけアニメーション終了時に呼び出す
+    // よろけアニメーション終了時に呼び出す
+    public void EndHitReaction()
+    {
+        IsTakingHit = false;
+        Debug.Log("よろけ終了：移動を再開できます");
     }
 }

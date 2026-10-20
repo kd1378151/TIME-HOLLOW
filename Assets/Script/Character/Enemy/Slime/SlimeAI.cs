@@ -20,6 +20,9 @@ public class EnemyAI : MonoBehaviour
     [Header("攻撃・待機設定")]
     public float attackInterval = 2.5f;
 
+    //スライムのステータス情報
+    private EnemyStats enemyStats;
+
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -54,10 +57,29 @@ public class EnemyAI : MonoBehaviour
 
         //発見時
         alertSystem = GetComponent<EnemyAlert>();
+
+        //スライムのステータス情報
+        enemyStats = GetComponent<EnemyStats>();
     }
 
     void Update()
     {
+        // よろけ中は移動を停止する
+        if (enemyStats != null && enemyStats.IsTakingHit)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            }
+
+            if (animator != null)
+            {
+                animator.SetFloat("Speed", 0f);
+            }
+
+            return;
+        }
+
         // 攻撃中は移動しない
         if (isAttacking)
         {
@@ -117,16 +139,7 @@ public class EnemyAI : MonoBehaviour
                 // 向いている方向にプレイヤーがいる場合だけ追尾・攻撃
                 if (facingPlayer)
                 {
-                    // 今回、新しく追跡を開始したときだけ表示
-                    if (!wasChasing)
-                    {
-                        if (alertSystem != null)
-                        {
-                            alertSystem.ShowAlert();
-                        }
-
-                        wasChasing = true;
-                    }
+                    ShowAlertOnce();
 
                     float direction =
                         player.position.x - transform.position.x;
@@ -166,8 +179,19 @@ public class EnemyAI : MonoBehaviour
 
         // 条件に合わなければ徘徊を続ける
         Patrol();
-        // 追跡していない状態に戻す
-        wasChasing = false;
+    }
+
+    // プレイヤーを発見したときの共通処理
+    void ShowAlertOnce()
+    {
+        if (wasChasing) return;
+
+        wasChasing = true;
+
+        if (alertSystem != null)
+        {
+            alertSystem.ShowAlert();
+        }
     }
 
     // 左右に徘徊する
@@ -293,5 +317,13 @@ public class EnemyAI : MonoBehaviour
         {
             enemyAttack.EndAttack();
         }
+    }
+
+    // 攻撃されたときにプレイヤーを発見する
+    public void DetectPlayerWhenAttacked()
+    {
+        if (player == null) return;
+
+        ShowAlertOnce();
     }
 }
