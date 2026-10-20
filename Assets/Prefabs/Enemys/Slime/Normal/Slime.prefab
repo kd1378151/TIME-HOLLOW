@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3127433822625048339}
   - component: {fileID: 8964169751997823204}
   - component: {fileID: 632831140223546545}
+  - component: {fileID: 3983435504761837007}
   m_Layer: 9
   m_Name: Slime
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 939257665461117253}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.1, y: -0.22, z: 0}
+  m_LocalPosition: {x: 15.23, y: -1.78, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -225,7 +226,7 @@ MonoBehaviour:
   maxHP: 50
   currentHP: 50
   attackPower: 5
-  experienceReward: 10
+  canFlinch: 1
 --- !u!114 &8964169751997823204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +255,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAlert
   alertIcon: {fileID: 5593245281060345583}
   displayTime: 1
+--- !u!114 &3983435504761837007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939257665461117253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd7faabeede67814e9d919109a29097e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyExperience
+  experienceReward: 10
 --- !u!1 &2166735285594345195
 GameObject:
   m_ObjectHideFlags: 0
