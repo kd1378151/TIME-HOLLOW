@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: 073e85ef2dd00f2458e5df9f0d9a22f0
+guid: a0eee6e0fcb603a48bc1cdf492aead47
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7266299365211966428
-    second: Bringer-of-Death_Death_6_0
+      213: 7853225994363254803
+    second: Bringer-of-Death_Death_8_0
   - first:
-      213: -1279285770815250664
-    second: Bringer-of-Death_Death_6_1
+      213: 640872009328108804
+    second: Bringer-of-Death_Death_8_1
+  - first:
+      213: -6719485050478072235
+    second: Bringer-of-Death_Death_8_2
+  - first:
+      213: -2888608777900695298
+    second: Bringer-of-Death_Death_8_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -118,45 +124,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bringer-of-Death_Death_6_0
+      name: Bringer-of-Death_Death_13
       rect:
         serializedVersion: 2
-        x: 84
-        y: 0
-        width: 46
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 85
+        y: 1
+        width: 42
+        height: 66
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cdb0b1f26c417d460800000000000000
-      internalID: 7266299365211966428
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bringer-of-Death_Death_6_1
-      rect:
-        serializedVersion: 2
-        x: 129
-        y: 28
-        width: 7
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 81f58509e501f3ee0800000000000000
-      internalID: -1279285770815250664
+      spriteID: 4052e7e62b5d4e800800000000000000
+      internalID: 640872009328108804
       vertices: []
       indices: 
       edges: []
@@ -175,8 +159,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bringer-of-Death_Death_6_0: 7266299365211966428
-      Bringer-of-Death_Death_6_1: -1279285770815250664
+      Bringer-of-Death_Death_13: 640872009328108804
+      Bringer-of-Death_Death_8_0: 7853225994363254803
+      Bringer-of-Death_Death_8_2: -6719485050478072235
+      Bringer-of-Death_Death_8_3: -2888608777900695298
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

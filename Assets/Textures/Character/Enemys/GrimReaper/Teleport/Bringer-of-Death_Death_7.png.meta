@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 876beaa4fd6c7e24aa7e0e410e3075b1
+guid: 96737968f1ec18c44bffc949c92971f6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7355854551013154530
-    second: Bringer-of-Death_Death_3_0
+      213: 2842250879550429346
+    second: Bringer-of-Death_Death_7_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,23 +115,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bringer-of-Death_Death_3_0
+      name: Bringer-of-Death_Death_7_0
       rect:
         serializedVersion: 2
-        x: 80
-        y: 0
-        width: 50
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 86
+        y: 1
+        width: 48
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e11ab634241cae990800000000000000
-      internalID: -7355854551013154530
+      spriteID: 2a81526bd14b17720800000000000000
+      internalID: 2842250879550429346
       vertices: []
       indices: 
       edges: []
@@ -148,9 +148,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Bringer-of-Death_Death_3_0: -7355854551013154530
+      Bringer-of-Death_Death_7_0: 2842250879550429346
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

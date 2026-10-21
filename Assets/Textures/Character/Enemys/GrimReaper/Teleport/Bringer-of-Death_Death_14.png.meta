@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 5c5d766b9f0e09344abada6c5bb8962a
+guid: 76fefae1d1c5b4847a369d60555dcd68
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1856965731364296361
-    second: Bringer-of-Death_Death_9_0
-  - first:
-      213: -3537203532875549864
-    second: Bringer-of-Death_Death_9_1
-  - first:
-      213: 6103343854425362758
-    second: Bringer-of-Death_Death_9_2
-  - first:
-      213: 8109035500888307011
-    second: Bringer-of-Death_Death_9_3
+      213: 2842250879550429346
+    second: Bringer-of-Death_Death_7_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -124,89 +115,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bringer-of-Death_Death_9_0
+      name: Bringer-of-Death_Death_14
       rect:
         serializedVersion: 2
-        x: 87
-        y: 18
-        width: 32
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 86
+        y: 1
+        width: 48
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a6da0a7e7445c910800000000000000
-      internalID: 1856965731364296361
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bringer-of-Death_Death_9_1
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 62
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 85332b4b02459eec0800000000000000
-      internalID: -3537203532875549864
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bringer-of-Death_Death_9_2
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 40
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 641561116ee63b450800000000000000
-      internalID: 6103343854425362758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bringer-of-Death_Death_9_3
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 25
-        width: 9
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 345ba7513d4198070800000000000000
-      internalID: 8109035500888307011
+      spriteID: 2a81526bd14b17720800000000000000
+      internalID: 2842250879550429346
       vertices: []
       indices: 
       edges: []
@@ -223,12 +148,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Bringer-of-Death_Death_9_0: 1856965731364296361
-      Bringer-of-Death_Death_9_1: -3537203532875549864
-      Bringer-of-Death_Death_9_2: 6103343854425362758
-      Bringer-of-Death_Death_9_3: 8109035500888307011
+      Bringer-of-Death_Death_14: 2842250879550429346
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
