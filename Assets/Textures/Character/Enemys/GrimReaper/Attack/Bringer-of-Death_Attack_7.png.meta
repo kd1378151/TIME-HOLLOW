@@ -58,7 +58,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -130,12 +130,12 @@ TextureImporter:
       name: Bringer-of-Death_Attack_7_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 0
-        width: 110
-        height: 83
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 3
+        y: 1
+        width: 127
+        height: 85
+      alignment: 9
+      pivot: {x: 0.7995822, y: -0.00011143918}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -144,94 +144,6 @@ TextureImporter:
       bones: []
       spriteID: b843cec502414abc0800000000000000
       internalID: -3772868458599140213
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bringer-of-Death_Attack_7_1
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 81
-        width: 8
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 94aaeb52b8dfa87b0800000000000000
-      internalID: -5221082043907134903
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bringer-of-Death_Attack_7_2
-      rect:
-        serializedVersion: 2
-        x: 117
-        y: 66
-        width: 14
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1796082e5089d0d40800000000000000
-      internalID: 5552261066660014449
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bringer-of-Death_Attack_7_3
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 27
-        width: 7
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d4d690df895237d20800000000000000
-      internalID: 3275002693038992717
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bringer-of-Death_Attack_7_4
-      rect:
-        serializedVersion: 2
-        x: 4
-        y: 13
-        width: 7
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 83af06fd300851850800000000000000
-      internalID: 6347120003969514040
       vertices: []
       indices: 
       edges: []

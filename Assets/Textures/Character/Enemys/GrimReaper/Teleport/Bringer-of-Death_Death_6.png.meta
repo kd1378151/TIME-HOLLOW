@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 8fd1195abe4118f4886a1d3e193238d1
+guid: b8fe407ac032f924d83c49cd6a43fa25
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1021693074315421392
-    second: Bringer-of-Death_Death_10_0
+      213: 7266299365211966428
+    second: Bringer-of-Death_Death_6_0
+  - first:
+      213: -1279285770815250664
+    second: Bringer-of-Death_Death_6_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,23 +118,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bringer-of-Death_Death_10_0
+      name: Bringer-of-Death_Death_6_0
       rect:
         serializedVersion: 2
-        x: 95
-        y: 27
-        width: 35
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 85
+        y: 1
+        width: 44
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0d62c0c1078cd2e00800000000000000
-      internalID: 1021693074315421392
+      spriteID: cdb0b1f26c417d460800000000000000
+      internalID: 7266299365211966428
       vertices: []
       indices: 
       edges: []
@@ -148,9 +151,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Bringer-of-Death_Death_10_0: 1021693074315421392
+      Bringer-of-Death_Death_6_0: 7266299365211966428
+      Bringer-of-Death_Death_6_1: -1279285770815250664
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

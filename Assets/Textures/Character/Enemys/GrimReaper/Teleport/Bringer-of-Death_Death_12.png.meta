@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 10d8ff82f955f334ea1d7ad9d95c909e
+guid: d57def4fd6a7cea478fa56d746fd22e7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7028766693463444213
-    second: Bringer-of-Death_Death_5_0
+      213: 1856965731364296361
+    second: Bringer-of-Death_Death_9_0
+  - first:
+      213: -3537203532875549864
+    second: Bringer-of-Death_Death_9_1
+  - first:
+      213: 6103343854425362758
+    second: Bringer-of-Death_Death_9_2
+  - first:
+      213: 8109035500888307011
+    second: Bringer-of-Death_Death_9_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,23 +124,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bringer-of-Death_Death_5_0
+      name: Bringer-of-Death_Death_12
       rect:
         serializedVersion: 2
-        x: 81
-        y: 0
-        width: 53
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 87
+        y: 1
+        width: 41
+        height: 67
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b05b30baeedc47e90800000000000000
-      internalID: -7028766693463444213
+      spriteID: 9a6da0a7e7445c910800000000000000
+      internalID: 1856965731364296361
       vertices: []
       indices: 
       edges: []
@@ -150,7 +159,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bringer-of-Death_Death_5_0: -7028766693463444213
+      Bringer-of-Death_Death_12: 1856965731364296361
+      Bringer-of-Death_Death_9_1: -3537203532875549864
+      Bringer-of-Death_Death_9_2: 6103343854425362758
+      Bringer-of-Death_Death_9_3: 8109035500888307011
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
