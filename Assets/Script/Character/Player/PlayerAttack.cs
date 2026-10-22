@@ -8,21 +8,14 @@ public class PlayerAttack : MonoBehaviour
     [Header("攻撃判定")]
     public BoxCollider2D attackCollider;
 
-    // プレイヤーのパラメータを管理するスクリプト
     private PlayerStatus playerStatus;
-
-    // 攻撃判定が有効な間、同じ敵への連続ヒットを防ぐ
     private bool hasHit = false;
 
     void Start()
     {
-        // 子オブジェクトにあるAnimatorを取得
         animator = GetComponentInChildren<Animator>();
-
-        //プレイヤーのパラメータ
         playerStatus = GetComponent<PlayerStatus>();
 
-        // ゲーム開始時は攻撃判定を無効にする
         if (attackCollider != null)
         {
             attackCollider.enabled = false;
@@ -38,24 +31,20 @@ public class PlayerAttack : MonoBehaviour
 
         if (animator == null) return;
 
-        // 現在のアニメーションステートを取得
         AnimatorStateInfo state =
             animator.GetCurrentAnimatorStateInfo(0);
 
-        // 攻撃アニメーション中は新しい攻撃を受け付けない
         if (state.IsName("Attack") ||
             state.IsName("Attack2"))
         {
             return;
         }
 
-        // 攻撃1：Jキー
         if (Input.GetKeyDown(KeyCode.J))
         {
             animator.ResetTrigger("Attack2");
             animator.SetTrigger("Attack1");
         }
-        // 攻撃2：Kキー
         else if (Input.GetKeyDown(KeyCode.K))
         {
             animator.ResetTrigger("Attack1");
@@ -63,7 +52,6 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    // Animation Eventから呼び出す：攻撃判定を有効にする
     public void StartHit()
     {
         if (attackCollider == null) return;
@@ -72,7 +60,6 @@ public class PlayerAttack : MonoBehaviour
         attackCollider.enabled = true;
     }
 
-    // Animation Eventから呼び出す：攻撃判定を無効にする
     public void EndHit()
     {
         if (attackCollider == null) return;
@@ -80,9 +67,6 @@ public class PlayerAttack : MonoBehaviour
         attackCollider.enabled = false;
     }
 
-    // 攻撃判定が敵に触れたとき
-
-    // 攻撃判定が敵に触れたとき
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (attackCollider == null ||
@@ -92,13 +76,11 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
-        if (playerStatus == null) return;
+        if (playerStatus == null || animator == null) return;
 
-        // 現在の攻撃アニメーションを取得
         AnimatorStateInfo state =
             animator.GetCurrentAnimatorStateInfo(0);
 
-        // 攻撃1か攻撃2かでダメージを決める
         int damage;
 
         if (state.IsName("Attack2"))
@@ -110,27 +92,49 @@ public class PlayerAttack : MonoBehaviour
             damage = playerStatus.attackPower1;
         }
 
-        // ゴーレム専用のステータスを取得
-        GolemStats golem = other.GetComponentInParent<GolemStats>();
+        // 死神への攻撃
+        GrimReaperStats grimReaper =
+            other.GetComponentInParent<GrimReaperStats>();
 
-        if (golem != null)
+
+        if (grimReaper != null)
         {
-            // ゴーレムにダメージを与える
-            golem.TakeDamage(damage);
+            // 死神にダメージを与える
+            grimReaper.TakeDamage(damage);
+
+            // 死神を白く点滅させる
+            DamageFlash damageFlash =
+                grimReaper.GetComponent<DamageFlash>();
+
+            if (damageFlash != null)
+            {
+                damageFlash.Flash();
+            }
 
             hasHit = true;
             return;
         }
 
-        // 既存の敵ステータスも引き続き利用する
-        EnemyStats enemy = other.GetComponentInParent<EnemyStats>();
+
+        // ゴーレムへの攻撃
+        GolemStats golem =
+            other.GetComponentInParent<GolemStats>();
+
+        if (golem != null)
+        {
+            golem.TakeDamage(damage);
+            hasHit = true;
+            return;
+        }
+
+        // 通常の敵への攻撃
+        EnemyStats enemy =
+            other.GetComponentInParent<EnemyStats>();
 
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
-
             hasHit = true;
         }
     }
-
 }

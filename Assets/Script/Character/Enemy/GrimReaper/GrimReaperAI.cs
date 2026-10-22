@@ -7,18 +7,31 @@ public class GrimReaperAI : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float chaseRange = 6f;
     [SerializeField] private float attackRange = 1.2f;
+    [Header("接近後の行動設定")]
+    [Range(0f, 1f)]
+    [SerializeField] private float attackAfterApproachChance = 0.7f;
 
     [Header("攻撃設定")]
     [SerializeField] private float attackInterval = 2.5f;
 
     [Header("攻撃後の待機設定")]
     [SerializeField] private float postAttackWait = 1.5f;
+    [SerializeField] private float attackWaitRandom = 0.5f;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float repeatAttackChance = 0.4f;
 
     [Header("瞬間移動後の待機設定")]
     [SerializeField] private float postTeleportWait = 0.5f;
+    [SerializeField] private float teleportWaitRandom = 0.3f;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float repeatTeleportChance = 0.35f;
 
     [Header("瞬間移動設定")]
     [SerializeField] private float teleportDistance = 3f;
+    [SerializeField] private float teleportDistanceRandom = 1f;
+    [SerializeField] private float minTeleportDistance = 2.5f;
 
     [Header("参照設定")]
     [SerializeField] private Transform player;
@@ -28,13 +41,12 @@ public class GrimReaperAI : MonoBehaviour
 
     private float nextAttackTime;
     private float waitEndTime;
+    private float teleportWaitEndTime;
 
     private bool isAttacking;
     private bool isWaiting;
     private bool isTeleporting;
-
     private bool isWaitingAfterTeleport;
-    private float teleportWaitEndTime;
 
     private void Awake()
     {
@@ -49,32 +61,36 @@ public class GrimReaperAI : MonoBehaviour
             return;
         }
 
-        // プレイヤーが未設定なら待機
         if (player == null)
         {
             SetAnimation(false, false, false);
             return;
         }
 
-        // 瞬間移動アニメーション中は操作しない
+        // 瞬間移動アニメーション中
         if (isTeleporting)
         {
             return;
         }
 
-        // 瞬間移動後の待機中
+        // 瞬間移動後の待機
         if (isWaitingAfterTeleport)
         {
             SetAnimation(false, false, false);
 
-            // 待機時間が終わるまで動かない
             if (Time.time < teleportWaitEndTime)
             {
                 return;
             }
 
-            // 待機終了
             isWaitingAfterTeleport = false;
+
+            // 確率で再び瞬間移動
+            if (Random.value < repeatTeleportChance)
+            {
+                StartTeleport();
+                return;
+            }
         }
 
         // 攻撃アニメーション中
@@ -85,13 +101,17 @@ public class GrimReaperAI : MonoBehaviour
             AnimatorStateInfo state =
                 animator.GetCurrentAnimatorStateInfo(0);
 
-            // Attackアニメーションが終了したら待機へ
             if (state.IsName("Attack") &&
                 state.normalizedTime >= 1f)
             {
                 isAttacking = false;
                 isWaiting = true;
-                waitEndTime = Time.time + postAttackWait;
+
+                waitEndTime = Time.time +
+                    Random.Range(
+                        Mathf.Max(0f, postAttackWait - attackWaitRandom),
+                        postAttackWait + attackWaitRandom
+                    );
 
                 SetAnimation(false, false, false);
             }
@@ -99,39 +119,54 @@ public class GrimReaperAI : MonoBehaviour
             return;
         }
 
-        // 攻撃後の待機中
+        // 攻撃後の待機
         if (isWaiting)
         {
             SetAnimation(false, false, false);
 
-            // 待機時間が終わったら瞬間移動を開始
-            if (Time.time >= waitEndTime)
+            if (Time.time < waitEndTime)
             {
-                isWaiting = false;
-                isTeleporting = true;
+                return;
+            }
 
-                SetAnimation(false, false, true);
+            isWaiting = false;
+
+            // 確率で連続攻撃
+            if (Random.value < repeatAttackChance)
+            {
+                StartAttack();
+            }
+            else
+            {
+                StartTeleport();
             }
 
             return;
         }
 
-        // 左右方向だけで距離を判定
+        // プレイヤーとの左右の距離
         float distanceX = Mathf.Abs(
             player.position.x - transform.position.x
         );
 
-        // 攻撃範囲に入った場合
+        // 攻撃範囲内
+
+        // 攻撃範囲内
         if (distanceX <= attackRange)
         {
             FacePlayer();
 
             if (Time.time >= nextAttackTime)
             {
-                isAttacking = true;
-                nextAttackTime = Time.time + attackInterval;
-
-                SetAnimation(false, true, false);
+                // 攻撃するか、瞬間移動するかをランダムに選ぶ
+                if (Random.value < attackAfterApproachChance)
+                {
+                    StartAttack();
+                }
+                else
+                {
+                    StartTeleport();
+                }
             }
             else
             {
@@ -141,14 +176,15 @@ public class GrimReaperAI : MonoBehaviour
             return;
         }
 
-        // 追跡範囲外なら待機
+
+        // 追跡範囲外
         if (distanceX > chaseRange)
         {
             SetAnimation(false, false, false);
             return;
         }
 
-        // プレイヤーの方向へ左右移動
+        // プレイヤーを追跡
         float direction = Mathf.Sign(
             player.position.x - transform.position.x
         );
@@ -159,8 +195,27 @@ public class GrimReaperAI : MonoBehaviour
             * Time.deltaTime;
 
         FacePlayer();
-
         SetAnimation(true, false, false);
+    }
+
+    // 攻撃開始
+    private void StartAttack()
+    {
+        isAttacking = true;
+        nextAttackTime = Time.time + attackInterval;
+
+        FacePlayer();
+        SetAnimation(false, true, false);
+    }
+
+    // 瞬間移動開始
+    private void StartTeleport()
+    {
+        isWaiting = false;
+        isWaitingAfterTeleport = false;
+        isTeleporting = true;
+
+        SetAnimation(false, false, true);
     }
 
     // プレイヤーの方向を向く
@@ -168,17 +223,15 @@ public class GrimReaperAI : MonoBehaviour
     {
         if (player.position.x > transform.position.x)
         {
-            // プレイヤーが右側なら右向き
             spriteRenderer.flipX = true;
         }
         else if (player.position.x < transform.position.x)
         {
-            // プレイヤーが左側なら左向き
             spriteRenderer.flipX = false;
         }
     }
 
-    // アニメーションのパラメータを設定
+    // アニメーション設定
     private void SetAnimation(
         bool walking,
         bool attacking,
@@ -190,7 +243,7 @@ public class GrimReaperAI : MonoBehaviour
     }
 
     // =================================
-    // アニメーションイベントから呼び出す
+    // アニメーションイベント
     // =================================
 
     // 瞬間移動アニメーションの途中で呼び出す
@@ -201,21 +254,22 @@ public class GrimReaperAI : MonoBehaviour
             return;
         }
 
-        // 現在いる側と反対側へ移動する
-        float side;
+        // 左右を毎回ランダムに選ぶ
+        float side = Random.value < 0.5f ? -1f : 1f;
 
-        if (transform.position.x >= player.position.x)
-        {
-            side = -1f;
-        }
-        else
-        {
-            side = 1f;
-        }
+        // 出現距離にもランダム性を持たせる
+        float distance = Random.Range(
+            Mathf.Max(
+                minTeleportDistance,
+                teleportDistance - teleportDistanceRandom
+            ),
+            Mathf.Max(
+                minTeleportDistance,
+                teleportDistance + teleportDistanceRandom
+            )
+        );
 
-        // プレイヤーから一定距離離れた場所へ移動
-        float targetX =
-            player.position.x + side * teleportDistance;
+        float targetX = player.position.x + side * distance;
 
         transform.position = new Vector3(
             targetX,
@@ -223,19 +277,20 @@ public class GrimReaperAI : MonoBehaviour
             transform.position.z
         );
 
-        // 移動後にプレイヤーの方向を向く
         FacePlayer();
     }
 
     // 瞬間移動アニメーションの最後で呼び出す
-
     public void EndTeleportAnimation()
     {
         isTeleporting = false;
-
-        // 瞬間移動後は待機モーションを挟む
         isWaitingAfterTeleport = true;
-        teleportWaitEndTime = Time.time + postTeleportWait;
+
+        teleportWaitEndTime = Time.time +
+            Random.Range(
+                Mathf.Max(0f, postTeleportWait - teleportWaitRandom),
+                postTeleportWait + teleportWaitRandom
+            );
 
         SetAnimation(false, false, false);
     }
