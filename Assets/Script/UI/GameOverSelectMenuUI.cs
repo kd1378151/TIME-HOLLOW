@@ -13,7 +13,7 @@ public class GameOverSelectMenuUI : MonoBehaviour
     }
     #endregion
     public void OnClickBackToTitle()
-    {
+        {
         m_sceneFlowManager.LoadTitleScene();
     }
 }

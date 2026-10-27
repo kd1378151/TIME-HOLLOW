@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+using System;
+>>>>>>> b58b74401386c52238518213faa7358226e773bd
 using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
@@ -15,6 +19,7 @@ public class PlayerStatus : MonoBehaviour
     public float maxExplorationTime = 60f;
     public float currentExplorationTime = 60f;
 
+<<<<<<< HEAD
     private Animator animator;
     private Rigidbody2D rb;
 
@@ -32,6 +37,9 @@ public class PlayerStatus : MonoBehaviour
     {
         get { return !isTakingHit && !isDead; }
     }
+=======
+    public event Action<int, int> OnHPChanged;
+>>>>>>> b58b74401386c52238518213faa7358226e773bd
 
     void Start()
     {
@@ -52,6 +60,7 @@ public class PlayerStatus : MonoBehaviour
         //プレイヤーが攻撃を受けた時の演出
         damageFlash = GetComponentInChildren<DamageFlash>();
     }
+<<<<<<< HEAD
 
     // 敵からダメージを受けたときに呼ばれる
     public void TakeDamage(int damage)
@@ -110,3 +119,49 @@ public class PlayerStatus : MonoBehaviour
         isTakingHit = false;
     }
 }
+=======
+    #region HP methods
+    public int GetMaxHP()
+    {
+        return maxHP;
+    }
+
+    public int GetCurrentHP()
+    {
+        return currentHP;
+    }
+    #endregion
+
+    //test only
+    public void TakeDamage(int amout)
+    {
+       currentHP -= amout;
+        if (currentHP < 0)
+        {
+            currentHP = 0;
+        }
+    }
+    public void Heal(int amount)
+    {
+        currentHP += amount;
+        if (currentHP > maxHP)
+        {
+            currentHP = maxHP;
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            TakeDamage(10);
+            OnHPChanged?.Invoke(currentHP, maxHP);
+        }
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            Heal(10);
+            OnHPChanged?.Invoke(currentHP, maxHP);
+        }
+    }
+}
+>>>>>>> b58b74401386c52238518213faa7358226e773bd
