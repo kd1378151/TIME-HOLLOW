@@ -12,50 +12,42 @@ public class EnemyStats : MonoBehaviour
     public bool canFlinch = true;
     public bool IsTakingHit { get; private set; } = false;
 
-    //スライムのAIスクリプト
     private EnemyAI enemyAI;
-
     private Animator animator;
     private bool isDead = false;
-
-    //攻撃を受けた時の演出
     private DamageFlash damageFlash;
+
+    // 経験値を渡すための設定
+    private EnemyExperience enemyExperience;
+    private bool experienceGiven = false;
 
     void Start()
     {
-        // 初期HPを最大HPにする
         currentHP = maxHP;
 
-        // Animatorを取得する
         animator = GetComponent<Animator>();
-
-        //攻撃を受けた時の演出
         damageFlash = GetComponentInChildren<DamageFlash>();
-
-        //スライムのAIスクリプト
         enemyAI = GetComponent<EnemyAI>();
+
+        // 敵が持つ経験値を取得
+        enemyExperience = GetComponent<EnemyExperience>();
     }
 
-    // プレイヤーの攻撃を受けたときに呼び出す
     public void TakeDamage(int damage)
     {
-        // 死亡後はダメージを受けない
         if (isDead)
         {
             return;
         }
 
-        // HPを減らし、0未満にならないようにする
         currentHP -= damage;
         currentHP = Mathf.Max(currentHP, 0);
 
-        // 攻撃されたらプレイヤーを発見する
         if (enemyAI != null)
         {
             enemyAI.DetectPlayerWhenAttacked();
         }
 
-        // HPが0になったら死亡
         if (currentHP <= 0)
         {
             Die();
@@ -66,7 +58,6 @@ public class EnemyStats : MonoBehaviour
             animator.SetTrigger("Hurt");
         }
 
-        // ダメージを受けたら白く点滅する
         if (damageFlash != null)
         {
             damageFlash.Flash();
@@ -76,22 +67,40 @@ public class EnemyStats : MonoBehaviour
     void Die()
     {
         isDead = true;
+        Debug.Log("① 敵の死亡処理が呼ばれました");
 
-        // 死亡モーションを再生
+        if (!experienceGiven)
+        {
+            experienceGiven = true;
+
+            PlayerExperience playerExperience =
+                FindAnyObjectByType<PlayerExperience>();
+
+            Debug.Log("② EnemyExperience: " + (enemyExperience != null));
+            Debug.Log("③ PlayerExperience: " + (playerExperience != null));
+
+            if (enemyExperience != null && playerExperience != null)
+            {
+                Debug.Log("④ 獲得経験値: " + enemyExperience.experienceReward);
+
+                playerExperience.AddExperience(
+                    enemyExperience.experienceReward
+                );
+            }
+        }
+
         if (animator != null)
         {
             animator.SetTrigger("Death");
         }
     }
 
-    // 死亡モーションが終わったら敵を削除する
+
     public void FinishDeath()
     {
         Destroy(gameObject);
     }
 
-    // よろけアニメーション終了時に呼び出す
-    // よろけアニメーション終了時に呼び出す
     public void EndHitReaction()
     {
         IsTakingHit = false;
