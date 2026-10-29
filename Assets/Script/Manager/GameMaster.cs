@@ -18,6 +18,21 @@ public class GameMaster : MonoBehaviour
     public TextMeshProUGUI m_timeText;
     public float m_dispayTime;
 
+    [Header("タイマーゲージの色")]
+    [SerializeField] private Color m_timerNormalColor = Color.green;
+    [SerializeField] private Color m_timerLowColor = Color.red;
+
+    [Header("色が変化し始める残り時間の割合")]
+    [SerializeField, Range(0f, 1f)]
+    private float m_timerColorChangeThreshold = 0.5f;
+
+    [Header("探索開始の演出")]
+    [SerializeField] private float m_fadeInDuration = 3.0f;
+
+    private bool m_isStarting = true;
+    private PlayerAttack m_playerAttack;
+
+
     private bool m_isCountDown = true;
     private bool m_isTimeOver = false;
     private float m_times = 0;
@@ -63,19 +78,30 @@ public class GameMaster : MonoBehaviour
         }
 
         NewGameStart();
+
+        m_playerAttack = m_playerController != null
+            ? m_playerController.GetComponent<PlayerAttack>()
+            : null;
+
+        StartCoroutine(FadeInAndBeginExploration());
     }
 
     void Update()
     {
-if (m_isTimeOver)
-{
-    if (!m_isEndSceneLoading)
-    {
-        m_isEndSceneLoading = true;
-        StartCoroutine(LoadExpeditionEnd());
-    }
-    return;
-}
+        if (m_isStarting)
+        {
+            return;
+        }
+
+        if (m_isTimeOver)
+        {
+            if (!m_isEndSceneLoading)
+            {
+                m_isEndSceneLoading = true;
+                StartCoroutine(LoadExpeditionEnd());
+            }
+            return;
+        }
 
         if (m_timerEnabled)
         {
@@ -92,14 +118,7 @@ if (m_isTimeOver)
 
         m_times += Time.deltaTime;
 
-        if (m_isCountDown)
-        {
-            m_dispayTime = Mathf.Max(0, maxTime - m_times);
-        }
-        else
-        {
-            m_dispayTime = Mathf.Min(m_times, maxTime);
-        }
+        m_dispayTime = Mathf.Max(0, maxTime - m_times);
 
         if (m_times >= maxTime)
         {
@@ -118,11 +137,22 @@ if (m_isTimeOver)
         if (m_timeSliderColor != null)
         {
             float ratio = maxTime > 0
-                ? m_dispayTime / maxTime
+                ? Mathf.Clamp01(m_dispayTime / maxTime)
                 : 0f;
 
-            m_timeSliderColor.color =
-                Color.Lerp(Color.red, Color.green, ratio);
+            float threshold = Mathf.Clamp01(m_timerColorChangeThreshold);
+
+            // 指定した割合までは通常色を維持し、
+            // そこから時間切れに向かって低HP色へ変化
+            float colorRatio = threshold > 0f
+                ? Mathf.Clamp01(ratio / threshold)
+                : (ratio > 0f ? 1f : 0f);
+
+            m_timeSliderColor.color = Color.Lerp(
+                m_timerLowColor,
+                m_timerNormalColor,
+                colorRatio
+            );
         }
 
         if (m_timeText != null)
@@ -242,5 +272,70 @@ if (m_isTimeOver)
         }
 
         SceneManager.LoadScene("ExpeditionEnd");
+    }
+
+    private IEnumerator FadeInAndBeginExploration()
+    {
+        // 暗転パネルを探す
+        Image fadePanel = null;
+
+        Canvas[] canvases = FindObjectsByType<Canvas>();
+
+        foreach (Canvas canvas in canvases)
+        {
+            Transform panel = canvas.transform.Find("FadePanel");
+
+            if (panel != null)
+            {
+                fadePanel = panel.GetComponent<Image>();
+
+                if (fadePanel != null)
+                    break;
+            }
+        }
+
+        // パネルがあれば、黒から透明へ変化させる
+        if (fadePanel != null)
+        {
+            fadePanel.gameObject.SetActive(true);
+
+            Color color = Color.black;
+            color.a = 1f;
+            fadePanel.color = color;
+
+            float elapsed = 0f;
+
+            while (elapsed < m_fadeInDuration)
+            {
+                elapsed += Time.deltaTime;
+
+                color.a = 1f - Mathf.Clamp01(
+                    elapsed / m_fadeInDuration
+                );
+
+                fadePanel.color = color;
+
+                yield return null;
+            }
+
+            color.a = 0f;
+            fadePanel.color = color;
+            fadePanel.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning(
+                "FadePanelが見つかりません。Canvas内の設定を確認してください。"
+            );
+        }
+
+        // 演出終了後に操作を許可
+        if (m_playerController != null)
+            m_playerController.enabled = true;
+
+        if (m_playerAttack != null)
+            m_playerAttack.enabled = true;
+
+        m_isStarting = false;
     }
 }

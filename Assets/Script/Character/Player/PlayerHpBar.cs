@@ -53,7 +53,8 @@ public class PlayerHPBar : MonoBehaviour
         if (hpText != null)
         {
             hpText.text = playerStatus.currentHP
-                + " / " + playerStatus.maxHP;
+                + "/" + playerStatus.maxHP;
         }
+
     }
 }

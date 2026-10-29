@@ -17,9 +17,11 @@ public class EnemyStats : MonoBehaviour
     private bool isDead = false;
     private DamageFlash damageFlash;
 
-    // 経験値を渡すための設定
     private EnemyExperience enemyExperience;
     private bool experienceGiven = false;
+
+    // Hurtアニメーションの監視用
+    private bool wasHurtPlaying = false;
 
     void Start()
     {
@@ -28,9 +30,35 @@ public class EnemyStats : MonoBehaviour
         animator = GetComponent<Animator>();
         damageFlash = GetComponentInChildren<DamageFlash>();
         enemyAI = GetComponent<EnemyAI>();
-
-        // 敵が持つ経験値を取得
         enemyExperience = GetComponent<EnemyExperience>();
+    }
+
+    void Update()
+    {
+        if (isDead || !IsTakingHit || animator == null)
+        {
+            return;
+        }
+
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+
+        // Hurtアニメーションが再生中か確認
+        if (state.IsName("Hurt"))
+        {
+            wasHurtPlaying = true;
+
+            // Hurtの再生が終わったら、よろけ状態を解除
+            if (state.normalizedTime >= 1f &&
+                !animator.IsInTransition(0))
+            {
+                EndHitReaction();
+            }
+        }
+        else if (wasHurtPlaying && !animator.IsInTransition(0))
+        {
+            // Hurtから別の状態に移った場合も解除
+            EndHitReaction();
+        }
     }
 
     public void TakeDamage(int damage)
@@ -48,19 +76,26 @@ public class EnemyStats : MonoBehaviour
             enemyAI.DetectPlayerWhenAttacked();
         }
 
+        // HPが0になったら死亡処理
         if (currentHP <= 0)
         {
             Die();
-        }
-        else if (canFlinch && animator != null)
-        {
-            IsTakingHit = true;
-            animator.SetTrigger("Hurt");
+            return;
         }
 
+        // ダメージを受けたら点滅
         if (damageFlash != null)
         {
             damageFlash.Flash();
+        }
+
+        // よろけ可能ならHurtを再生
+        if (canFlinch && animator != null)
+        {
+            IsTakingHit = true;
+            wasHurtPlaying = false;
+            animator.ResetTrigger("Hurt");
+            animator.SetTrigger("Hurt");
         }
     }
 
@@ -95,7 +130,6 @@ public class EnemyStats : MonoBehaviour
         }
     }
 
-
     public void FinishDeath()
     {
         Destroy(gameObject);
@@ -103,7 +137,13 @@ public class EnemyStats : MonoBehaviour
 
     public void EndHitReaction()
     {
+        if (!IsTakingHit)
+        {
+            return;
+        }
+
         IsTakingHit = false;
+        wasHurtPlaying = false;
         Debug.Log("よろけ終了：移動を再開できます");
     }
 }

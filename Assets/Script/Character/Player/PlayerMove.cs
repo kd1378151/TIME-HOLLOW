@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private float moveInput;       // 左右の入力
     private bool jumpRequested;    // ジャンプ入力の記録
     private bool isGrounded;       // 地面にいるかどうか
+    public bool IsGrounded => isGrounded;
 
 
     //プレイヤーのパラメータ

@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class PlayerAttack : MonoBehaviour
     public BoxCollider2D attackCollider;
 
     private PlayerStatus playerStatus;
-    private bool hasHit = false;
+
+    // 今回の攻撃ですでにダメージを与えた敵
+    private HashSet<GameObject> hitEnemies = new HashSet<GameObject>();
 
     void Start()
     {
@@ -22,41 +25,59 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+
     void Update()
     {
+        if (animator == null) return;
+
+        // 操作不能中は入力を受け付けない
         if (playerStatus != null && !playerStatus.CanControl)
         {
             return;
         }
 
-        if (animator == null) return;
-
+        // 攻撃中・攻撃への遷移中は入力を受け付けない
         AnimatorStateInfo state =
             animator.GetCurrentAnimatorStateInfo(0);
 
         if (state.IsName("Attack") ||
-            state.IsName("Attack2"))
+            state.IsName("Attack2") ||
+            animator.IsInTransition(0))
         {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        // 空中では攻撃できない
+        PlayerMovement movement = GetComponent<PlayerMovement>();
+
+        if (movement == null || !movement.IsGrounded)
         {
+            return;
+        }
+
+        // 左クリック：通常攻撃
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.ResetTrigger("Attack1");
             animator.ResetTrigger("Attack2");
             animator.SetTrigger("Attack1");
         }
-        else if (Input.GetKeyDown(KeyCode.K))
+        // 右クリック：強攻撃
+        else if (Input.GetMouseButtonDown(1))
         {
             animator.ResetTrigger("Attack1");
+            animator.ResetTrigger("Attack2");
             animator.SetTrigger("Attack2");
         }
     }
+
 
     public void StartHit()
     {
         if (attackCollider == null) return;
 
-        hasHit = false;
+        // 新しい攻撃なので命中履歴をリセット
+        hitEnemies.Clear();
         attackCollider.enabled = true;
     }
 
@@ -69,9 +90,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (attackCollider == null ||
-            !attackCollider.enabled ||
-            hasHit)
+        if (attackCollider == null || !attackCollider.enabled)
         {
             return;
         }
@@ -96,13 +115,14 @@ public class PlayerAttack : MonoBehaviour
         GrimReaperStats grimReaper =
             other.GetComponentInParent<GrimReaperStats>();
 
-
         if (grimReaper != null)
         {
-            // 死神にダメージを与える
+            GameObject enemyObject = grimReaper.gameObject;
+
+            if (!hitEnemies.Add(enemyObject)) return;
+
             grimReaper.TakeDamage(damage);
 
-            // 死神を白く点滅させる
             DamageFlash damageFlash =
                 grimReaper.GetComponent<DamageFlash>();
 
@@ -111,19 +131,6 @@ public class PlayerAttack : MonoBehaviour
                 damageFlash.Flash();
             }
 
-            hasHit = true;
-            return;
-        }
-
-
-        // ゴーレムへの攻撃
-        GolemStats golem =
-            other.GetComponentInParent<GolemStats>();
-
-        if (golem != null)
-        {
-            golem.TakeDamage(damage);
-            hasHit = true;
             return;
         }
 
@@ -133,8 +140,11 @@ public class PlayerAttack : MonoBehaviour
 
         if (enemy != null)
         {
+            GameObject enemyObject = enemy.gameObject;
+
+            if (!hitEnemies.Add(enemyObject)) return;
+
             enemy.TakeDamage(damage);
-            hasHit = true;
         }
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1d04c5c91baf872438f27108ac0ee68e
+guid: 8408d86dec5705148a4c6f95c3dc706f
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Noto Sans JP
+  - DotGothic16
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
