@@ -8,4 +8,9 @@ public class ExplorationResultManager : MonoBehaviour
     {
         SceneManager.LoadScene("Stage");
     }
+    // 強化ボタンを押したとき
+    public void OpenUpgrade()
+    {
+        SceneManager.LoadScene("Upgrade");
+    }
 }
