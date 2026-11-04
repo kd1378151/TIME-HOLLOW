@@ -1,11 +1,8 @@
-TIME HOLLOW
 0123456789
 /
-EXP
 探索終了
-ゲームオーバー
 攻撃力
-最大HP
+最大
 探索時間
 探索開始
 強化
@@ -17,4 +14,8 @@ EXP
 秒
 ()
 スタート
-UPGRADE
+ABCDEFG
+HIJKMLN
+OPQRSTU
+VWXYZ
+はじめから
