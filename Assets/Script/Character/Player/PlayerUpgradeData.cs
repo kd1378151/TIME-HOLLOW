@@ -7,7 +7,7 @@ public static class PlayerUpgradeData
     public static int MaxHP = 100;
     public static int AttackPower1 = 10;
     public static int AttackPower2 = 25;
-    public static float MaxExplorationTime = 10f;
+    public static float MaxExplorationTime = 60f;
 
     // 強化回数
     public static int HPUpgradeCount = 0;
@@ -21,7 +21,7 @@ public static class PlayerUpgradeData
         MaxHP = 100;
         AttackPower1 = 10;
         AttackPower2 = 25;
-        MaxExplorationTime = 10f;
+        MaxExplorationTime = 60f;
 
         HPUpgradeCount = 0;
         AttackUpgradeCount = 0;

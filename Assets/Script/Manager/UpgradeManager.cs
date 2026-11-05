@@ -31,8 +31,14 @@ public class UpgradeManager : MonoBehaviour
     public Color normalColor = Color.white;
     public Color insufficientColor = Color.red;
 
+    [Header("経験値カウントダウン")]
+    public float expCountDuration = 0.5f;
+    private int displayedExperience;
+    private Coroutine expCountCoroutine;
+
     private void Start()
     {
+        displayedExperience = PlayerExperience.SavedExperience;
         UpdateUpgradeUI();
     }
 
@@ -47,6 +53,7 @@ public class UpgradeManager : MonoBehaviour
         PlayerUpgradeData.MaxHP += hpUpgradeAmount;
         PlayerUpgradeData.HPUpgradeCount++;
 
+        StartExperienceCountDown();
         UpdateUpgradeUI();
     }
 
@@ -62,6 +69,7 @@ public class UpgradeManager : MonoBehaviour
         PlayerUpgradeData.AttackPower2 += attack2UpgradeAmount;
         PlayerUpgradeData.AttackUpgradeCount++;
 
+        StartExperienceCountDown();
         UpdateUpgradeUI();
     }
 
@@ -76,6 +84,7 @@ public class UpgradeManager : MonoBehaviour
         PlayerUpgradeData.MaxExplorationTime += timeUpgradeAmount;
         PlayerUpgradeData.TimeUpgradeCount++;
 
+        StartExperienceCountDown();
         UpdateUpgradeUI();
     }
 
@@ -91,7 +100,7 @@ public class UpgradeManager : MonoBehaviour
         int experience = PlayerExperience.SavedExperience;
 
         if (expNumText != null)
-            expNumText.text = experience.ToString();
+            expNumText.text = displayedExperience.ToString();
 
         if (hpUpgradeText != null)
         {
@@ -140,15 +149,71 @@ public class UpgradeManager : MonoBehaviour
     {
         if (target == null) return;
 
+        // 必要経験値を表示
         target.text = "(" + cost + ")";
-        target.color = experience >= cost
-            ? normalColor
-            : insufficientColor;
+
+        // 経験値が足りていれば白、足りなければ赤
+        if (experience >= cost)
+        {
+            target.color = Color.white;
+        }
+        else
+        {
+            target.color = Color.red;
+        }
+
+        target.ForceMeshUpdate();
     }
 
     // 結果画面へ戻る
     public void BackToResult()
     {
         SceneManager.LoadScene("ExpeditionEnd");
+    }
+
+    private void StartExperienceCountDown()
+    {
+        if (expCountCoroutine != null)
+        {
+            StopCoroutine(expCountCoroutine);
+        }
+
+        expCountCoroutine = StartCoroutine(CountDownExperience());
+    }
+
+    private System.Collections.IEnumerator CountDownExperience()
+    {
+        int targetExperience = PlayerExperience.SavedExperience;
+        int startExperience = displayedExperience;
+
+        if (expCountDuration <= 0f)
+        {
+            displayedExperience = targetExperience;
+            expNumText.text = displayedExperience.ToString();
+            expCountCoroutine = null;
+            yield break;
+        }
+
+        float elapsed = 0f;
+
+        while (elapsed < expCountDuration)
+        {
+            elapsed += Time.deltaTime;
+
+            float progress = Mathf.Clamp01(elapsed / expCountDuration);
+
+            displayedExperience = Mathf.RoundToInt(
+                Mathf.Lerp(startExperience, targetExperience, progress)
+            );
+
+            expNumText.text = displayedExperience.ToString();
+
+            yield return null;
+        }
+
+        displayedExperience = targetExperience;
+        expNumText.text = displayedExperience.ToString();
+
+        expCountCoroutine = null;
     }
 }

@@ -43,6 +43,9 @@ public class EnemyAI : MonoBehaviour
     private EnemyAlert alertSystem;
     private bool wasChasing = false;
 
+    //死んでるかどうか
+    private bool isDead = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -64,6 +67,12 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        // 死亡していたら移動・攻撃処理を行わない
+        if (isDead)
+        {
+            return;
+        }
+
         // よろけ中は移動を停止する
         if (enemyStats != null && enemyStats.IsTakingHit)
         {
@@ -325,5 +334,23 @@ public class EnemyAI : MonoBehaviour
         if (player == null) return;
 
         ShowAlertOnce();
+    }
+
+    // 敵が死亡したときに呼び出す
+    public void Die()
+    {
+        isDead = true;
+
+        // 移動を完全に停止
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+
+        // 歩行アニメーションを停止
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", 0f);
+        }
     }
 }

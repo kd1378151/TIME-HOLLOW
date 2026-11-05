@@ -14,8 +14,8 @@ public class PlayerStatus : MonoBehaviour
     public int attackPower2 = 25;
 
     [Header("探索時間")]
-    public float maxExplorationTime = 10f;
-    public float currentExplorationTime = 10f;
+    public float maxExplorationTime = 60f;
+    public float currentExplorationTime = 60f;
 
     [Header("ゲームオーバー設定")]
     public string gameOverSceneName = "GameOver";

@@ -102,7 +102,14 @@ public class EnemyStats : MonoBehaviour
     void Die()
     {
         isDead = true;
+
         Debug.Log("① 敵の死亡処理が呼ばれました");
+
+        // 敵AIを停止
+        if (enemyAI != null)
+        {
+            enemyAI.Die();
+        }
 
         if (!experienceGiven)
         {
