@@ -1,7 +1,9 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -18,14 +20,23 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI attackCostText;
     public TextMeshProUGUI timeCostText;
 
+    [Header("強化ボタン")]
+    public Button hpUpgradeButton;
+    public Button attackUpgradeButton;
+    public Button timeUpgradeButton;
+
+    [Header("ボタンの暗さ設定")]
+    [Range(0f, 1f)]
+    public float disabledBrightness = 0.65f;
+
     [Header("強化設定")]
-    public int hpUpgradeAmount = 20;
-    public int attackUpgradeAmount = 5;
-    public int attack2UpgradeAmount = 10;
-    public float timeUpgradeAmount = 15f;
+    public int hpUpgradeAmount = 10;
+    public int attackUpgradeAmount = 2;
+    public int attack2UpgradeAmount = 4;
+    public float timeUpgradeAmount = 11f;
 
     [Header("初回の必要経験値")]
-    public int baseUpgradeCost = 50;
+    public int baseUpgradeCost = 10;
 
     [Header("文字色")]
     public Color normalColor = Color.white;
@@ -33,14 +44,17 @@ public class UpgradeManager : MonoBehaviour
 
     [Header("経験値カウントダウン")]
     public float expCountDuration = 0.5f;
+
     private int displayedExperience;
     private Coroutine expCountCoroutine;
+
 
     private void Start()
     {
         displayedExperience = PlayerExperience.SavedExperience;
         UpdateUpgradeUI();
     }
+
 
     // 最大HP強化
     public void UpgradeHP()
@@ -56,6 +70,7 @@ public class UpgradeManager : MonoBehaviour
         StartExperienceCountDown();
         UpdateUpgradeUI();
     }
+
 
     // 攻撃力強化
     public void UpgradeAttack()
@@ -73,6 +88,7 @@ public class UpgradeManager : MonoBehaviour
         UpdateUpgradeUI();
     }
 
+
     // 探索時間強化
     public void UpgradeTime()
     {
@@ -88,11 +104,13 @@ public class UpgradeManager : MonoBehaviour
         UpdateUpgradeUI();
     }
 
+
     // 次回の必要経験値
     private int GetCost(int upgradeCount)
     {
         return baseUpgradeCost * (upgradeCount + 1);
     }
+
 
     // UI更新
     public void UpdateUpgradeUI()
@@ -123,25 +141,23 @@ public class UpgradeManager : MonoBehaviour
                 (PlayerUpgradeData.MaxExplorationTime + timeUpgradeAmount).ToString("0") + "秒";
         }
 
-        UpdateCostText(
-            hpCostText,
-            GetCost(PlayerUpgradeData.HPUpgradeCount),
-            experience
-        );
+        int hpCost = GetCost(PlayerUpgradeData.HPUpgradeCount);
+        int attackCost = GetCost(PlayerUpgradeData.AttackUpgradeCount);
+        int timeCost = GetCost(PlayerUpgradeData.TimeUpgradeCount);
 
-        UpdateCostText(
-            attackCostText,
-            GetCost(PlayerUpgradeData.AttackUpgradeCount),
-            experience
-        );
+        // 必要経験値の表示
+        UpdateCostText(hpCostText, hpCost, experience);
+        UpdateCostText(attackCostText, attackCost, experience);
+        UpdateCostText(timeCostText, timeCost, experience);
 
-        UpdateCostText(
-            timeCostText,
-            GetCost(PlayerUpgradeData.TimeUpgradeCount),
-            experience
-        );
+        // ボタンの操作可否と明るさを更新
+        UpdateButtonState(hpUpgradeButton, hpCost, experience);
+        UpdateButtonState(attackUpgradeButton, attackCost, experience);
+        UpdateButtonState(timeUpgradeButton, timeCost, experience);
     }
 
+
+    // 必要経験値の文字色更新
     private void UpdateCostText(
         TextMeshProUGUI target,
         int cost,
@@ -149,20 +165,29 @@ public class UpgradeManager : MonoBehaviour
     {
         if (target == null) return;
 
-        // 必要経験値を表示
-        target.text = "(" + cost + ")";
+        target.text = cost.ToString();
 
-        // 経験値が足りていれば白、足りなければ赤
         if (experience >= cost)
         {
-            target.color = Color.white;
+            target.color = normalColor;
         }
         else
         {
-            target.color = Color.red;
+            target.color = insufficientColor;
         }
 
         target.ForceMeshUpdate();
+    }
+
+    private void UpdateButtonState(
+        Button target,
+        int cost,
+        int experience)
+    {
+        if (target == null) return;
+
+        // 経験値が足りない場合はボタンを押せなくする
+        target.interactable = experience >= cost;
     }
 
     // 結果画面へ戻る
@@ -171,6 +196,8 @@ public class UpgradeManager : MonoBehaviour
         SceneManager.LoadScene("ExpeditionEnd");
     }
 
+
+    // 経験値カウントダウン開始
     private void StartExperienceCountDown()
     {
         if (expCountCoroutine != null)
@@ -181,7 +208,8 @@ public class UpgradeManager : MonoBehaviour
         expCountCoroutine = StartCoroutine(CountDownExperience());
     }
 
-    private System.Collections.IEnumerator CountDownExperience()
+
+    private IEnumerator CountDownExperience()
     {
         int targetExperience = PlayerExperience.SavedExperience;
         int startExperience = displayedExperience;
@@ -189,7 +217,10 @@ public class UpgradeManager : MonoBehaviour
         if (expCountDuration <= 0f)
         {
             displayedExperience = targetExperience;
-            expNumText.text = displayedExperience.ToString();
+
+            if (expNumText != null)
+                expNumText.text = displayedExperience.ToString();
+
             expCountCoroutine = null;
             yield break;
         }
@@ -206,13 +237,16 @@ public class UpgradeManager : MonoBehaviour
                 Mathf.Lerp(startExperience, targetExperience, progress)
             );
 
-            expNumText.text = displayedExperience.ToString();
+            if (expNumText != null)
+                expNumText.text = displayedExperience.ToString();
 
             yield return null;
         }
 
         displayedExperience = targetExperience;
-        expNumText.text = displayedExperience.ToString();
+
+        if (expNumText != null)
+            expNumText.text = displayedExperience.ToString();
 
         expCountCoroutine = null;
     }

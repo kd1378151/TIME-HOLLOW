@@ -157,7 +157,13 @@ public class GameMaster : MonoBehaviour
 
         if (m_timeText != null)
         {
-            m_timeText.text = m_dispayTime.ToString("F0");
+            float ratio = maxTime > 0f
+                ? Mathf.Clamp01(m_dispayTime / maxTime)
+                : 0f;
+
+            int percentage = Mathf.RoundToInt(ratio * 100f);
+
+            m_timeText.text = percentage + "%";
         }
     }
 
@@ -204,7 +210,7 @@ public class GameMaster : MonoBehaviour
 
         if (m_timeText != null)
         {
-            m_timeText.text = m_dispayTime.ToString("F0");
+            m_timeText.text = "100%";
         }
     }
 
