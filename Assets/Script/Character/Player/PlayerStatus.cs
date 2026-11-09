@@ -11,14 +11,25 @@ public class PlayerStatus : MonoBehaviour
 
     [Header("攻撃力")]
     public int attackPower1 = 10;
-    public int attackPower2 = 25;
+    public int attackPower2 = 30;
+
+    [Header("スキル設定")]
+    [SerializeField] private float skillDuration = 10f;
+    [SerializeField] private float skillTimeCost = 30f;
+    [SerializeField] private float skillAttackMultiplier = 1.5f;
+
+    private bool isSkillActive = false;
+    private GameMaster gameMaster;
 
     [Header("探索時間")]
-    public float maxExplorationTime = 60f;
-    public float currentExplorationTime = 60f;
+    public float maxExplorationTime = 100f;
+    public float currentExplorationTime = 100f;
 
     [Header("ゲームオーバー設定")]
     public string gameOverSceneName = "GameOver";
+
+    [Header("スキルエフェクト")]
+    public ParticleSystem skillEffect;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -49,6 +60,8 @@ public class PlayerStatus : MonoBehaviour
         currentHP = maxHP;
         currentExplorationTime = maxExplorationTime;
 
+        gameMaster = FindAnyObjectByType<GameMaster>();
+
         // Animator取得
         animator = GetComponent<Animator>();
 
@@ -66,6 +79,23 @@ public class PlayerStatus : MonoBehaviour
 
         // ダメージ演出
         damageFlash = GetComponentInChildren<DamageFlash>();
+
+        //攻撃力アップのスキルエフェクト
+        if (skillEffect != null)
+        {
+            skillEffect.Stop(
+                true,
+                ParticleSystemStopBehavior.StopEmittingAndClear
+            );
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ActivateSkill();
+        }
     }
 
     // 敵からダメージを受けたとき
@@ -217,5 +247,66 @@ public class PlayerStatus : MonoBehaviour
         Time.timeScale = 1f;
 
         SceneManager.LoadScene(gameOverSceneName);
+    }
+
+    // スキル発動
+    private void ActivateSkill()
+    {
+        if (!CanControl) return;
+
+        if (isSkillActive) return;
+
+        if (gameMaster == null) return;
+
+        // 時間を消費できなければ発動しない
+        if (!gameMaster.TryReduceSkillTime(skillTimeCost))
+        {
+            return;
+        }
+
+        // スキル開始
+        StartCoroutine(SkillCoroutine());
+    }
+
+    private IEnumerator SkillCoroutine()
+    {
+        isSkillActive = true;
+
+        int originalAttackPower1 = attackPower1;
+        int originalAttackPower2 = attackPower2;
+
+        // 攻撃力1.5倍
+        attackPower1 = Mathf.FloorToInt(
+            originalAttackPower1 * skillAttackMultiplier
+        );
+
+        attackPower2 = Mathf.FloorToInt(
+            originalAttackPower2 * skillAttackMultiplier
+        );
+
+        // パーティクル表示
+        if (skillEffect != null)
+        {
+            skillEffect.Play();
+        }
+
+        // スキル効果時間
+        yield return new WaitForSeconds(skillDuration);
+
+        // 攻撃力を元に戻す
+        attackPower1 = originalAttackPower1;
+        attackPower2 = originalAttackPower2;
+
+        // 新しいパーティクルの発生だけを停止
+        // すでに出ているパーティクルは最後まで再生する
+        if (skillEffect != null)
+        {
+            skillEffect.Stop(
+                true,
+                ParticleSystemStopBehavior.StopEmitting
+            );
+        }
+
+        isSkillActive = false;
     }
 }
