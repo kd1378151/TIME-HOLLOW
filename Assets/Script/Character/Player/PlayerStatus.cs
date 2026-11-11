@@ -13,10 +13,18 @@ public class PlayerStatus : MonoBehaviour
     public int attackPower1 = 10;
     public int attackPower2 = 30;
 
-    [Header("スキル設定")]
-    [SerializeField] private float skillDuration = 10f;
+    [Header("攻撃力スキル設定")]
+    [SerializeField] private float skillDuration = 60f;
     [SerializeField] private float skillTimeCost = 30f;
     [SerializeField] private float skillAttackMultiplier = 1.5f;
+
+    [Header("高速移動スキル")]
+    [SerializeField] private float dashDuration = 4f;
+    [SerializeField] private float dashSpeed = 12f;
+    [SerializeField] private float dashAnimatorSpeed = 1.8f;
+    [SerializeField] private ParticleSystem dashEffect;
+
+    public bool IsDashActive { get; private set; } = false;
 
     private bool isSkillActive = false;
     private GameMaster gameMaster;
@@ -92,15 +100,28 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
+        // Eキー：攻撃力アップスキル
         if (Input.GetKeyDown(KeyCode.E))
         {
-            ActivateSkill();
+            if (!IsDashActive)
+            {
+                ActivateSkill();
+            }
+        }
+
+        // Rキー：高速移動スキル
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ActivateDashSkill();
         }
     }
 
     // 敵からダメージを受けたとき
     public void TakeDamage(int damage)
     {
+        // 高速移動中はダメージを受けない
+        if (IsDashActive) return;
+
         if (!CanControl) return;
 
         currentHP -= damage;
@@ -256,21 +277,25 @@ public class PlayerStatus : MonoBehaviour
 
         if (isSkillActive) return;
 
+        // 高速移動中は発動できない
+        if (IsDashActive) return;
+
         if (gameMaster == null) return;
 
-        // 時間を消費できなければ発動しない
         if (!gameMaster.TryReduceSkillTime(skillTimeCost))
         {
             return;
         }
 
-        // スキル開始
         StartCoroutine(SkillCoroutine());
     }
 
     private IEnumerator SkillCoroutine()
     {
         isSkillActive = true;
+
+        Debug.Log("現在のスキル効果時間：" + skillDuration);
+
 
         int originalAttackPower1 = attackPower1;
         int originalAttackPower2 = attackPower2;
@@ -308,5 +333,62 @@ public class PlayerStatus : MonoBehaviour
         }
 
         isSkillActive = false;
+    }
+
+    private void ActivateDashSkill()
+    {
+        if (!CanControl) return;
+        if (IsDashActive) return;
+        if (playerMovement == null) return;
+        if (gameMaster == null) return;
+
+        // 攻撃中は移動スキルを発動できない
+        if (playerAttack != null && playerAttack.IsAttackingNow())
+            return;
+
+        // 探索時間を10秒消費
+        if (!gameMaster.TryReduceSkillTime(10f))
+        {
+            Debug.Log("探索時間が足りません！");
+            return;
+        }
+
+        StartCoroutine(DashCoroutine());
+    }
+
+
+    // 高速移動スキル
+    private IEnumerator DashCoroutine()
+    {
+        IsDashActive = true;
+
+        Debug.Log("高速移動スキル開始！");
+
+        // パーティクルを再生
+        if (dashEffect != null)
+        {
+            dashEffect.Stop(
+                true,
+                ParticleSystemStopBehavior.StopEmittingAndClear
+            );
+
+            dashEffect.Play();
+        }
+
+        // 高速移動開始
+        playerMovement.StartDash(
+            dashSpeed,
+            dashAnimatorSpeed
+        );
+
+        // 効果時間
+        yield return new WaitForSeconds(dashDuration);
+
+        // 高速移動終了
+        playerMovement.EndDash();
+
+        IsDashActive = false;
+
+        Debug.Log("高速移動スキル終了！");
     }
 }

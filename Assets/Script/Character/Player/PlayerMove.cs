@@ -41,6 +41,17 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;       // 地面にいるかどうか
     public bool IsGrounded => isGrounded;
 
+    // =========================
+    // 高速移動スキル
+    // =========================
+
+    private bool isDashing = false;
+
+    private float dashSpeed;
+    private float dashDirection;
+
+    private float originalAnimatorSpeed;
+
 
     //プレイヤーのパラメータ
     private PlayerStatus playerStatus;
@@ -75,6 +86,41 @@ public class PlayerMovement : MonoBehaviour
         //死んでいるときまたは移動中はそうさできない
         if (playerStatus != null && !playerStatus.CanControl)
         {
+            return;
+        }
+
+        // 高速移動中の操作
+        if (isDashing)
+        {
+            moveInput = 0f;
+
+            // 左右の方向転換
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveInput = -1f;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                moveInput = 1f;
+            }
+
+            // 入力があれば移動方向を変更
+            if (moveInput != 0f)
+            {
+                dashDirection = moveInput;
+
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.flipX = dashDirection < 0f;
+                }
+            }
+
+            // ジャンプ
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                jumpRequested = true;
+            }
+
             return;
         }
 
@@ -148,6 +194,53 @@ public class PlayerMovement : MonoBehaviour
         {
             // GroundCheckが未設定なら接地していない扱い
             isGrounded = false;
+        }
+
+        // =========================
+        // 高速移動中の処理
+        // =========================
+
+        if (isDashing)
+        {
+            // 自動高速移動
+            rb.linearVelocity = new Vector2(
+                dashDirection * dashSpeed,
+                rb.linearVelocity.y
+            );
+
+            // ジャンプ
+            if (jumpRequested)
+            {
+                if (isGrounded)
+                {
+                    rb.linearVelocity = new Vector2(
+                        rb.linearVelocity.x,
+                        jumpForce
+                    );
+
+                    isGrounded = false;
+                }
+
+                jumpRequested = false;
+            }
+
+            // アニメーション設定
+            if (animator != null)
+            {
+                animator.SetFloat("Speed", 1f);
+
+                animator.SetFloat(
+                    "VerticalSpeed",
+                    rb.linearVelocity.y
+                );
+
+                animator.SetBool(
+                    "IsGrounded",
+                    isGrounded
+                );
+            }
+
+            return;
         }
 
         bool isAttacking = IsAttacking();
@@ -277,5 +370,72 @@ public class PlayerMovement : MonoBehaviour
         }
 
         return false;
+    }
+
+    // =========================
+    // 高速移動開始
+    // =========================
+
+    public void StartDash(float speed, float animationSpeed)
+    {
+        if (isDashing) return;
+
+        isDashing = true;
+
+        dashSpeed = speed;
+
+        // 現在向いている方向を取得
+        if (spriteRenderer != null)
+        {
+            dashDirection = spriteRenderer.flipX ? -1f : 1f;
+        }
+        else
+        {
+            dashDirection = 1f;
+        }
+
+        // アニメーション速度を保存
+        if (animator != null)
+        {
+            originalAnimatorSpeed = animator.speed;
+
+            // アニメーションを高速化
+            animator.speed = animationSpeed;
+        }
+
+        jumpRequested = false;
+    }
+
+    // =========================
+    // 高速移動終了
+    // =========================
+    public void EndDash()
+    {
+        if (!isDashing) return;
+
+        isDashing = false;
+
+        // アニメーション速度を元に戻す
+        if (animator != null)
+        {
+            animator.speed = originalAnimatorSpeed;
+        }
+
+        // 横方向の速度をリセット
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector2(
+                0f,
+                rb.linearVelocity.y
+            );
+        }
+
+        moveInput = 0f;
+        jumpRequested = false;
+
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", 0f);
+        }
     }
 }

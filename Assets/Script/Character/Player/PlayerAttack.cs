@@ -39,6 +39,12 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
+        // 高速移動中は攻撃できない
+        if (playerStatus != null && playerStatus.IsDashActive)
+        {
+            return;
+        }
+
         // 攻撃中・攻撃への遷移中は入力を受け付けない
         AnimatorStateInfo state =
             animator.GetCurrentAnimatorStateInfo(0);
@@ -127,6 +133,12 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
+        // 高速移動中は攻撃判定を無効にする
+        if (playerStatus != null && playerStatus.IsDashActive)
+        {
+            return;
+        }
+
         if (playerStatus == null || animator == null) return;
 
         AnimatorStateInfo state =
@@ -178,5 +190,33 @@ public class PlayerAttack : MonoBehaviour
 
             enemy.TakeDamage(damage);
         }
+    }
+
+    public bool IsAttackingNow()
+    {
+        if (animator == null) return false;
+
+        AnimatorStateInfo state =
+            animator.GetCurrentAnimatorStateInfo(0);
+
+        if (state.IsName("Attack") ||
+            state.IsName("Attack2"))
+        {
+            return true;
+        }
+
+        if (animator.IsInTransition(0))
+        {
+            AnimatorStateInfo next =
+                animator.GetNextAnimatorStateInfo(0);
+
+            if (next.IsName("Attack") ||
+                next.IsName("Attack2"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
