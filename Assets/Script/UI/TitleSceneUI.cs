@@ -7,7 +7,7 @@ public class TitleSceneUI : MonoBehaviour
         SceneFlowManager _manager = FindAnyObjectByType<SceneFlowManager>();
         if (_manager != null)
         {
-            _manager.LoadStageScene();
+            _manager.LoadMainMenuScene();
         }
     }
 }

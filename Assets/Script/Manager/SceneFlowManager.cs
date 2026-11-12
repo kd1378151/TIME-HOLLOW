@@ -10,6 +10,7 @@ public class SceneFlowManager : MonoBehaviour
     [SerializeField] private string m_mainMenuSceneName = "MainMenu";
     [SerializeField] private string m_stageSceneName = "Stage";
     [SerializeField] private string m_resultSceneName = "Result";
+    [SerializeField] private string m_settingSceneName = "Setting";
 
     private bool m_isLoadingScene = false;
     #endregion
@@ -56,6 +57,11 @@ public class SceneFlowManager : MonoBehaviour
     public void LoadResultScene()
     {
         LoadScene(m_resultSceneName);
+    }
+
+    public void LoadSettingScene()
+    {
+        LoadScene(m_settingSceneName);
     }
     #endregion
 }
