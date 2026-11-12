@@ -1136,8 +1136,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: TIME HOLLOW
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}
-  m_sharedMaterial: {fileID: -3852555445300860798, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4ab3d734a8906e54bb8b84675b16ad55, type: 2}
+  m_sharedMaterial: {fileID: -1243368521058547925, guid: 4ab3d734a8906e54bb8b84675b16ad55, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
