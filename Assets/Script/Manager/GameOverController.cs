@@ -121,9 +121,6 @@ public class GameOverFadeController : MonoBehaviour
     // タイトルへ戻るボタンを押したとき
     public void ReturnToTitle()
     {
-        if (!buttonsEnabled) return;
-
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(titleSceneName);
+        SceneFlowManager.Instance.LoadMainMenuScene();
     }
 }
