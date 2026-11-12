@@ -29,6 +29,10 @@ public class GameMaster : MonoBehaviour
     [Header("探索開始の演出")]
     [SerializeField] private float m_fadeInDuration = 3.0f;
 
+    [Header("攻撃時の探索時間減少")]
+    [SerializeField] private float attack1TimeReduction = 5f;
+    [SerializeField] private float attack2TimeReduction = 7f;
+
     private bool m_isStarting = true;
     private PlayerAttack m_playerAttack;
 
@@ -157,7 +161,13 @@ public class GameMaster : MonoBehaviour
 
         if (m_timeText != null)
         {
-            m_timeText.text = m_dispayTime.ToString("F0");
+            float ratio = maxTime > 0f
+                ? Mathf.Clamp01(m_dispayTime / maxTime)
+                : 0f;
+
+            int percentage = Mathf.RoundToInt(ratio * 100f);
+
+            m_timeText.text = percentage + "%";
         }
     }
 
@@ -204,7 +214,7 @@ public class GameMaster : MonoBehaviour
 
         if (m_timeText != null)
         {
-            m_timeText.text = m_dispayTime.ToString("F0");
+            m_timeText.text = "100%";
         }
     }
 
@@ -337,5 +347,116 @@ public class GameMaster : MonoBehaviour
             m_playerAttack.enabled = true;
 
         m_isStarting = false;
+    }
+
+    // 攻撃時に探索時間を減らす
+    public void ReduceExplorationTime(float reduction)
+    {
+        if (m_isStarting || m_isTimeOver) return;
+        if (m_playerStatus == null) return;
+
+        m_times += reduction;
+
+        float maxTime = m_playerStatus.maxExplorationTime;
+
+        m_dispayTime = Mathf.Max(0, maxTime - m_times);
+
+        m_playerStatus.currentExplorationTime = m_dispayTime;
+
+        if (m_times >= maxTime)
+        {
+            m_isTimeOver = true;
+        }
+
+        TimerUpdateDisplay();
+    }
+
+    // 通常攻撃が可能か確認
+    public bool CanAttack1()
+    {
+        return m_dispayTime >= attack1TimeReduction
+            && !m_isTimeOver
+            && !m_isStarting;
+    }
+
+    // 強攻撃が可能か確認
+    public bool CanAttack2()
+    {
+        return m_dispayTime >= attack2TimeReduction
+            && !m_isTimeOver
+            && !m_isStarting;
+    }
+
+    // 通常攻撃
+    public bool ReduceAttack1Time()
+    {
+        if (!CanAttack1()) return false;
+
+        ReduceExplorationTime(attack1TimeReduction);
+        return true;
+    }
+
+    public bool ReduceAttack2Time()
+    {
+        if (!CanAttack2()) return false;
+
+        ReduceExplorationTime(attack2TimeReduction);
+        return true;
+    }
+
+    private void TimerUpdateDisplay()
+    {
+        float maxTime = m_playerStatus.maxExplorationTime;
+
+        if (m_timeSlider != null)
+        {
+            m_timeSlider.value = maxTime > 0
+                ? m_dispayTime / maxTime
+                : 0f;
+        }
+
+        if (m_timeSliderColor != null)
+        {
+            float ratio = maxTime > 0
+                ? Mathf.Clamp01(m_dispayTime / maxTime)
+                : 0f;
+
+            float threshold = Mathf.Clamp01(m_timerColorChangeThreshold);
+
+            float colorRatio = threshold > 0f
+                ? Mathf.Clamp01(ratio / threshold)
+                : (ratio > 0f ? 1f : 0f);
+
+            m_timeSliderColor.color = Color.Lerp(
+                m_timerLowColor,
+                m_timerNormalColor,
+                colorRatio
+            );
+        }
+
+        if (m_timeText != null)
+        {
+            float ratio = maxTime > 0
+                ? Mathf.Clamp01(m_dispayTime / maxTime)
+                : 0f;
+
+            int percentage = Mathf.RoundToInt(ratio * 100f);
+
+            m_timeText.text = percentage + "%";
+        }
+    }
+
+    // スキル発動時の探索時間消費
+    public bool TryReduceSkillTime(float reduction)
+    {
+        if (m_isStarting || m_isTimeOver) return false;
+
+        // 残り時間が消費時間より少なければ発動しない
+        if (m_dispayTime < reduction) return false;
+
+        // 時間を消費
+        ReduceExplorationTime(reduction);
+
+        return true;
     }
 }

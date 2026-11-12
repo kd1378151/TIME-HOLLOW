@@ -19,3 +19,4 @@ HIJKMLN
 OPQRSTU
 VWXYZ
 はじめから
+%

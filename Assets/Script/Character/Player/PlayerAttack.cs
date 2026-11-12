@@ -6,6 +6,8 @@ public class PlayerAttack : MonoBehaviour
 {
     private Animator animator;
 
+    private GameMaster gameMaster;
+
     [Header("攻撃判定")]
     public BoxCollider2D attackCollider;
 
@@ -16,6 +18,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
+        gameMaster = FindAnyObjectByType<GameMaster>();
         animator = GetComponentInChildren<Animator>();
         playerStatus = GetComponent<PlayerStatus>();
 
@@ -32,6 +35,12 @@ public class PlayerAttack : MonoBehaviour
 
         // 操作不能中は入力を受け付けない
         if (playerStatus != null && !playerStatus.CanControl)
+        {
+            return;
+        }
+
+        // 高速移動中は攻撃できない
+        if (playerStatus != null && playerStatus.IsDashActive)
         {
             return;
         }
@@ -58,6 +67,11 @@ public class PlayerAttack : MonoBehaviour
         // 左クリック：通常攻撃
         if (Input.GetMouseButtonDown(0))
         {
+            if (gameMaster != null && !gameMaster.CanAttack1())
+            {
+                return;
+            }
+
             animator.ResetTrigger("Attack1");
             animator.ResetTrigger("Attack2");
             animator.SetTrigger("Attack1");
@@ -65,6 +79,11 @@ public class PlayerAttack : MonoBehaviour
         // 右クリック：強攻撃
         else if (Input.GetMouseButtonDown(1))
         {
+            if (gameMaster != null && !gameMaster.CanAttack2())
+            {
+                return;
+            }
+
             animator.ResetTrigger("Attack1");
             animator.ResetTrigger("Attack2");
             animator.SetTrigger("Attack2");
@@ -75,9 +94,28 @@ public class PlayerAttack : MonoBehaviour
     public void StartHit()
     {
         if (attackCollider == null) return;
+        if (attackCollider.enabled) return;
 
-        // 新しい攻撃なので命中履歴をリセット
         hitEnemies.Clear();
+
+        bool success = true;
+
+        AnimatorStateInfo state =
+            animator.GetCurrentAnimatorStateInfo(0);
+
+        if (state.IsName("Attack2"))
+        {
+            if (gameMaster != null)
+                success = gameMaster.ReduceAttack2Time();
+        }
+        else
+        {
+            if (gameMaster != null)
+                success = gameMaster.ReduceAttack1Time();
+        }
+
+        if (!success) return;
+
         attackCollider.enabled = true;
     }
 
@@ -91,6 +129,12 @@ public class PlayerAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (attackCollider == null || !attackCollider.enabled)
+        {
+            return;
+        }
+
+        // 高速移動中は攻撃判定を無効にする
+        if (playerStatus != null && playerStatus.IsDashActive)
         {
             return;
         }
@@ -146,5 +190,33 @@ public class PlayerAttack : MonoBehaviour
 
             enemy.TakeDamage(damage);
         }
+    }
+
+    public bool IsAttackingNow()
+    {
+        if (animator == null) return false;
+
+        AnimatorStateInfo state =
+            animator.GetCurrentAnimatorStateInfo(0);
+
+        if (state.IsName("Attack") ||
+            state.IsName("Attack2"))
+        {
+            return true;
+        }
+
+        if (animator.IsInTransition(0))
+        {
+            AnimatorStateInfo next =
+                animator.GetNextAnimatorStateInfo(0);
+
+            if (next.IsName("Attack") ||
+                next.IsName("Attack2"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
