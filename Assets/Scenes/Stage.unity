@@ -2451,8 +2451,6 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-=======
 --- !u!1 &1310222035
 GameObject:
   m_ObjectHideFlags: 0
@@ -5142,7 +5140,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331249823}
   m_CullTransparentMesh: 1
->>>>>>> e570d4dbc9a62849de474d76916a29431d41b546
 --- !u!1 &1367277908
 GameObject:
   m_ObjectHideFlags: 0
@@ -25551,8 +25548,4 @@ SceneRoots:
   - {fileID: 163231030}
   - {fileID: 866459676}
   - {fileID: 208885401}
-<<<<<<< HEAD
-  - {fileID: 1188538869}
-=======
   - {fileID: 369050130}
->>>>>>> e570d4dbc9a62849de474d76916a29431d41b546
