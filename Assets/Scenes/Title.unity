@@ -268,7 +268,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u63A2\u7D22\u958B\u59CB"
+  m_text: GAME START
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}
   m_sharedMaterial: {fileID: -3852555445300860798, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}

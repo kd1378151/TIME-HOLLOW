@@ -4622,7 +4622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52d2a10ea8a05848bfe3aa0b6644102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerExperience
-  currentExperience: 0
+  currentExperience: 1000
   experienceText: {fileID: 1607798529}
   countUpDuration: 0.5
 --- !u!1 &1188538867

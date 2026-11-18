@@ -1,253 +1,470 @@
 
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
 public class UpgradeManager : MonoBehaviour
 {
+    [Header("スキルツリー")]
+    public UpgradeNode[] allNodes;
+
     [Header("所持経験値")]
     public TextMeshProUGUI expNumText;
 
-    [Header("強化後の数値表示")]
-    public TextMeshProUGUI hpUpgradeText;
-    public TextMeshProUGUI attackUpgradeText;
-    public TextMeshProUGUI timeUpgradeText;
+    [Header("説明表示")]
+    public GameObject descriptionArea;
+    public TextMeshProUGUI descriptionText;
 
-    [Header("必要経験値の表示")]
-    public TextMeshProUGUI hpCostText;
-    public TextMeshProUGUI attackCostText;
-    public TextMeshProUGUI timeCostText;
+    [Header("共通ボタン")]
+    public Button upgradeButton;
+    public TextMeshProUGUI actionButtonText;
+    public TextMeshProUGUI costText;
 
-    [Header("強化ボタン")]
-    public Button hpUpgradeButton;
-    public Button attackUpgradeButton;
-    public Button timeUpgradeButton;
+    [Header("RELEASE専用ボタン")]
+    public GameObject releaseButtonArea;
 
-    [Header("ボタンの暗さ設定")]
-    [Range(0f, 1f)]
-    public float disabledBrightness = 0.65f;
+    [Header("ステータス表示")]
+    public TextMeshProUGUI hpText;
+    public TextMeshProUGUI attackText;
+    public TextMeshProUGUI timeText;
 
-    [Header("強化設定")]
-    public int hpUpgradeAmount = 10;
-    public int attackUpgradeAmount = 2;
-    public int attack2UpgradeAmount = 4;
-    public float timeUpgradeAmount = 11f;
+    [Header("カウント時間")]
+    public float countDuration = 0.5f;
 
-    [Header("初回の必要経験値")]
-    public int baseUpgradeCost = 10;
-
-    [Header("文字色")]
-    public Color normalColor = Color.white;
-    public Color insufficientColor = Color.red;
-
-    [Header("経験値カウントダウン")]
-    public float expCountDuration = 0.5f;
+    private UpgradeNode selectedNode;
 
     private int displayedExperience;
-    private Coroutine expCountCoroutine;
 
+    private Coroutine expCoroutine;
+    private Coroutine hpCoroutine;
+    private Coroutine attackCoroutine;
+    private Coroutine timeCoroutine;
 
     private void Start()
     {
         displayedExperience = PlayerExperience.SavedExperience;
-        UpdateUpgradeUI();
-    }
 
-
-    // 最大HP強化
-    public void UpgradeHP()
-    {
-        int cost = GetCost(PlayerUpgradeData.HPUpgradeCount);
-
-        if (!PlayerExperience.TrySpendExperience(cost))
-            return;
-
-        PlayerUpgradeData.MaxHP += hpUpgradeAmount;
-        PlayerUpgradeData.HPUpgradeCount++;
-
-        StartExperienceCountDown();
-        UpdateUpgradeUI();
-    }
-
-
-    // 攻撃力強化
-    public void UpgradeAttack()
-    {
-        int cost = GetCost(PlayerUpgradeData.AttackUpgradeCount);
-
-        if (!PlayerExperience.TrySpendExperience(cost))
-            return;
-
-        PlayerUpgradeData.AttackPower1 += attackUpgradeAmount;
-        PlayerUpgradeData.AttackPower2 += attack2UpgradeAmount;
-        PlayerUpgradeData.AttackUpgradeCount++;
-
-        StartExperienceCountDown();
-        UpdateUpgradeUI();
-    }
-
-
-    // 探索時間強化
-    public void UpgradeTime()
-    {
-        int cost = GetCost(PlayerUpgradeData.TimeUpgradeCount);
-
-        if (!PlayerExperience.TrySpendExperience(cost))
-            return;
-
-        PlayerUpgradeData.MaxExplorationTime += timeUpgradeAmount;
-        PlayerUpgradeData.TimeUpgradeCount++;
-
-        StartExperienceCountDown();
-        UpdateUpgradeUI();
-    }
-
-
-    // 次回の必要経験値
-    private int GetCost(int upgradeCount)
-    {
-        return baseUpgradeCost * (upgradeCount + 1);
-    }
-
-
-    // UI更新
-    public void UpdateUpgradeUI()
-    {
-        int experience = PlayerExperience.SavedExperience;
-
-        if (expNumText != null)
-            expNumText.text = displayedExperience.ToString();
-
-        if (hpUpgradeText != null)
+        // 各パネルを初期化
+        foreach (UpgradeNode node in allNodes)
         {
-            hpUpgradeText.text =
-                PlayerUpgradeData.MaxHP + " → " +
-                (PlayerUpgradeData.MaxHP + hpUpgradeAmount);
+            if (node != null)
+                node.Initialize(this);
         }
 
-        if (attackUpgradeText != null)
+        // ボタン設定
+        if (upgradeButton != null)
         {
-            attackUpgradeText.text =
-                PlayerUpgradeData.AttackPower1 + " → " +
-                (PlayerUpgradeData.AttackPower1 + attackUpgradeAmount);
+            upgradeButton.onClick.RemoveListener(ExecuteSelectedAction);
+            upgradeButton.onClick.AddListener(ExecuteSelectedAction);
         }
 
-        if (timeUpgradeText != null)
-        {
-            timeUpgradeText.text =
-                PlayerUpgradeData.MaxExplorationTime.ToString("0") + "秒 → " +
-                (PlayerUpgradeData.MaxExplorationTime + timeUpgradeAmount).ToString("0") + "秒";
-        }
+        // 初期表示
+        UpdateExperienceText();
+        UpdateStatusText();
 
-        int hpCost = GetCost(PlayerUpgradeData.HPUpgradeCount);
-        int attackCost = GetCost(PlayerUpgradeData.AttackUpgradeCount);
-        int timeCost = GetCost(PlayerUpgradeData.TimeUpgradeCount);
-
-        // 必要経験値の表示
-        UpdateCostText(hpCostText, hpCost, experience);
-        UpdateCostText(attackCostText, attackCost, experience);
-        UpdateCostText(timeCostText, timeCost, experience);
-
-        // ボタンの操作可否と明るさを更新
-        UpdateButtonState(hpUpgradeButton, hpCost, experience);
-        UpdateButtonState(attackUpgradeButton, attackCost, experience);
-        UpdateButtonState(timeUpgradeButton, timeCost, experience);
+        ClearSelection();
+        UpdateAllNodes();
     }
 
-
-    // 必要経験値の文字色更新
-    private void UpdateCostText(
-        TextMeshProUGUI target,
-        int cost,
-        int experience)
+    // パネルを選択
+    public void SelectNode(UpgradeNode node)
     {
-        if (target == null) return;
+        if (node == null)
+            return;
 
-        target.text = cost.ToString();
+        selectedNode = node;
 
-        if (experience >= cost)
+        if (descriptionArea != null)
+            descriptionArea.SetActive(true);
+
+        if (descriptionText != null)
+            descriptionText.text = node.description;
+
+        RefreshSelectedUI();
+    }
+
+    // 選択解除
+    public void ClearSelection()
+    {
+        selectedNode = null;
+
+        if (descriptionArea != null)
+            descriptionArea.SetActive(false);
+
+        if (upgradeButton != null)
+            upgradeButton.gameObject.SetActive(false);
+
+        if (costText != null)
+            costText.gameObject.SetActive(false);
+
+        if (releaseButtonArea != null)
+            releaseButtonArea.SetActive(false);
+    }
+
+    // 選択中パネルの表示更新
+    private void RefreshSelectedUI()
+    {
+        if (selectedNode == null)
+            return;
+
+        bool unlocked = selectedNode.IsUnlocked;
+        bool purchased = selectedNode.IsPurchased;
+        bool available = selectedNode.IsAvailable;
+
+        if (releaseButtonArea != null)
+            releaseButtonArea.SetActive(false);
+
+        // ボタン表示
+        if (upgradeButton != null)
         {
-            target.color = normalColor;
+            upgradeButton.gameObject.SetActive(unlocked);
+
+            // 経験値が足りていて、未購入の場合だけ押せる
+            upgradeButton.interactable =
+                available &&
+                PlayerExperience.SavedExperience >=
+                selectedNode.experienceCost;
+        }
+
+        // ボタン文字
+        if (actionButtonText != null)
+        {
+            if (purchased)
+            {
+                actionButtonText.text = "MAX";
+            }
+            else if (selectedNode.isReleaseNode)
+            {
+                actionButtonText.text = "RELEASE";
+            }
+            else
+            {
+                actionButtonText.text = "UPGRADE";
+            }
+        }
+
+        // 必要経験値表示
+        if (costText != null)
+        {
+            costText.gameObject.SetActive(available);
+
+            if (available)
+            {
+                int cost = selectedNode.experienceCost;
+
+                costText.text = cost.ToString();
+
+                costText.color =
+                    PlayerExperience.SavedExperience >= cost
+                    ? Color.black
+                    : Color.red;
+            }
+        }
+    }
+
+    // 強化・スキル解放実行
+    private void ExecuteSelectedAction()
+    {
+        if (selectedNode == null)
+            return;
+
+        if (!selectedNode.IsAvailable)
+            return;
+
+        int cost = selectedNode.experienceCost;
+
+        // 経験値を消費
+        if (!PlayerExperience.TrySpendExperience(cost))
+        {
+            RefreshSelectedUI();
+            return;
+        }
+
+        // RELEASEの場合
+        if (selectedNode.isReleaseNode)
+        {
+            PlayerUpgradeData.MarkSkillReleased(
+                selectedNode.skillToRelease
+            );
+
+            Debug.Log(
+                "スキル解放：" + selectedNode.skillToRelease
+            );
         }
         else
         {
-            target.color = insufficientColor;
+            // 強化前の数値
+            int oldHP = PlayerUpgradeData.MaxHP;
+            int oldAttack = PlayerUpgradeData.AttackPower1;
+            float oldTime = PlayerUpgradeData.MaxExplorationTime;
+
+            // 強化処理
+            switch (selectedNode.upgradeType)
+            {
+                case UpgradeNode.UpgradeType.HP:
+
+                    PlayerUpgradeData.MaxHP +=
+                        selectedNode.hpAmount;
+
+                    break;
+
+                case UpgradeNode.UpgradeType.Attack:
+
+                    PlayerUpgradeData.AttackPower1 +=
+                        selectedNode.attackAmount1;
+
+                    PlayerUpgradeData.AttackPower2 +=
+                        selectedNode.attackAmount2;
+
+                    break;
+
+                case UpgradeNode.UpgradeType.ExplorationTime:
+
+                    PlayerUpgradeData.MaxExplorationTime +=
+                        selectedNode.timeAmount;
+
+                    break;
+
+                case UpgradeNode.UpgradeType.DefenseSkill:
+
+                    PlayerUpgradeData.DefenseSkillDuration +=
+                        selectedNode.defenseDurationAmount;
+
+                    PlayerUpgradeData.DefenseDamageReduction =
+                        Mathf.Clamp(
+                            PlayerUpgradeData.DefenseDamageReduction +
+                            selectedNode.defenseReductionAmount,
+                            0f,
+                            0.9f
+                        );
+
+                    break;
+            }
+
+            StartStatusCount(
+                oldHP,
+                oldAttack,
+                oldTime
+            );
+
+            Debug.Log(
+                "強化完了：" + selectedNode.nodeId
+            );
         }
 
-        target.ForceMeshUpdate();
+        // 取得済みにする
+        PlayerUpgradeData.MarkPurchased(
+            selectedNode.nodeId
+        );
+
+        // 経験値表示更新
+        StartExperienceCount();
+
+        // 全パネル更新
+        UpdateAllNodes();
+
+        // 選択中パネルの表示更新
+        RefreshSelectedUI();
     }
 
-    private void UpdateButtonState(
-        Button target,
-        int cost,
-        int experience)
+    // 全パネル更新
+    private void UpdateAllNodes()
     {
-        if (target == null) return;
-
-        // 経験値が足りない場合はボタンを押せなくする
-        target.interactable = experience >= cost;
-    }
-
-    // 結果画面へ戻る
-    public void BackToResult()
-    {
-        SceneManager.LoadScene("ExpeditionEnd");
-    }
-
-
-    // 経験値カウントダウン開始
-    private void StartExperienceCountDown()
-    {
-        if (expCountCoroutine != null)
+        foreach (UpgradeNode node in allNodes)
         {
-            StopCoroutine(expCountCoroutine);
+            if (node != null)
+                node.UpdateVisual();
         }
-
-        expCountCoroutine = StartCoroutine(CountDownExperience());
     }
 
-
-    private IEnumerator CountDownExperience()
+    // 経験値表示
+    private void UpdateExperienceText()
     {
-        int targetExperience = PlayerExperience.SavedExperience;
-        int startExperience = displayedExperience;
-
-        if (expCountDuration <= 0f)
+        if (expNumText != null)
         {
-            displayedExperience = targetExperience;
-
-            if (expNumText != null)
-                expNumText.text = displayedExperience.ToString();
-
-            expCountCoroutine = null;
-            yield break;
+            expNumText.text =
+                displayedExperience.ToString();
         }
+    }
+
+    private void StartExperienceCount()
+    {
+        if (expCoroutine != null)
+            StopCoroutine(expCoroutine);
+
+        expCoroutine = StartCoroutine(
+            CountExperience()
+        );
+    }
+
+    private IEnumerator CountExperience()
+    {
+        int start = displayedExperience;
+        int target = PlayerExperience.SavedExperience;
 
         float elapsed = 0f;
 
-        while (elapsed < expCountDuration)
+        if (countDuration <= 0f)
+        {
+            displayedExperience = target;
+            UpdateExperienceText();
+            expCoroutine = null;
+            yield break;
+        }
+
+        while (elapsed < countDuration)
         {
             elapsed += Time.deltaTime;
 
-            float progress = Mathf.Clamp01(elapsed / expCountDuration);
-
-            displayedExperience = Mathf.RoundToInt(
-                Mathf.Lerp(startExperience, targetExperience, progress)
+            float progress = Mathf.Clamp01(
+                elapsed / countDuration
             );
 
-            if (expNumText != null)
-                expNumText.text = displayedExperience.ToString();
+            displayedExperience = Mathf.RoundToInt(
+                Mathf.Lerp(start, target, progress)
+            );
+
+            UpdateExperienceText();
 
             yield return null;
         }
 
-        displayedExperience = targetExperience;
+        displayedExperience = target;
+        UpdateExperienceText();
 
-        if (expNumText != null)
-            expNumText.text = displayedExperience.ToString();
+        expCoroutine = null;
+    }
 
-        expCountCoroutine = null;
+    // ステータス表示初期化
+    private void UpdateStatusText()
+    {
+        if (hpText != null)
+            hpText.text = PlayerUpgradeData.MaxHP.ToString();
+
+        if (attackText != null)
+            attackText.text = PlayerUpgradeData.AttackPower1.ToString();
+
+        if (timeText != null)
+        {
+            timeText.text =
+                PlayerUpgradeData.MaxExplorationTime.ToString("0") + "秒";
+        }
+    }
+
+    // ステータスのカウントアップ
+    private void StartStatusCount(
+        int oldHP,
+        int oldAttack,
+        float oldTime)
+    {
+        if (hpCoroutine != null)
+            StopCoroutine(hpCoroutine);
+
+        if (attackCoroutine != null)
+            StopCoroutine(attackCoroutine);
+
+        if (timeCoroutine != null)
+            StopCoroutine(timeCoroutine);
+
+        hpCoroutine = StartCoroutine(
+            CountInt(hpText, oldHP, PlayerUpgradeData.MaxHP)
+        );
+
+        attackCoroutine = StartCoroutine(
+            CountInt(
+                attackText,
+                oldAttack,
+                PlayerUpgradeData.AttackPower1
+            )
+        );
+
+        timeCoroutine = StartCoroutine(
+            CountFloat(
+                timeText,
+                oldTime,
+                PlayerUpgradeData.MaxExplorationTime
+            )
+        );
+    }
+
+    private IEnumerator CountInt(
+        TextMeshProUGUI target,
+        int start,
+        int end)
+    {
+        if (target == null)
+            yield break;
+
+        float elapsed = 0f;
+
+        if (countDuration <= 0f)
+        {
+            target.text = end.ToString();
+            yield break;
+        }
+
+        while (elapsed < countDuration)
+        {
+            elapsed += Time.deltaTime;
+
+            float progress = Mathf.Clamp01(
+                elapsed / countDuration
+            );
+
+            int value = Mathf.RoundToInt(
+                Mathf.Lerp(start, end, progress)
+            );
+
+            target.text = value.ToString();
+
+            yield return null;
+        }
+
+        target.text = end.ToString();
+    }
+
+    private IEnumerator CountFloat(
+        TextMeshProUGUI target,
+        float start,
+        float end)
+    {
+        if (target == null)
+            yield break;
+
+        float elapsed = 0f;
+
+        if (countDuration <= 0f)
+        {
+            target.text = end.ToString("0") + "秒";
+            yield break;
+        }
+
+        while (elapsed < countDuration)
+        {
+            elapsed += Time.deltaTime;
+
+            float progress = Mathf.Clamp01(
+                elapsed / countDuration
+            );
+
+            float value = Mathf.Lerp(
+                start,
+                end,
+                progress
+            );
+
+            target.text = value.ToString("0") + "秒";
+
+            yield return null;
+        }
+
+        target.text = end.ToString("0") + "秒";
+    }
+
+    public void BackToResult()
+    {
+        SceneManager.LoadScene("ExpeditionEnd");
     }
 }

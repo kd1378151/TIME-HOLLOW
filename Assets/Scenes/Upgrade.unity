@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 200932504}
   - component: {fileID: 200932503}
   - component: {fileID: 200932502}
+  - component: {fileID: 200932505}
   m_Layer: 5
   m_Name: Hp1
   m_TagString: Untagged
@@ -452,6 +453,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200932500}
   m_CullTransparentMesh: 1
+--- !u!114 &200932505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200932500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Hp1
+  description: "\u6700\u5927HP\u304C+20\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 1
+  prerequisiteNode: {fileID: 0}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 200932502}
+  panelImage: {fileID: 200932503}
+  nextNodes:
+  - {fileID: 218732498}
+  routeImages:
+  - {fileID: 748861525}
+  lockedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &211386312
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +639,7 @@ GameObject:
   - component: {fileID: 218732497}
   - component: {fileID: 218732496}
   - component: {fileID: 218732495}
+  - component: {fileID: 218732498}
   m_Layer: 5
   m_Name: Hp2
   m_TagString: Untagged
@@ -710,6 +749,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218732493}
   m_CullTransparentMesh: 1
+--- !u!114 &218732498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218732493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Hp2
+  description: "\u6700\u5927HP\u304C+40\u3055\u308C\u308B"
+  experienceCost: 20
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 200932505}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 40
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 218732495}
+  panelImage: {fileID: 218732496}
+  nextNodes:
+  - {fileID: 1901550021}
+  routeImages:
+  - {fileID: 1240724171}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &273561669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,8 +1182,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -176, y: -370}
-  m_SizeDelta: {x: 1000, y: 50}
+  m_AnchoredPosition: {x: -146, y: -370}
+  m_SizeDelta: {x: 1200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328104631
 MonoBehaviour:
@@ -1733,7 +1809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 446, y: -370}
+  m_AnchoredPosition: {x: 560, y: -370}
   m_SizeDelta: {x: 150, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &418729014
@@ -1980,6 +2056,7 @@ GameObject:
   - component: {fileID: 440279350}
   - component: {fileID: 440279349}
   - component: {fileID: 440279348}
+  - component: {fileID: 440279351}
   m_Layer: 5
   m_Name: Attack8
   m_TagString: Untagged
@@ -2089,6 +2166,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440279346}
   m_CullTransparentMesh: 1
+--- !u!114 &440279351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440279346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Attack8
+  description: "\u30B9\u30AD\u30EB\u304C\u3055\u3089\u306B\u5F37\u5316\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 628353393}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 440279348}
+  panelImage: {fileID: 440279349}
+  nextNodes: []
+  routeImages: []
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &493567728
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,6 +2213,7 @@ GameObject:
   - component: {fileID: 493567732}
   - component: {fileID: 493567731}
   - component: {fileID: 493567730}
+  - component: {fileID: 493567733}
   m_Layer: 5
   m_Name: Hp8
   m_TagString: Untagged
@@ -2210,6 +2323,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493567728}
   m_CullTransparentMesh: 1
+--- !u!114 &493567733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493567728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Hp8
+  description: "\u30B9\u30AD\u30EB\u304C\u3055\u3089\u306B\u5F37\u5316\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 986648796}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 493567730}
+  panelImage: {fileID: 493567731}
+  nextNodes: []
+  routeImages: []
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &509647128
 GameObject:
   m_ObjectHideFlags: 0
@@ -3099,6 +3247,7 @@ GameObject:
   - component: {fileID: 628353392}
   - component: {fileID: 628353391}
   - component: {fileID: 628353390}
+  - component: {fileID: 628353393}
   m_Layer: 5
   m_Name: Attack7
   m_TagString: Untagged
@@ -3208,6 +3357,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628353388}
   m_CullTransparentMesh: 1
+--- !u!114 &628353393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628353388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Attack7
+  description: "\u30B9\u30AD\u30EB\u304C\u5F37\u5316\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1954088505}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 628353390}
+  panelImage: {fileID: 628353391}
+  nextNodes:
+  - {fileID: 440279351}
+  routeImages:
+  - {fileID: 1954753662}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &630756223
 GameObject:
   m_ObjectHideFlags: 0
@@ -3436,6 +3622,7 @@ GameObject:
   - component: {fileID: 679371621}
   - component: {fileID: 679371620}
   - component: {fileID: 679371619}
+  - component: {fileID: 679371622}
   m_Layer: 5
   m_Name: Attack1
   m_TagString: Untagged
@@ -3545,6 +3732,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679371617}
   m_CullTransparentMesh: 1
+--- !u!114 &679371622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679371617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Attack1
+  description: "\u653B\u6483\u529B\u304C+2\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 1
+  prerequisiteNode: {fileID: 0}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 1
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 6
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 679371619}
+  panelImage: {fileID: 679371620}
+  nextNodes:
+  - {fileID: 1347232654}
+  routeImages:
+  - {fileID: 288128827}
+  lockedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &698668186
 GameObject:
   m_ObjectHideFlags: 0
@@ -3619,143 +3843,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698668186}
-  m_CullTransparentMesh: 1
---- !u!1 &709302474
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 709302475}
-  - component: {fileID: 709302477}
-  - component: {fileID: 709302476}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &709302475
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709302474}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1875073262}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &709302476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709302474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: RELEASE
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}
-  m_sharedMaterial: {fileID: -3852555445300860798, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656bu
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &709302477
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709302474}
   m_CullTransparentMesh: 1
 --- !u!1 &732153520
 GameObject:
@@ -4118,6 +4205,7 @@ GameObject:
   - component: {fileID: 915748230}
   - component: {fileID: 915748229}
   - component: {fileID: 915748228}
+  - component: {fileID: 915748231}
   m_Layer: 5
   m_Name: Time2
   m_TagString: Untagged
@@ -4227,6 +4315,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915748226}
   m_CullTransparentMesh: 1
+--- !u!114 &915748231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915748226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Time2
+  description: "\u9178\u7D20\u30B2\u30FC\u30B8(\u63A2\u7D22\u6642\u9593)\u304C+60\u3055\u308C\u308B"
+  experienceCost: 20
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1533777174}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 2
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 60
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 915748228}
+  panelImage: {fileID: 915748229}
+  nextNodes:
+  - {fileID: 1203447394}
+  routeImages:
+  - {fileID: 1649294924}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &986648791
 GameObject:
   m_ObjectHideFlags: 0
@@ -4239,6 +4364,7 @@ GameObject:
   - component: {fileID: 986648795}
   - component: {fileID: 986648794}
   - component: {fileID: 986648793}
+  - component: {fileID: 986648796}
   m_Layer: 5
   m_Name: Hp7
   m_TagString: Untagged
@@ -4348,6 +4474,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986648791}
   m_CullTransparentMesh: 1
+--- !u!114 &986648796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986648791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Hp7
+  description: "\u30B9\u30AD\u30EB\u304C\u5F37\u5316\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1110221345}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 986648793}
+  panelImage: {fileID: 986648794}
+  nextNodes:
+  - {fileID: 493567733}
+  routeImages:
+  - {fileID: 1103391263}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1025515819
 GameObject:
   m_ObjectHideFlags: 0
@@ -4520,7 +4683,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -700, y: 250}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 115, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1060235465
 MonoBehaviour:
@@ -4542,7 +4705,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8b157e6fa590999429b76579acbf3585, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f1bf44d2209cecf4a96d5d62c4ad9a61, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4572,6 +4735,7 @@ GameObject:
   - component: {fileID: 1080323720}
   - component: {fileID: 1080323719}
   - component: {fileID: 1080323718}
+  - component: {fileID: 1080323721}
   m_Layer: 5
   m_Name: Time4
   m_TagString: Untagged
@@ -4681,6 +4845,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080323716}
   m_CullTransparentMesh: 1
+--- !u!114 &1080323721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080323716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Time4
+  description: "\u9178\u7D20\u30B2\u30FC\u30B8(\u63A2\u7D22\u6642\u9593)\u304C+120\u3055\u308C\u308B"
+  experienceCost: 40
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1203447394}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 2
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 120
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1080323718}
+  panelImage: {fileID: 1080323719}
+  nextNodes:
+  - {fileID: 1633463484}
+  routeImages:
+  - {fileID: 1936451666}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1084961816
 GameObject:
   m_ObjectHideFlags: 0
@@ -4905,6 +5106,7 @@ GameObject:
   - component: {fileID: 1110221344}
   - component: {fileID: 1110221343}
   - component: {fileID: 1110221342}
+  - component: {fileID: 1110221345}
   m_Layer: 5
   m_Name: Hp6
   m_TagString: Untagged
@@ -5014,6 +5216,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110221340}
   m_CullTransparentMesh: 1
+--- !u!114 &1110221345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110221340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Hp6
+  description: "\u63A2\u7D22\u4E2D\u306BE\u30DC\u30BF\u30F3\u3067\u9632\u5FA1\u529B\u304C\u4E00\u5B9A\u6642\u9593\u30A2\u30C3\u30D7\u3059\u308B\u30B9\u30AD\u30EB\u304C\u89E3\u653E\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1901550021}
+  isReleaseNode: 1
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1110221342}
+  panelImage: {fileID: 1110221343}
+  nextNodes:
+  - {fileID: 986648796}
+  routeImages:
+  - {fileID: 1126346163}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1124467614
 GameObject:
   m_ObjectHideFlags: 0
@@ -5383,7 +5622,6 @@ RectTransform:
   - {fileID: 1153031660}
   - {fileID: 328104630}
   - {fileID: 418729013}
-  - {fileID: 1875073262}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5403,25 +5641,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d46e232666f72458625205069cf04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
-  expNumText: {fileID: 0}
-  hpUpgradeText: {fileID: 0}
-  attackUpgradeText: {fileID: 0}
-  timeUpgradeText: {fileID: 0}
-  hpCostText: {fileID: 0}
-  attackCostText: {fileID: 0}
-  timeCostText: {fileID: 0}
-  hpUpgradeButton: {fileID: 0}
-  attackUpgradeButton: {fileID: 0}
-  timeUpgradeButton: {fileID: 0}
-  disabledBrightness: 1
-  hpUpgradeAmount: 10
-  attackUpgradeAmount: 2
-  attack2UpgradeAmount: 4
-  timeUpgradeAmount: 10
-  baseUpgradeCost: 10
-  normalColor: {r: 0, g: 0, b: 0, a: 1}
-  insufficientColor: {r: 1, g: 0, b: 0, a: 1}
-  expCountDuration: 0.5
+  allNodes:
+  - {fileID: 200932505}
+  - {fileID: 218732498}
+  - {fileID: 1901550021}
+  - {fileID: 1826703560}
+  - {fileID: 1772630720}
+  - {fileID: 1110221345}
+  - {fileID: 986648796}
+  - {fileID: 493567733}
+  - {fileID: 679371622}
+  - {fileID: 1347232654}
+  - {fileID: 1267631180}
+  - {fileID: 1694320290}
+  - {fileID: 1795525291}
+  - {fileID: 1954088505}
+  - {fileID: 628353393}
+  - {fileID: 440279351}
+  - {fileID: 1533777174}
+  - {fileID: 915748231}
+  - {fileID: 1203447394}
+  - {fileID: 1080323721}
+  - {fileID: 1633463484}
+  - {fileID: 1830688203}
+  - {fileID: 1556239020}
+  - {fileID: 1736899865}
+  expNumText: {fileID: 1153031661}
+  descriptionArea: {fileID: 328104629}
+  descriptionText: {fileID: 328104631}
+  upgradeButton: {fileID: 418729014}
+  actionButtonText: {fileID: 0}
+  costText: {fileID: 1265876810}
+  releaseButtonArea: {fileID: 0}
+  hpText: {fileID: 587971045}
+  attackText: {fileID: 367638159}
+  timeText: {fileID: 1494514768}
+  countDuration: 0.5
 --- !u!1 &1153031659
 GameObject:
   m_ObjectHideFlags: 0
@@ -5708,6 +5963,7 @@ GameObject:
   - component: {fileID: 1203447393}
   - component: {fileID: 1203447392}
   - component: {fileID: 1203447391}
+  - component: {fileID: 1203447394}
   m_Layer: 5
   m_Name: Time3
   m_TagString: Untagged
@@ -5817,6 +6073,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203447389}
   m_CullTransparentMesh: 1
+--- !u!114 &1203447394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203447389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Time3
+  description: "\u9178\u7D20\u30B2\u30FC\u30B8(\u63A2\u7D22\u6642\u9593)\u304C+90\u3055\u308C\u308B"
+  experienceCost: 30
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 915748231}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 2
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 90
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1203447391}
+  panelImage: {fileID: 1203447392}
+  nextNodes:
+  - {fileID: 1080323721}
+  - {fileID: 1830688203}
+  routeImages:
+  - {fileID: 510053007}
+  - {fileID: 698668188}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1240724169
 GameObject:
   m_ObjectHideFlags: 0
@@ -6041,6 +6336,7 @@ GameObject:
   - component: {fileID: 1267631179}
   - component: {fileID: 1267631178}
   - component: {fileID: 1267631177}
+  - component: {fileID: 1267631180}
   m_Layer: 5
   m_Name: Attack3
   m_TagString: Untagged
@@ -6150,6 +6446,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267631175}
   m_CullTransparentMesh: 1
+--- !u!114 &1267631180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267631175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Attack3
+  description: "\u653B\u6483\u529B\u304C+6\u3055\u308C\u308B"
+  experienceCost: 30
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1347232654}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 1
+  hpAmount: 20
+  attackAmount1: 6
+  attackAmount2: 18
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1267631177}
+  panelImage: {fileID: 1267631178}
+  nextNodes:
+  - {fileID: 1694320290}
+  - {fileID: 1954088505}
+  routeImages:
+  - {fileID: 2081856589}
+  - {fileID: 2062630151}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1274691554
 GameObject:
   m_ObjectHideFlags: 0
@@ -6299,6 +6634,7 @@ GameObject:
   - component: {fileID: 1345890973}
   - component: {fileID: 1345890972}
   - component: {fileID: 1345890971}
+  - component: {fileID: 1345890974}
   m_Layer: 5
   m_Name: Return
   m_TagString: Untagged
@@ -6369,7 +6705,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1345890972}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1148534044}
+        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
+        m_MethodName: BackToResult
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1345890972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6408,6 +6756,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345890969}
   m_CullTransparentMesh: 1
+--- !u!114 &1345890974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345890969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc850d5b5640ed645a575f3312582504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackButtonHover
+  arrowText: {fileID: 399438697}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
 --- !u!1 &1347232649
 GameObject:
   m_ObjectHideFlags: 0
@@ -6420,6 +6783,7 @@ GameObject:
   - component: {fileID: 1347232653}
   - component: {fileID: 1347232652}
   - component: {fileID: 1347232651}
+  - component: {fileID: 1347232654}
   m_Layer: 5
   m_Name: Attack2
   m_TagString: Untagged
@@ -6529,6 +6893,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347232649}
   m_CullTransparentMesh: 1
+--- !u!114 &1347232654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347232649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Attack2
+  description: "\u653B\u6483\u529B\u304C+4\u3055\u308C\u308B"
+  experienceCost: 20
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 679371622}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 1
+  hpAmount: 20
+  attackAmount1: 4
+  attackAmount2: 12
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1347232651}
+  panelImage: {fileID: 1347232652}
+  nextNodes:
+  - {fileID: 1267631180}
+  routeImages:
+  - {fileID: 1657171827}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1367810419
 GameObject:
   m_ObjectHideFlags: 0
@@ -7575,6 +7976,7 @@ GameObject:
   - component: {fileID: 1533777173}
   - component: {fileID: 1533777172}
   - component: {fileID: 1533777171}
+  - component: {fileID: 1533777174}
   m_Layer: 5
   m_Name: Time1
   m_TagString: Untagged
@@ -7684,6 +8086,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533777169}
   m_CullTransparentMesh: 1
+--- !u!114 &1533777174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533777169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Time1
+  description: "\u9178\u7D20\u30B2\u30FC\u30B8(\u63A2\u7D22\u6642\u9593)\u304C+30\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 1
+  prerequisiteNode: {fileID: 0}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 2
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1533777171}
+  panelImage: {fileID: 1533777172}
+  nextNodes:
+  - {fileID: 915748231}
+  routeImages:
+  - {fileID: 1841378975}
+  lockedColor: {r: 0.5882353, g: 0.5, b: 0.5, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1556239015
 GameObject:
   m_ObjectHideFlags: 0
@@ -7696,6 +8135,7 @@ GameObject:
   - component: {fileID: 1556239019}
   - component: {fileID: 1556239018}
   - component: {fileID: 1556239017}
+  - component: {fileID: 1556239020}
   m_Layer: 5
   m_Name: Time7
   m_TagString: Untagged
@@ -7805,6 +8245,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1556239015}
   m_CullTransparentMesh: 1
+--- !u!114 &1556239020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556239015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Time7
+  description: "\u30B9\u30AD\u30EB\u304C\u5F37\u5316\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1830688203}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1556239017}
+  panelImage: {fileID: 1556239018}
+  nextNodes:
+  - {fileID: 1736899865}
+  routeImages:
+  - {fileID: 1954753662}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1560872361
 GameObject:
   m_ObjectHideFlags: 0
@@ -8579,6 +9056,7 @@ GameObject:
   - component: {fileID: 1633463483}
   - component: {fileID: 1633463482}
   - component: {fileID: 1633463481}
+  - component: {fileID: 1633463484}
   m_Layer: 5
   m_Name: Time5
   m_TagString: Untagged
@@ -8688,6 +9166,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633463479}
   m_CullTransparentMesh: 1
+--- !u!114 &1633463484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633463479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Time5
+  description: "\u9178\u7D20\u30B2\u30FC\u30B8(\u63A2\u7D22\u6642\u9593)\u304C+150\u3055\u308C\u308B"
+  experienceCost: 50
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1080323721}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 2
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 150
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1633463481}
+  panelImage: {fileID: 1633463482}
+  nextNodes: []
+  routeImages: []
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1643188963
 GameObject:
   m_ObjectHideFlags: 0
@@ -8987,6 +9500,7 @@ GameObject:
   - component: {fileID: 1694320289}
   - component: {fileID: 1694320288}
   - component: {fileID: 1694320287}
+  - component: {fileID: 1694320290}
   m_Layer: 5
   m_Name: Attack4
   m_TagString: Untagged
@@ -9096,6 +9610,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694320285}
   m_CullTransparentMesh: 1
+--- !u!114 &1694320290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694320285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Attack4
+  description: "\u653B\u6483\u529B\u304C+8"
+  experienceCost: 40
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1267631180}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 1
+  hpAmount: 20
+  attackAmount1: 8
+  attackAmount2: 24
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1694320287}
+  panelImage: {fileID: 1694320288}
+  nextNodes:
+  - {fileID: 1795525291}
+  routeImages:
+  - {fileID: 509647130}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1736899860
 GameObject:
   m_ObjectHideFlags: 0
@@ -9108,6 +9659,7 @@ GameObject:
   - component: {fileID: 1736899864}
   - component: {fileID: 1736899863}
   - component: {fileID: 1736899862}
+  - component: {fileID: 1736899865}
   m_Layer: 5
   m_Name: Time8
   m_TagString: Untagged
@@ -9217,6 +9769,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736899860}
   m_CullTransparentMesh: 1
+--- !u!114 &1736899865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736899860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Time8
+  description: "\u30B9\u30AD\u30EB\u304C\u3055\u3089\u306B\u5F37\u5316\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1556239020}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1736899862}
+  panelImage: {fileID: 1736899863}
+  nextNodes: []
+  routeImages: []
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1767825930
 GameObject:
   m_ObjectHideFlags: 0
@@ -9304,6 +9891,7 @@ GameObject:
   - component: {fileID: 1772630719}
   - component: {fileID: 1772630718}
   - component: {fileID: 1772630717}
+  - component: {fileID: 1772630720}
   m_Layer: 5
   m_Name: Hp5
   m_TagString: Untagged
@@ -9413,6 +10001,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772630715}
   m_CullTransparentMesh: 1
+--- !u!114 &1772630720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772630715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Hp5
+  description: "\u6700\u5927HP\u304C+100\u3055\u308C\u308B"
+  experienceCost: 50
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1826703560}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 100
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1772630717}
+  panelImage: {fileID: 1772630718}
+  nextNodes: []
+  routeImages: []
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 1, g: 1, b: 1, a: 1}
+  availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1795525286
 GameObject:
   m_ObjectHideFlags: 0
@@ -9425,6 +10048,7 @@ GameObject:
   - component: {fileID: 1795525290}
   - component: {fileID: 1795525289}
   - component: {fileID: 1795525288}
+  - component: {fileID: 1795525291}
   m_Layer: 5
   m_Name: Attack5
   m_TagString: Untagged
@@ -9534,6 +10158,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795525286}
   m_CullTransparentMesh: 1
+--- !u!114 &1795525291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795525286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Attack5
+  description: "\u653B\u6483\u529B\u304C+10\u3055\u308C\u308B"
+  experienceCost: 50
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1694320290}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 1
+  hpAmount: 20
+  attackAmount1: 10
+  attackAmount2: 30
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1795525288}
+  panelImage: {fileID: 1795525289}
+  nextNodes: []
+  routeImages: []
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1808301351
 GameObject:
   m_ObjectHideFlags: 0
@@ -9683,6 +10342,7 @@ GameObject:
   - component: {fileID: 1826703559}
   - component: {fileID: 1826703558}
   - component: {fileID: 1826703557}
+  - component: {fileID: 1826703560}
   m_Layer: 5
   m_Name: Hp4
   m_TagString: Untagged
@@ -9792,6 +10452,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1826703555}
   m_CullTransparentMesh: 1
+--- !u!114 &1826703560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826703555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Hp4
+  description: "\u6700\u5927HP\u304C+80\u3055\u308C\u308B"
+  experienceCost: 40
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1901550021}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 80
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1826703557}
+  panelImage: {fileID: 1826703558}
+  nextNodes:
+  - {fileID: 0}
+  routeImages:
+  - {fileID: 1625919366}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1830688198
 GameObject:
   m_ObjectHideFlags: 0
@@ -9804,6 +10501,7 @@ GameObject:
   - component: {fileID: 1830688202}
   - component: {fileID: 1830688201}
   - component: {fileID: 1830688200}
+  - component: {fileID: 1830688203}
   m_Layer: 5
   m_Name: Time6
   m_TagString: Untagged
@@ -9913,6 +10611,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830688198}
   m_CullTransparentMesh: 1
+--- !u!114 &1830688203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830688198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Time6
+  description: "\u63A2\u7D22\u4E2D\u306BT\u30DC\u30BF\u30F3\u3067\u79FB\u52D5\u901F\u5EA6\u304C\u4E00\u5B9A\u6642\u9593\u30A2\u30C3\u30D7\u3059\u308B\u30B9\u30AD\u30EB\u304C\u89E3\u653E\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1203447394}
+  isReleaseNode: 1
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1830688200}
+  panelImage: {fileID: 1830688201}
+  nextNodes:
+  - {fileID: 1556239020}
+  routeImages:
+  - {fileID: 323875642}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1841378973
 GameObject:
   m_ObjectHideFlags: 0
@@ -9987,127 +10722,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841378973}
-  m_CullTransparentMesh: 1
---- !u!1 &1875073261
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1875073262}
-  - component: {fileID: 1875073265}
-  - component: {fileID: 1875073264}
-  - component: {fileID: 1875073263}
-  m_Layer: 5
-  m_Name: Release_Button
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1875073262
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875073261}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 709302475}
-  m_Father: {fileID: 1148534043}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 446, y: -370}
-  m_SizeDelta: {x: 150, y: 75}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1875073263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875073261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1875073264}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1875073264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875073261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1875073265
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875073261}
   m_CullTransparentMesh: 1
 --- !u!1 &1883943466
 GameObject:
@@ -10258,6 +10872,7 @@ GameObject:
   - component: {fileID: 1901550020}
   - component: {fileID: 1901550019}
   - component: {fileID: 1901550018}
+  - component: {fileID: 1901550021}
   m_Layer: 5
   m_Name: Hp3
   m_TagString: Untagged
@@ -10367,6 +10982,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901550016}
   m_CullTransparentMesh: 1
+--- !u!114 &1901550021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901550016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Hp3
+  description: "\u6700\u5927HP\u304C+60\u3055\u308C\u308B"
+  experienceCost: 30
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 218732498}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 60
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1901550018}
+  panelImage: {fileID: 1901550019}
+  nextNodes:
+  - {fileID: 1826703560}
+  - {fileID: 1110221345}
+  routeImages:
+  - {fileID: 535464866}
+  - {fileID: 307167045}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1936451664
 GameObject:
   m_ObjectHideFlags: 0
@@ -10454,6 +11108,7 @@ GameObject:
   - component: {fileID: 1954088504}
   - component: {fileID: 1954088503}
   - component: {fileID: 1954088502}
+  - component: {fileID: 1954088505}
   m_Layer: 5
   m_Name: Attack6
   m_TagString: Untagged
@@ -10563,6 +11218,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954088500}
   m_CullTransparentMesh: 1
+--- !u!114 &1954088505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954088500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec30c38b6daaac44e8b8968d700ece06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
+  nodeId: Attack6
+  description: "\u63A2\u7D22\u4E2D\u306BR\t\u30DC\u30BF\u30F3\u3067\u653B\u6483\u529B\u304C\u4E00\u5B9A\u6642\u9593\u30A2\u30C3\u30D7\u3059\u308B\u30B9\u30AD\u30EB\u304C\u89E3\u653E\u3055\u308C\u308B"
+  experienceCost: 10
+  startUnlocked: 0
+  prerequisiteNode: {fileID: 1267631180}
+  isReleaseNode: 0
+  skillToRelease: 0
+  upgradeType: 0
+  hpAmount: 20
+  attackAmount1: 2
+  attackAmount2: 4
+  timeAmount: 30
+  defenseDurationAmount: 1
+  defenseReductionAmount: 0.05
+  panelButton: {fileID: 1954088502}
+  panelImage: {fileID: 1954088503}
+  nextNodes:
+  - {fileID: 628353393}
+  routeImages:
+  - {fileID: 323875642}
+  lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
+  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
+  availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1954753660
 GameObject:
   m_ObjectHideFlags: 0
@@ -10673,7 +11365,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -700, y: 50}
-  m_SizeDelta: {x: 110, y: 100}
+  m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1966535618
 MonoBehaviour:
@@ -10695,7 +11387,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a874eb2493f5732408c5f6ae0d903cfd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef8df5496c05777488a71509ebce91e2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

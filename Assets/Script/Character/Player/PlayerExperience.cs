@@ -43,7 +43,11 @@ public class PlayerExperience : MonoBehaviour
     {
         if (amount <= 0) return;
 
+        // 消費後の最新経験値を反映
+        currentExperience = SavedExperience;
+
         currentExperience += amount;
+        SavedExperience = currentExperience;
         SavedExperience = currentExperience;
 
         Debug.Log("獲得経験値：" + amount
@@ -124,5 +128,20 @@ public class PlayerExperience : MonoBehaviour
         {
             experienceText.text = displayedExperience.ToString();
         }
+    }
+
+    // 経験値を初期化
+    public static void ResetExperience()
+    {
+        SavedExperience = 0;
+        isInitialized = true;
+
+        Debug.Log("所持経験値を初期化しました");
+    }
+
+    // ゲーム終了時に経験値をリセット
+    void OnApplicationQuit()
+    {
+        ResetExperience();
     }
 }

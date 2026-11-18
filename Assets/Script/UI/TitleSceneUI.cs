@@ -8,6 +8,8 @@ public class TitleSceneUI : MonoBehaviour
         if (_manager != null)
         {
             _manager.LoadStageScene();
+
+            PlayerExperience.ResetExperience();
         }
     }
 }
