@@ -394,8 +394,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
+    m_SelectedColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -488,6 +488,7 @@ MonoBehaviour:
   lockedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &211386312
@@ -690,7 +691,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -784,6 +785,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &273561669
@@ -2199,6 +2201,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &493567728
@@ -2356,6 +2359,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &509647128
@@ -3392,6 +3396,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &630756223
@@ -3767,6 +3772,7 @@ MonoBehaviour:
   lockedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &698668186
@@ -4350,6 +4356,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &986648791
@@ -4509,6 +4516,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1025515819
@@ -4880,6 +4888,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1084961816
@@ -5234,7 +5243,7 @@ MonoBehaviour:
   startUnlocked: 0
   prerequisiteNode: {fileID: 1901550021}
   isReleaseNode: 1
-  skillToRelease: 0
+  skillToRelease: 2
   upgradeType: 0
   hpAmount: 20
   attackAmount1: 2
@@ -5251,6 +5260,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1124467614
@@ -5670,7 +5680,7 @@ MonoBehaviour:
   descriptionArea: {fileID: 328104629}
   descriptionText: {fileID: 328104631}
   upgradeButton: {fileID: 418729014}
-  actionButtonText: {fileID: 0}
+  actionButtonText: {fileID: 1560872363}
   costText: {fileID: 1265876810}
   releaseButtonArea: {fileID: 0}
   hpText: {fileID: 587971045}
@@ -6110,6 +6120,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1240724169
@@ -6483,6 +6494,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1274691554
@@ -6928,6 +6940,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1367810419
@@ -8121,6 +8134,7 @@ MonoBehaviour:
   lockedColor: {r: 0.5882353, g: 0.5, b: 0.5, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1556239015
@@ -8280,6 +8294,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1560872361
@@ -9199,6 +9214,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1643188963
@@ -9645,6 +9661,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1736899860
@@ -9802,6 +9819,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1767825930
@@ -10034,6 +10052,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 1, g: 1, b: 1, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1795525286
@@ -10191,6 +10210,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1808301351
@@ -10487,6 +10507,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1830688198
@@ -10629,7 +10650,7 @@ MonoBehaviour:
   startUnlocked: 0
   prerequisiteNode: {fileID: 1203447394}
   isReleaseNode: 1
-  skillToRelease: 0
+  skillToRelease: 1
   upgradeType: 0
   hpAmount: 20
   attackAmount1: 2
@@ -10646,6 +10667,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1841378973
@@ -11019,6 +11041,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1936451664
@@ -11253,6 +11276,7 @@ MonoBehaviour:
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
   purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverDarkenAmount: 0.15
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1954753660

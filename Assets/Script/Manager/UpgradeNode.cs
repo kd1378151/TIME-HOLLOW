@@ -1,8 +1,10 @@
-
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class UpgradeNode : MonoBehaviour
+public class UpgradeNode : MonoBehaviour,
+    IPointerEnterHandler,
+    IPointerExitHandler
 {
     public enum UpgradeType
     {
@@ -54,11 +56,21 @@ public class UpgradeNode : MonoBehaviour
     public Color availableColor = Color.white;
     public Color purchasedColor = Color.green;
 
+    [Header("マウスを乗せたときの色")]
+    [Range(0f, 1f)]
+    public float hoverDarkenAmount = 0.15f;
+
     [Header("ルートバーの色")]
     public Color lockedRouteColor = Color.gray;
     public Color availableRouteColor = Color.white;
 
     private UpgradeManager manager;
+
+    // マウスが乗っているか
+    private bool isHovered = false;
+
+    // 通常時のパネル色
+    private Color basePanelColor;
 
     public bool IsPurchased
     {
@@ -102,7 +114,10 @@ public class UpgradeNode : MonoBehaviour
             panelButton.onClick.RemoveListener(OnClick);
             panelButton.onClick.AddListener(OnClick);
 
+            // Buttonによる色変化は使用しない
             panelButton.transition = Selectable.Transition.None;
+
+            // 未解放パネルもクリックできるようにする
             panelButton.interactable = true;
         }
 
@@ -115,21 +130,63 @@ public class UpgradeNode : MonoBehaviour
             manager.SelectNode(this);
     }
 
+    // マウスがパネルに乗ったとき
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        isHovered = true;
+        ApplyPanelColor();
+    }
+
+    // マウスがパネルから離れたとき
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        isHovered = false;
+        ApplyPanelColor();
+    }
+
+    // パネルの色を適用
+    private void ApplyPanelColor()
+    {
+        if (panelImage == null)
+            return;
+
+        if (isHovered)
+        {
+            // 現在の色を少し暗くする
+            panelImage.color = Color.Lerp(
+                basePanelColor,
+                Color.black,
+                hoverDarkenAmount
+            );
+        }
+        else
+        {
+            // 通常の色に戻す
+            panelImage.color = basePanelColor;
+        }
+    }
+
     public void UpdateVisual()
     {
+        // パネルの通常色を設定
         if (panelImage != null)
         {
             if (IsPurchased)
-                panelImage.color = purchasedColor;
+                basePanelColor = purchasedColor;
             else if (IsUnlocked)
-                panelImage.color = availableColor;
+                basePanelColor = availableColor;
             else
-                panelImage.color = lockedColor;
+                basePanelColor = lockedColor;
+
+            // マウスが乗っている場合も状態に応じて色を更新
+            ApplyPanelColor();
         }
 
+        // 未解放パネルも選択可能
         if (panelButton != null)
             panelButton.interactable = true;
 
+        // ルートバーの色
         for (int i = 0; i < routeImages.Length; i++)
         {
             if (routeImages[i] == null)

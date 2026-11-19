@@ -1,4 +1,3 @@
-
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
@@ -94,7 +93,10 @@ public class UpgradeManager : MonoBehaviour
             descriptionArea.SetActive(false);
 
         if (upgradeButton != null)
+        {
             upgradeButton.gameObject.SetActive(false);
+            upgradeButton.interactable = false;
+        }
 
         if (costText != null)
             costText.gameObject.SetActive(false);
@@ -107,22 +109,33 @@ public class UpgradeManager : MonoBehaviour
     private void RefreshSelectedUI()
     {
         if (selectedNode == null)
+        {
+            ClearSelection();
             return;
+        }
 
         bool unlocked = selectedNode.IsUnlocked;
         bool purchased = selectedNode.IsPurchased;
         bool available = selectedNode.IsAvailable;
 
+        // RELEASE専用ボタンは一旦非表示
         if (releaseButtonArea != null)
             releaseButtonArea.SetActive(false);
 
-        // ボタン表示
+        // =====================================
+        // 強化ボタンの表示条件
+        // 解放済み ＆ 未強化の場合だけ表示
+        // =====================================
+
+        bool showUpgradeButton = unlocked && !purchased;
+
         if (upgradeButton != null)
         {
-            upgradeButton.gameObject.SetActive(unlocked);
+            upgradeButton.gameObject.SetActive(showUpgradeButton);
 
-            // 経験値が足りていて、未購入の場合だけ押せる
+            // 強化可能かどうか
             upgradeButton.interactable =
+                showUpgradeButton &&
                 available &&
                 PlayerExperience.SavedExperience >=
                 selectedNode.experienceCost;
@@ -131,11 +144,7 @@ public class UpgradeManager : MonoBehaviour
         // ボタン文字
         if (actionButtonText != null)
         {
-            if (purchased)
-            {
-                actionButtonText.text = "MAX";
-            }
-            else if (selectedNode.isReleaseNode)
+            if (selectedNode.isReleaseNode)
             {
                 actionButtonText.text = "RELEASE";
             }
@@ -145,12 +154,21 @@ public class UpgradeManager : MonoBehaviour
             }
         }
 
-        // 必要経験値表示
+        // =====================================
+        // 必要経験値の表示条件
+        // 解放済み ＆ 未強化 ＆ 利用可能の場合だけ表示
+        // =====================================
+
+        bool showCost =
+            unlocked &&
+            !purchased &&
+            available;
+
         if (costText != null)
         {
-            costText.gameObject.SetActive(available);
+            costText.gameObject.SetActive(showCost);
 
-            if (available)
+            if (showCost)
             {
                 int cost = selectedNode.experienceCost;
 
@@ -168,6 +186,14 @@ public class UpgradeManager : MonoBehaviour
     private void ExecuteSelectedAction()
     {
         if (selectedNode == null)
+            return;
+
+        // 未解放の場合は実行しない
+        if (!selectedNode.IsUnlocked)
+            return;
+
+        // すでに強化済みの場合は実行しない
+        if (selectedNode.IsPurchased)
             return;
 
         if (!selectedNode.IsAvailable)
