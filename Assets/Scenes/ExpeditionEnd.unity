@@ -1394,11 +1394,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06580f6557d1b2c449d1995ac94d9054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExplorationResultManager
-  resultTextGroup: {fileID: 398395670}
-  restartButtonGroup: {fileID: 665466342}
-  upgradeButtonGroup: {fileID: 805790002}
-  fadeDuration: 1
-  startDelay: 0.3
+  resultTextGroup: {fileID: 0}
+  restartButtonGroup: {fileID: 0}
+  upgradeButtonGroup: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

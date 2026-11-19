@@ -261,6 +261,7 @@ public class GameMaster : MonoBehaviour
 
         if (fadePanel != null)
         {
+            SetFadePanelOnTop(fadePanel);
             Color color = fadePanel.color;
             color.a = 0f;
             fadePanel.color = color;
@@ -307,6 +308,8 @@ public class GameMaster : MonoBehaviour
         // パネルがあれば、黒から透明へ変化させる
         if (fadePanel != null)
         {
+            SetFadePanelOnTop(fadePanel);
+
             fadePanel.gameObject.SetActive(true);
 
             Color color = Color.black;
@@ -458,5 +461,26 @@ public class GameMaster : MonoBehaviour
         ReduceExplorationTime(reduction);
 
         return true;
+    }
+
+    // 暗転パネルを画面の最前面に表示する
+    private void SetFadePanelOnTop(Image fadePanel)
+    {
+        if (fadePanel == null) return;
+
+        // FadePanel専用のCanvasを設定
+        Canvas fadeCanvas = fadePanel.GetComponent<Canvas>();
+
+        if (fadeCanvas == null)
+        {
+            fadeCanvas = fadePanel.gameObject.AddComponent<Canvas>();
+        }
+
+        // 他のCanvasより前に表示
+        fadeCanvas.overrideSorting = true;
+        fadeCanvas.sortingOrder = 32767;
+
+        // 同じCanvas内でも最後に表示
+        fadePanel.transform.SetAsLastSibling();
     }
 }

@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -11,7 +12,9 @@ public class UpgradeNode : MonoBehaviour,
         HP,
         Attack,
         ExplorationTime,
-        DefenseSkill
+        AttackSkillAll,
+        DashSkillAll,
+        DefenseSkillAll
     }
 
     [Header("基本設定")]
@@ -26,21 +29,29 @@ public class UpgradeNode : MonoBehaviour,
     public bool startUnlocked = false;
     public UpgradeNode prerequisiteNode;
 
-    [Header("RELEASE設定")]
+    [Header("スキル解放設定")]
     public bool isReleaseNode = false;
-
     public PlayerUpgradeData.SkillType skillToRelease;
 
-    [Header("強化設定")]
+    [Header("強化種類")]
     public UpgradeType upgradeType;
 
+    [Header("基本ステータス強化")]
     public int hpAmount = 20;
     public int attackAmount1 = 2;
     public int attackAmount2 = 4;
     public float timeAmount = 30f;
 
+    [Header("攻撃スキル強化")]
+    public float attackSkillCostReduction = 5f;
+    public float attackSkillMultiplierAmount = 0.3f;
+
+    [Header("高速移動スキル強化")]
+    public float dashSkillCostReduction = 2f;
+    public float dashSkillSpeedAmount = 2f;
+
     [Header("防御スキル強化")]
-    public float defenseDurationAmount = 1f;
+    public float defenseSkillCostReduction = 2f;
     public float defenseReductionAmount = 0.05f;
 
     [Header("パネル")]
@@ -56,7 +67,7 @@ public class UpgradeNode : MonoBehaviour,
     public Color availableColor = Color.white;
     public Color purchasedColor = Color.green;
 
-    [Header("マウスを乗せたときの色")]
+    [Header("ホバー設定")]
     [Range(0f, 1f)]
     public float hoverDarkenAmount = 0.15f;
 
@@ -65,16 +76,15 @@ public class UpgradeNode : MonoBehaviour,
     public Color availableRouteColor = Color.white;
 
     private UpgradeManager manager;
-
-    // マウスが乗っているか
-    private bool isHovered = false;
-
-    // 通常時のパネル色
+    private bool isHovered;
     private Color basePanelColor;
 
     public bool IsPurchased
     {
-        get { return PlayerUpgradeData.IsPurchased(nodeId); }
+        get
+        {
+            return PlayerUpgradeData.IsPurchased(nodeId);
+        }
     }
 
     public bool IsUnlocked
@@ -114,10 +124,7 @@ public class UpgradeNode : MonoBehaviour,
             panelButton.onClick.RemoveListener(OnClick);
             panelButton.onClick.AddListener(OnClick);
 
-            // Buttonによる色変化は使用しない
             panelButton.transition = Selectable.Transition.None;
-
-            // 未解放パネルもクリックできるようにする
             panelButton.interactable = true;
         }
 
@@ -130,45 +137,34 @@ public class UpgradeNode : MonoBehaviour,
             manager.SelectNode(this);
     }
 
-    // マウスがパネルに乗ったとき
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovered = true;
         ApplyPanelColor();
     }
 
-    // マウスがパネルから離れたとき
     public void OnPointerExit(PointerEventData eventData)
     {
         isHovered = false;
         ApplyPanelColor();
     }
 
-    // パネルの色を適用
     private void ApplyPanelColor()
     {
         if (panelImage == null)
             return;
 
-        if (isHovered)
-        {
-            // 現在の色を少し暗くする
-            panelImage.color = Color.Lerp(
+        panelImage.color = isHovered
+            ? Color.Lerp(
                 basePanelColor,
                 Color.black,
                 hoverDarkenAmount
-            );
-        }
-        else
-        {
-            // 通常の色に戻す
-            panelImage.color = basePanelColor;
-        }
+            )
+            : basePanelColor;
     }
 
     public void UpdateVisual()
     {
-        // パネルの通常色を設定
         if (panelImage != null)
         {
             if (IsPurchased)
@@ -178,27 +174,32 @@ public class UpgradeNode : MonoBehaviour,
             else
                 basePanelColor = lockedColor;
 
-            // マウスが乗っている場合も状態に応じて色を更新
             ApplyPanelColor();
         }
 
-        // 未解放パネルも選択可能
         if (panelButton != null)
             panelButton.interactable = true;
 
-        // ルートバーの色
+        UpdateRoutes();
+    }
+
+    private void UpdateRoutes()
+    {
+        if (routeImages == null)
+            return;
+
         for (int i = 0; i < routeImages.Length; i++)
         {
             if (routeImages[i] == null)
                 continue;
 
             bool nextUnlocked =
+                nextNodes != null &&
                 i < nextNodes.Length &&
                 nextNodes[i] != null &&
                 nextNodes[i].IsUnlocked;
 
-            routeImages[i].color =
-                nextUnlocked
+            routeImages[i].color = nextUnlocked
                 ? availableRouteColor
                 : lockedRouteColor;
         }

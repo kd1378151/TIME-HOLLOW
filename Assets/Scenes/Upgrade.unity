@@ -119,143 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &116686988
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 116686989}
-  - component: {fileID: 116686991}
-  - component: {fileID: 116686990}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &116686989
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116686988}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1110221341}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &116686990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116686988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: RELEASE
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}
-  m_sharedMaterial: {fileID: -3852555445300860798, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656bu
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &116686991
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116686988}
-  m_CullTransparentMesh: 1
 --- !u!1 &186551389
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,7 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Hp1
   description: "\u6700\u5927HP\u304C+20\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 20
   startUnlocked: 1
   prerequisiteNode: {fileID: 0}
   isReleaseNode: 0
@@ -477,7 +340,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 200932502}
   panelImage: {fileID: 200932503}
@@ -487,8 +354,8 @@ MonoBehaviour:
   - {fileID: 748861525}
   lockedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &211386312
@@ -764,7 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Hp2
   description: "\u6700\u5927HP\u304C+40\u3055\u308C\u308B"
-  experienceCost: 20
+  experienceCost: 40
   startUnlocked: 0
   prerequisiteNode: {fileID: 200932505}
   isReleaseNode: 0
@@ -774,7 +641,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 218732495}
   panelImage: {fileID: 218732496}
@@ -784,7 +655,7 @@ MonoBehaviour:
   - {fileID: 1240724171}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
   hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
@@ -2182,17 +2053,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Attack8
   description: "\u30B9\u30AD\u30EB\u304C\u3055\u3089\u306B\u5F37\u5316\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 90
   startUnlocked: 0
   prerequisiteNode: {fileID: 628353393}
   isReleaseNode: 0
   skillToRelease: 0
-  upgradeType: 0
+  upgradeType: 3
   hpAmount: 20
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.25
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 440279348}
   panelImage: {fileID: 440279349}
@@ -2200,8 +2075,8 @@ MonoBehaviour:
   routeImages: []
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &493567728
@@ -2340,26 +2215,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Hp8
   description: "\u30B9\u30AD\u30EB\u304C\u3055\u3089\u306B\u5F37\u5316\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 90
   startUnlocked: 0
   prerequisiteNode: {fileID: 986648796}
   isReleaseNode: 0
   skillToRelease: 0
-  upgradeType: 0
+  upgradeType: 5
   hpAmount: 20
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
-  defenseReductionAmount: 0.05
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2.5
+  defenseSkillCostReduction: 5
+  defenseReductionAmount: 0.15
   panelButton: {fileID: 493567730}
   panelImage: {fileID: 493567731}
   nextNodes: []
   routeImages: []
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &509647128
@@ -2649,143 +2528,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &530940739
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 530940740}
-  - component: {fileID: 530940742}
-  - component: {fileID: 530940741}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &530940740
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530940739}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1954088501}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &530940741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530940739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: RELEASE
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}
-  m_sharedMaterial: {fileID: -3852555445300860798, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656bu
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &530940742
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530940739}
-  m_CullTransparentMesh: 1
 --- !u!1 &535464864
 GameObject:
   m_ObjectHideFlags: 0
@@ -3375,28 +3117,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Attack7
   description: "\u30B9\u30AD\u30EB\u304C\u5F37\u5316\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 70
   startUnlocked: 0
   prerequisiteNode: {fileID: 1954088505}
   isReleaseNode: 0
   skillToRelease: 0
-  upgradeType: 0
+  upgradeType: 3
   hpAmount: 20
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.25
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 628353390}
   panelImage: {fileID: 628353391}
   nextNodes:
   - {fileID: 440279351}
   routeImages:
-  - {fileID: 1954753662}
+  - {fileID: 1103391263}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &630756223
@@ -3751,7 +3497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Attack1
   description: "\u653B\u6483\u529B\u304C+2\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 20
   startUnlocked: 1
   prerequisiteNode: {fileID: 0}
   isReleaseNode: 0
@@ -3761,7 +3507,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 6
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 679371619}
   panelImage: {fileID: 679371620}
@@ -3771,8 +3521,8 @@ MonoBehaviour:
   - {fileID: 288128827}
   lockedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &698668186
@@ -4335,7 +4085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Time2
   description: "\u9178\u7D20\u30B2\u30FC\u30B8(\u63A2\u7D22\u6642\u9593)\u304C+60\u3055\u308C\u308B"
-  experienceCost: 20
+  experienceCost: 40
   startUnlocked: 0
   prerequisiteNode: {fileID: 1533777174}
   isReleaseNode: 0
@@ -4345,7 +4095,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 60
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 915748228}
   panelImage: {fileID: 915748229}
@@ -4355,8 +4109,8 @@ MonoBehaviour:
   - {fileID: 1649294924}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &986648791
@@ -4495,167 +4249,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Hp7
   description: "\u30B9\u30AD\u30EB\u304C\u5F37\u5316\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 70
   startUnlocked: 0
   prerequisiteNode: {fileID: 1110221345}
   isReleaseNode: 0
   skillToRelease: 0
-  upgradeType: 0
+  upgradeType: 5
   hpAmount: 20
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
-  defenseReductionAmount: 0.05
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.25
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 1.5
+  defenseSkillCostReduction: 5
+  defenseReductionAmount: 0.15
   panelButton: {fileID: 986648793}
   panelImage: {fileID: 986648794}
   nextNodes:
   - {fileID: 493567733}
   routeImages:
-  - {fileID: 1103391263}
+  - {fileID: 186551391}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
---- !u!1 &1025515819
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1025515820}
-  - component: {fileID: 1025515822}
-  - component: {fileID: 1025515821}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1025515820
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025515819}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1830688199}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1025515821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025515819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: RELEASE
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}
-  m_sharedMaterial: {fileID: -3852555445300860798, guid: f57ee85bbfb8c7a4cb781fc16b50056f, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656bu
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1025515822
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025515819}
-  m_CullTransparentMesh: 1
 --- !u!1 &1060235463
 GameObject:
   m_ObjectHideFlags: 0
@@ -4867,7 +4488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Time4
   description: "\u9178\u7D20\u30B2\u30FC\u30B8(\u63A2\u7D22\u6642\u9593)\u304C+120\u3055\u308C\u308B"
-  experienceCost: 40
+  experienceCost: 80
   startUnlocked: 0
   prerequisiteNode: {fileID: 1203447394}
   isReleaseNode: 0
@@ -4877,7 +4498,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 120
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1080323718}
   panelImage: {fileID: 1080323719}
@@ -4887,8 +4512,8 @@ MonoBehaviour:
   - {fileID: 1936451666}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1084961816
@@ -5134,14 +4759,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 116686989}
+  m_Children: []
   m_Father: {fileID: 1148534043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 200, y: 150}
-  m_SizeDelta: {x: 60, y: 60}
+  m_SizeDelta: {x: 80, y: 83}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1110221342
 MonoBehaviour:
@@ -5207,8 +4831,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 15015d3a3ee6ff94b983bca8e2b50a03, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5239,7 +4863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Hp6
   description: "\u63A2\u7D22\u4E2D\u306BE\u30DC\u30BF\u30F3\u3067\u9632\u5FA1\u529B\u304C\u4E00\u5B9A\u6642\u9593\u30A2\u30C3\u30D7\u3059\u308B\u30B9\u30AD\u30EB\u304C\u89E3\u653E\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 40
   startUnlocked: 0
   prerequisiteNode: {fileID: 1901550021}
   isReleaseNode: 1
@@ -5249,7 +4873,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1110221342}
   panelImage: {fileID: 1110221343}
@@ -5259,8 +4887,8 @@ MonoBehaviour:
   - {fileID: 1126346163}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1124467614
@@ -5687,6 +5315,16 @@ MonoBehaviour:
   attackText: {fileID: 367638159}
   timeText: {fileID: 1494514768}
   countDuration: 0.5
+  initialAttackSkillCost: 30
+  initialAttackSkillDuration: 30
+  initialAttackSkillMultiplier: 1.5
+  initialDashSkillCost: 10
+  initialDashSkillDuration: 2
+  initialDashSkillSpeed: 8
+  initialDashAnimatorSpeed: 1.8
+  initialDefenseSkillCost: 30
+  initialDefenseSkillDuration: 20
+  initialDefenseDamageReduction: 0.2
 --- !u!1 &1153031659
 GameObject:
   m_ObjectHideFlags: 0
@@ -6097,7 +5735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Time3
   description: "\u9178\u7D20\u30B2\u30FC\u30B8(\u63A2\u7D22\u6642\u9593)\u304C+90\u3055\u308C\u308B"
-  experienceCost: 30
+  experienceCost: 60
   startUnlocked: 0
   prerequisiteNode: {fileID: 915748231}
   isReleaseNode: 0
@@ -6107,7 +5745,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 90
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1203447391}
   panelImage: {fileID: 1203447392}
@@ -6119,8 +5761,8 @@ MonoBehaviour:
   - {fileID: 698668188}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1240724169
@@ -6471,7 +6113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Attack3
   description: "\u653B\u6483\u529B\u304C+6\u3055\u308C\u308B"
-  experienceCost: 30
+  experienceCost: 60
   startUnlocked: 0
   prerequisiteNode: {fileID: 1347232654}
   isReleaseNode: 0
@@ -6481,7 +6123,11 @@ MonoBehaviour:
   attackAmount1: 6
   attackAmount2: 18
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1267631177}
   panelImage: {fileID: 1267631178}
@@ -6493,8 +6139,8 @@ MonoBehaviour:
   - {fileID: 2062630151}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1274691554
@@ -6919,7 +6565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Attack2
   description: "\u653B\u6483\u529B\u304C+4\u3055\u308C\u308B"
-  experienceCost: 20
+  experienceCost: 40
   startUnlocked: 0
   prerequisiteNode: {fileID: 679371622}
   isReleaseNode: 0
@@ -6929,7 +6575,11 @@ MonoBehaviour:
   attackAmount1: 4
   attackAmount2: 12
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1347232651}
   panelImage: {fileID: 1347232652}
@@ -6939,8 +6589,8 @@ MonoBehaviour:
   - {fileID: 1657171827}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1367810419
@@ -8113,7 +7763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Time1
   description: "\u9178\u7D20\u30B2\u30FC\u30B8(\u63A2\u7D22\u6642\u9593)\u304C+30\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 20
   startUnlocked: 1
   prerequisiteNode: {fileID: 0}
   isReleaseNode: 0
@@ -8123,7 +7773,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1533777171}
   panelImage: {fileID: 1533777172}
@@ -8133,8 +7787,8 @@ MonoBehaviour:
   - {fileID: 1841378975}
   lockedColor: {r: 0.5882353, g: 0.5, b: 0.5, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1556239015
@@ -8273,17 +7927,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Time7
   description: "\u30B9\u30AD\u30EB\u304C\u5F37\u5316\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 70
   startUnlocked: 0
   prerequisiteNode: {fileID: 1830688203}
   isReleaseNode: 0
   skillToRelease: 0
-  upgradeType: 0
+  upgradeType: 4
   hpAmount: 20
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1556239017}
   panelImage: {fileID: 1556239018}
@@ -8293,8 +7951,8 @@ MonoBehaviour:
   - {fileID: 1954753662}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1560872361
@@ -9195,7 +8853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Time5
   description: "\u9178\u7D20\u30B2\u30FC\u30B8(\u63A2\u7D22\u6642\u9593)\u304C+150\u3055\u308C\u308B"
-  experienceCost: 50
+  experienceCost: 100
   startUnlocked: 0
   prerequisiteNode: {fileID: 1080323721}
   isReleaseNode: 0
@@ -9205,7 +8863,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 150
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1633463481}
   panelImage: {fileID: 1633463482}
@@ -9213,8 +8875,8 @@ MonoBehaviour:
   routeImages: []
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1643188963
@@ -9640,7 +9302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Attack4
   description: "\u653B\u6483\u529B\u304C+8"
-  experienceCost: 40
+  experienceCost: 80
   startUnlocked: 0
   prerequisiteNode: {fileID: 1267631180}
   isReleaseNode: 0
@@ -9650,7 +9312,11 @@ MonoBehaviour:
   attackAmount1: 8
   attackAmount2: 24
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1694320287}
   panelImage: {fileID: 1694320288}
@@ -9660,8 +9326,8 @@ MonoBehaviour:
   - {fileID: 509647130}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1736899860
@@ -9800,17 +9466,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Time8
   description: "\u30B9\u30AD\u30EB\u304C\u3055\u3089\u306B\u5F37\u5316\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 90
   startUnlocked: 0
   prerequisiteNode: {fileID: 1556239020}
   isReleaseNode: 0
   skillToRelease: 0
-  upgradeType: 0
+  upgradeType: 4
   hpAmount: 20
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 3
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1736899862}
   panelImage: {fileID: 1736899863}
@@ -9818,8 +9488,8 @@ MonoBehaviour:
   routeImages: []
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1767825930
@@ -10033,7 +9703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Hp5
   description: "\u6700\u5927HP\u304C+100\u3055\u308C\u308B"
-  experienceCost: 50
+  experienceCost: 100
   startUnlocked: 0
   prerequisiteNode: {fileID: 1826703560}
   isReleaseNode: 0
@@ -10043,7 +9713,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1772630717}
   panelImage: {fileID: 1772630718}
@@ -10051,8 +9725,8 @@ MonoBehaviour:
   routeImages: []
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 1, g: 1, b: 1, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1795525286
@@ -10191,7 +9865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Attack5
   description: "\u653B\u6483\u529B\u304C+10\u3055\u308C\u308B"
-  experienceCost: 50
+  experienceCost: 100
   startUnlocked: 0
   prerequisiteNode: {fileID: 1694320290}
   isReleaseNode: 0
@@ -10201,7 +9875,11 @@ MonoBehaviour:
   attackAmount1: 10
   attackAmount2: 30
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1795525288}
   panelImage: {fileID: 1795525289}
@@ -10209,8 +9887,8 @@ MonoBehaviour:
   routeImages: []
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   availableRouteColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1808301351
@@ -10486,7 +10164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Hp4
   description: "\u6700\u5927HP\u304C+80\u3055\u308C\u308B"
-  experienceCost: 40
+  experienceCost: 80
   startUnlocked: 0
   prerequisiteNode: {fileID: 1901550021}
   isReleaseNode: 0
@@ -10496,18 +10174,22 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1826703557}
   panelImage: {fileID: 1826703558}
   nextNodes:
-  - {fileID: 0}
+  - {fileID: 1772630720}
   routeImages:
   - {fileID: 1625919366}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1830688198
@@ -10541,14 +10223,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1025515820}
+  m_Children: []
   m_Father: {fileID: 1148534043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 200, y: -250}
-  m_SizeDelta: {x: 60, y: 60}
+  m_SizeDelta: {x: 80, y: 82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1830688200
 MonoBehaviour:
@@ -10614,8 +10295,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 50d5f584bdd28344191ab0e1c820c1eb, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -10646,7 +10327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Time6
   description: "\u63A2\u7D22\u4E2D\u306BT\u30DC\u30BF\u30F3\u3067\u79FB\u52D5\u901F\u5EA6\u304C\u4E00\u5B9A\u6642\u9593\u30A2\u30C3\u30D7\u3059\u308B\u30B9\u30AD\u30EB\u304C\u89E3\u653E\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 40
   startUnlocked: 0
   prerequisiteNode: {fileID: 1203447394}
   isReleaseNode: 1
@@ -10656,7 +10337,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1830688200}
   panelImage: {fileID: 1830688201}
@@ -10666,8 +10351,8 @@ MonoBehaviour:
   - {fileID: 323875642}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1841378973
@@ -11018,7 +10703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Hp3
   description: "\u6700\u5927HP\u304C+60\u3055\u308C\u308B"
-  experienceCost: 30
+  experienceCost: 60
   startUnlocked: 0
   prerequisiteNode: {fileID: 218732498}
   isReleaseNode: 0
@@ -11028,7 +10713,11 @@ MonoBehaviour:
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1901550018}
   panelImage: {fileID: 1901550019}
@@ -11040,8 +10729,8 @@ MonoBehaviour:
   - {fileID: 307167045}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1936451664
@@ -11150,14 +10839,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 530940740}
+  m_Children: []
   m_Father: {fileID: 1148534043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 200, y: -50}
-  m_SizeDelta: {x: 60, y: 60}
+  m_SizeDelta: {x: 85, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1954088502
 MonoBehaviour:
@@ -11223,8 +10911,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 9126cfce72d4e1542929381b3115aeb7, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11255,28 +10943,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeNode
   nodeId: Attack6
   description: "\u63A2\u7D22\u4E2D\u306BR\t\u30DC\u30BF\u30F3\u3067\u653B\u6483\u529B\u304C\u4E00\u5B9A\u6642\u9593\u30A2\u30C3\u30D7\u3059\u308B\u30B9\u30AD\u30EB\u304C\u89E3\u653E\u3055\u308C\u308B"
-  experienceCost: 10
+  experienceCost: 40
   startUnlocked: 0
   prerequisiteNode: {fileID: 1267631180}
-  isReleaseNode: 0
+  isReleaseNode: 1
   skillToRelease: 0
   upgradeType: 0
   hpAmount: 20
   attackAmount1: 2
   attackAmount2: 4
   timeAmount: 30
-  defenseDurationAmount: 1
+  attackSkillCostReduction: 5
+  attackSkillMultiplierAmount: 0.3
+  dashSkillCostReduction: 2
+  dashSkillSpeedAmount: 2
+  defenseSkillCostReduction: 2
   defenseReductionAmount: 0.05
   panelButton: {fileID: 1954088502}
   panelImage: {fileID: 1954088503}
   nextNodes:
   - {fileID: 628353393}
   routeImages:
-  - {fileID: 323875642}
+  - {fileID: 1767825932}
   lockedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   availableColor: {r: 1, g: 1, b: 1, a: 1}
-  purchasedColor: {r: 0, g: 1, b: 0, a: 1}
-  hoverDarkenAmount: 0.15
+  purchasedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  hoverDarkenAmount: 0.4
   lockedRouteColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   availableRouteColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
 --- !u!1 &1954753660

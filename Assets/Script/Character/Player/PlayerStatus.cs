@@ -26,7 +26,6 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private ParticleSystem dashEffect;
 
     [Header("防御力上昇スキル")]
-    [SerializeField] private KeyCode defenseSkillKey = KeyCode.T;
     [SerializeField] private float defenseSkillTimeCost = 10f;
     [SerializeField] private ParticleSystem defenseEffect;
 
@@ -126,7 +125,7 @@ public class PlayerStatus : MonoBehaviour
     void Update()
     {
         // Eキー：攻撃力アップ
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             if (!IsDashActive)
             {
@@ -135,13 +134,13 @@ public class PlayerStatus : MonoBehaviour
         }
 
         // Rキー：高速移動
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             ActivateDashSkill();
         }
 
         // Tキー：防御力アップ
-        if (Input.GetKeyDown(defenseSkillKey))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             ActivateDefenseSkill();
         }
@@ -328,7 +327,8 @@ public class PlayerStatus : MonoBehaviour
         if (gameMaster == null) return;
 
         // 探索時間を消費
-        if (!gameMaster.TryReduceSkillTime(skillTimeCost))
+        if (!gameMaster.TryReduceSkillTime(
+            PlayerUpgradeData.AttackSkillTimeCost))
         {
             Debug.Log("探索時間が足りません！");
             return;
@@ -349,12 +349,12 @@ public class PlayerStatus : MonoBehaviour
 
         // 攻撃力を倍率分アップ
         attackPower1 = Mathf.FloorToInt(
-            originalAttackPower1 * skillAttackMultiplier
-        );
+            originalAttackPower1 *
+            PlayerUpgradeData.AttackSkillMultiplier);
 
         attackPower2 = Mathf.FloorToInt(
-            originalAttackPower2 * skillAttackMultiplier
-        );
+            originalAttackPower2 *
+            PlayerUpgradeData.AttackSkillMultiplier);
 
         // パーティクル表示
         if (skillEffect != null)
@@ -363,7 +363,9 @@ public class PlayerStatus : MonoBehaviour
         }
 
         // スキル効果時間
-        yield return new WaitForSeconds(skillDuration);
+        yield return new WaitForSeconds(
+            PlayerUpgradeData.AttackSkillDuration
+        );
 
         // 攻撃力を元に戻す
         attackPower1 = originalAttackPower1;
@@ -403,7 +405,8 @@ public class PlayerStatus : MonoBehaviour
             return;
 
         // 探索時間を10秒消費
-        if (!gameMaster.TryReduceSkillTime(10f))
+        if (!gameMaster.TryReduceSkillTime(
+            PlayerUpgradeData.DashSkillTimeCost))
         {
             Debug.Log("探索時間が足りません！");
             return;
@@ -419,9 +422,15 @@ public class PlayerStatus : MonoBehaviour
 
         Debug.Log("高速移動スキル開始！");
 
-        // パーティクルを再生
+        // パーティクル設定
         if (dashEffect != null)
         {
+            var main = dashEffect.main;
+
+            // 効果時間中、繰り返し再生
+            main.loop = true;
+
+            // 前回の粒子を消して再スタート
             dashEffect.Stop(
                 true,
                 ParticleSystemStopBehavior.StopEmittingAndClear
@@ -432,19 +441,22 @@ public class PlayerStatus : MonoBehaviour
 
         // 高速移動開始
         playerMovement.StartDash(
-            dashSpeed,
-            dashAnimatorSpeed
+            PlayerUpgradeData.DashSkillSpeed,
+            PlayerUpgradeData.DashAnimatorSpeed
         );
 
-        // 効果時間
-        yield return new WaitForSeconds(dashDuration);
+        // スキル効果時間中待機
+        yield return new WaitForSeconds(
+            PlayerUpgradeData.DashSkillDuration
+        );
 
         // 高速移動終了
         playerMovement.EndDash();
 
         IsDashActive = false;
 
-        // パーティクルの新規発生を停止
+        // 新しいパーティクルの発生を停止
+        // 既に出ている粒子は自然に消える
         if (dashEffect != null)
         {
             dashEffect.Stop(
@@ -472,7 +484,8 @@ public class PlayerStatus : MonoBehaviour
         if (gameMaster == null) return;
 
         // 探索時間を消費
-        if (!gameMaster.TryReduceSkillTime(defenseSkillTimeCost))
+        if (!gameMaster.TryReduceSkillTime(
+            PlayerUpgradeData.DefenseSkillTimeCost))
         {
             Debug.Log("探索時間が足りません！");
             return;

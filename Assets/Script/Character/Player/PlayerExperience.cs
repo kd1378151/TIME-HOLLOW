@@ -8,6 +8,9 @@ public class PlayerExperience : MonoBehaviour
     [Header("所持経験値")]
     public int currentExperience = 0;
 
+    // 経験値の最大所持数
+    public const int MaxExperience = 1000;
+
     // シーンを切り替えても保持する経験値
     public static int SavedExperience { get; private set; }
 
@@ -26,11 +29,26 @@ public class PlayerExperience : MonoBehaviour
     {
         if (!isInitialized)
         {
-            SavedExperience = currentExperience;
+            // 初回起動時はInspectorの数値を使用
+            SavedExperience = Mathf.Clamp(
+                currentExperience,
+                0,
+                MaxExperience
+            );
+
             isInitialized = true;
+
+            Debug.Log("初期所持経験値：" + SavedExperience);
         }
         else
         {
+            // シーン切り替え時は保存した経験値を使用
+            SavedExperience = Mathf.Clamp(
+                SavedExperience,
+                0,
+                MaxExperience
+            );
+
             currentExperience = SavedExperience;
         }
 
@@ -38,30 +56,74 @@ public class PlayerExperience : MonoBehaviour
         UpdateExperienceText();
     }
 
+    // =========================
     // 経験値を獲得
+    // =========================
+
     public void AddExperience(int amount)
     {
         if (amount <= 0) return;
 
-        // 消費後の最新経験値を反映
+        // 現在の所持経験値を取得
         currentExperience = SavedExperience;
 
-        currentExperience += amount;
-        SavedExperience = currentExperience;
+        // 上限までの残り獲得可能量
+        int remainingExperience =
+            MaxExperience - SavedExperience;
+
+        // 実際に獲得できる経験値
+        int actualAmount = Mathf.Min(
+            amount,
+            remainingExperience
+        );
+
+        // 上限に達している場合
+        if (actualAmount <= 0)
+        {
+            Debug.Log("経験値は最大所持数の1000に達しています");
+            return;
+        }
+
+        // 経験値を加算
+        currentExperience += actualAmount;
+
+        // 念のため上限を適用
+        currentExperience = Mathf.Clamp(
+            currentExperience,
+            0,
+            MaxExperience
+        );
+
         SavedExperience = currentExperience;
 
-        Debug.Log("獲得経験値：" + amount
-            + " / 所持経験値：" + currentExperience);
+        Debug.Log(
+            "獲得経験値：" + actualAmount
+            + " / 所持経験値：" + currentExperience
+        );
 
+        // 上限に達した場合のログ
+        if (amount > actualAmount)
+        {
+            Debug.Log(
+                "経験値上限に達したため、超過分は獲得できませんでした"
+            );
+        }
+
+        // カウントアップ演出
         if (countUpCoroutine != null)
         {
             StopCoroutine(countUpCoroutine);
         }
 
-        countUpCoroutine = StartCoroutine(CountUpExperience());
+        countUpCoroutine = StartCoroutine(
+            CountUpExperience()
+        );
     }
 
+    // =========================
     // 経験値を消費
+    // =========================
+
     public static bool TrySpendExperience(int amount)
     {
         if (amount <= 0) return false;
@@ -74,11 +136,24 @@ public class PlayerExperience : MonoBehaviour
 
         SavedExperience -= amount;
 
-        Debug.Log("経験値を消費：" + amount
-            + " / 残り経験値：" + SavedExperience);
+        // 消費後も上限・下限を適用
+        SavedExperience = Mathf.Clamp(
+            SavedExperience,
+            0,
+            MaxExperience
+        );
+
+        Debug.Log(
+            "経験値を消費：" + amount
+            + " / 残り経験値：" + SavedExperience
+        );
 
         return true;
     }
+
+    // =========================
+    // 経験値カウントアップ
+    // =========================
 
     IEnumerator CountUpExperience()
     {
@@ -89,6 +164,7 @@ public class PlayerExperience : MonoBehaviour
         {
             displayedExperience = targetExperience;
             UpdateExperienceText();
+
             countUpCoroutine = null;
             yield break;
         }
@@ -122,15 +198,23 @@ public class PlayerExperience : MonoBehaviour
         countUpCoroutine = null;
     }
 
+    // =========================
+    // 経験値表示更新
+    // =========================
+
     void UpdateExperienceText()
     {
         if (experienceText != null)
         {
-            experienceText.text = displayedExperience.ToString();
+            experienceText.text =
+                displayedExperience.ToString();
         }
     }
 
+    // =========================
     // 経験値を初期化
+    // =========================
+
     public static void ResetExperience()
     {
         SavedExperience = 0;
@@ -139,9 +223,15 @@ public class PlayerExperience : MonoBehaviour
         Debug.Log("所持経験値を初期化しました");
     }
 
-    // ゲーム終了時に経験値をリセット
+    // =========================
+    // Unity終了時にリセット
+    // =========================
+
     void OnApplicationQuit()
     {
-        ResetExperience();
+        SavedExperience = 0;
+
+        // 次回のエディタ実行ではInspectorの値を読み込む
+        isInitialized = false;
     }
 }
