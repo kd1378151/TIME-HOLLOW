@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneFlowManager : MonoBehaviour
 {
@@ -74,6 +75,11 @@ public class SceneFlowManager : MonoBehaviour
     public void LoadResultScene()
     {
         LoadScene(m_resultSceneName);
+    }
+
+    public void LoadSettingsScene()
+    {
+        SceneManager.LoadScene("Settings");
     }
 
     #endregion
