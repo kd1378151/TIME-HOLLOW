@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Editor/TimeHollowLibrary.uss?fileID=7433441132597879392&amp;guid=3aa99a951b7ff574f9e66cf9c6247bc0&amp;type=3#TimeHollowLibrary"/>
+    <ui:VisualElement name="library-root" class="library-root">
+        <ui:Label text="TIME HOLLOW" class="library-title"/>
+        <ui:Label text="プレハブ　ライブラリレ" emoji-fallback-support="false" parse-escape-sequences="false" class="library-subtitle"/>
+        <ui:TabView name="Asset-tabs" class="library-tabs">
+            <ui:Tab label="敵" name="enemies-tab">
+                <ui:VisualElement class="enemy-toolbar">
+                    <uie:ToolbarSearchField name="enemy-search" tooltip="名前で検索する" class="enemy-search"/>
+                    <ui:Button name="refresh-enemies" text="更新"/>
+                </ui:VisualElement>
+                <uie:ObjectField name="scene-player" label="シ-ンプレーヤ" tooltip="オプションです。同じシーンに新たに配置された敵にA Iプレーヤー参照を割り当てます。"/>
+                <ui:Label name="enemy-count" text="敵プレハブ" class="enemy-count"/>
+                <ui:ScrollView name="enemies-list" class="enemies-list"/>
+                <ui:Label text="シーンビューセンターに配置し、地面に移動します。C tr l+Zは配置を元に戻します。" class="placement-note"/>
+            </ui:Tab>
+            <ui:Tab label="他" name="other-tab">
+                <ui:Label text="none" class="other-placeholder"/>
+            </ui:Tab>
+        </ui:TabView>
+    </ui:VisualElement>
+</ui:UXML>

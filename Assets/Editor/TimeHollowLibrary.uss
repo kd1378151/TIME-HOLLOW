@@ -1,0 +1,141 @@
+.library-root {
+    flex-grow: 1;
+    padding: 16px;
+}
+
+.library-title {
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgb(109, 190, 181);
+    margin-bottom: 2px;
+}
+
+.library-subtitle {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-bottom: 14px;
+}
+
+.library-tabs {
+    flex-grow: 1;
+    min-height: 240px;
+}
+
+.enemy-toolbar {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+.enemy-search {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-width: 0;
+    margin-right: 8px;
+}
+
+#refresh-enemies {
+    flex-shrink: 0;
+    min-width: 56px;
+}
+
+#scene-player {
+    margin-bottom: 6px;
+}
+
+.enemy-count {
+    font-size: 11px;
+    opacity: 0.65;
+    margin-top: 4px;
+    margin-bottom: 10px;
+}
+
+.enemies-list {
+    flex-grow: 1;
+    min-height: 150px;
+}
+
+.enemy-card {
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.35);
+    border-radius: 6px;
+    background-color: rgba(128, 128, 128, 0.08);
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-right: 4px;
+}
+
+.enemy-summary {
+    flex-direction: row;
+    align-items: center;
+}
+
+.enemy-preview {
+    width: 76px;
+    height: 76px;
+    flex-shrink: 0;
+    margin-right: 12px;
+    background-color: rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+}
+
+.enemy-details {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.enemy-name {
+    font-size: 15px;
+    -unity-font-style: bold;
+    margin-bottom: 5px;
+    white-space: normal;
+}
+
+.enemy-stats {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.asset-path {
+    font-size: 10px;
+    opacity: 0.6;
+    white-space: normal;
+}
+
+.enemy-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.enemy-actions Button {
+    min-height: 24px;
+    margin-left: 4px;
+    margin-bottom: 2px;
+}
+
+.place-button {
+    border-color: rgb(83, 147, 140);
+}
+
+.placement-note {
+    font-size: 11px;
+    white-space: normal;
+    opacity: 0.65;
+    margin-top: 10px;
+}
+
+.other-placeholder {
+    white-space: normal;
+    margin-top: 16px;
+    opacity: 0.7;
+}
+
+#empty-state {
+    white-space: normal;
+    padding: 16px;
+}
