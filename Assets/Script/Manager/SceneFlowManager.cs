@@ -1,34 +1,42 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneFlowManager : MonoBehaviour
 {
     #region Variables
+
     public static SceneFlowManager Instance { get; private set; }
 
     [Header("Scene Names")]
     [SerializeField] private string m_titleSceneName = "Title";
     [SerializeField] private string m_mainMenuSceneName = "MainMenu";
+    [SerializeField] private string m_settingSceneName = "Setting";
     [SerializeField] private string m_stageSceneName = "Stage";
     [SerializeField] private string m_resultSceneName = "Result";
     [SerializeField] private string m_settingSceneName = "Setting";
 
     private bool m_isLoadingScene = false;
+
     #endregion
 
     #region UnityCallingFunc
+
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
+
     #endregion
 
     #region LoadingFunc
+
     /// <summary>
     /// Loads the specified scene if not already loading another scene.
     /// </summary>
@@ -38,30 +46,49 @@ public class SceneFlowManager : MonoBehaviour
         if (!m_isLoadingScene)
         {
             m_isLoadingScene = true;
+
             UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+
             m_isLoadingScene = false;
         }
     }
+
     public void LoadTitleScene()
     {
         LoadScene(m_titleSceneName);
     }
+
     public void LoadMainMenuScene()
     {
         LoadScene(m_mainMenuSceneName);
-    }
-    public void LoadStageScene()
-    {
-        LoadScene(m_stageSceneName);
-    }
-    public void LoadResultScene()
-    {
-        LoadScene(m_resultSceneName);
     }
 
     public void LoadSettingScene()
     {
         LoadScene(m_settingSceneName);
     }
+
+    public void LoadStageScene()
+    {
+        LoadScene(m_stageSceneName);
+    }
+
+    public void LoadResultScene()
+    {
+        LoadScene(m_resultSceneName);
+    }
+
+<<<<<<< HEAD
+    public void LoadSettingScene()
+    {
+        LoadScene(m_settingSceneName);
+    }
+=======
+    public void LoadSettingsScene()
+    {
+        SceneManager.LoadScene("Settings");
+    }
+
+>>>>>>> save-main-project
     #endregion
 }

@@ -1,9 +1,6 @@
-
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 public class ExplorationResultManager : MonoBehaviour
 {
@@ -12,77 +9,34 @@ public class ExplorationResultManager : MonoBehaviour
     public CanvasGroup restartButtonGroup;
     public CanvasGroup upgradeButtonGroup;
 
-    [Header("フェード設定")]
-    public float fadeDuration = 1.0f;
-    public float startDelay = 0.3f;
-
     private bool buttonsEnabled = false;
 
     void Start()
     {
-        // 最初はすべて透明にする
-        SetAlpha(resultTextGroup, 0f);
-        SetAlpha(restartButtonGroup, 0f);
-        SetAlpha(upgradeButtonGroup, 0f);
+        // 文字を最初から表示
+        SetVisible(resultTextGroup);
 
-        // 最初はボタンを押せないようにする
-        SetInteractable(restartButtonGroup, false);
-        SetInteractable(upgradeButtonGroup, false);
+        // ボタンを最初から表示
+        SetVisible(restartButtonGroup);
+        SetVisible(upgradeButtonGroup);
 
-        StartCoroutine(ShowUI());
-    }
-
-
-    IEnumerator ShowUI()
-    {
-        yield return new WaitForSeconds(startDelay);
-
-        // 探索終了テキストを表示
-        yield return StartCoroutine(FadeIn(resultTextGroup));
-
-        // 2つのボタンを同時に表示
-        Coroutine restartFade = StartCoroutine(FadeIn(restartButtonGroup));
-        Coroutine upgradeFade = StartCoroutine(FadeIn(upgradeButtonGroup));
-
-        // 両方のフェードが終わるまで待つ
-        yield return restartFade;
-        yield return upgradeFade;
-
-        // 両方表示されたらボタンを押せるようにする
+        // ボタンを最初から押せるようにする
         buttonsEnabled = true;
 
         SetInteractable(restartButtonGroup, true);
         SetInteractable(upgradeButtonGroup, true);
     }
 
-
-    IEnumerator FadeIn(CanvasGroup group)
-    {
-        if (group == null) yield break;
-
-        float elapsed = 0f;
-
-        while (elapsed < fadeDuration)
-        {
-            elapsed += Time.deltaTime;
-
-            float alpha = Mathf.Clamp01(elapsed / fadeDuration);
-            group.alpha = alpha;
-
-            yield return null;
-        }
-
-        group.alpha = 1f;
-    }
-
-    void SetAlpha(CanvasGroup group, float alpha)
+    // UIを表示する
+    void SetVisible(CanvasGroup group)
     {
         if (group != null)
         {
-            group.alpha = alpha;
+            group.alpha = 1f;
         }
     }
 
+    // ボタンの操作設定
     void SetInteractable(CanvasGroup group, bool value)
     {
         if (group != null)

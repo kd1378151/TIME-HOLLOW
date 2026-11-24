@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -24,6 +25,11 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private float dashAnimatorSpeed = 1.8f;
     [SerializeField] private ParticleSystem dashEffect;
 
+    [Header("防御力上昇スキル")]
+    [SerializeField] private float defenseSkillTimeCost = 10f;
+    [SerializeField] private ParticleSystem defenseEffect;
+
+    public bool IsDefenseActive { get; private set; } = false;
     public bool IsDashActive { get; private set; } = false;
 
     private bool isSkillActive = false;
@@ -88,10 +94,28 @@ public class PlayerStatus : MonoBehaviour
         // ダメージ演出
         damageFlash = GetComponentInChildren<DamageFlash>();
 
-        //攻撃力アップのスキルエフェクト
+        // 攻撃力アップのスキルエフェクトを停止
         if (skillEffect != null)
         {
             skillEffect.Stop(
+                true,
+                ParticleSystemStopBehavior.StopEmittingAndClear
+            );
+        }
+
+        // 高速移動スキルのエフェクトを停止
+        if (dashEffect != null)
+        {
+            dashEffect.Stop(
+                true,
+                ParticleSystemStopBehavior.StopEmittingAndClear
+            );
+        }
+
+        // 防御スキルのエフェクトを停止
+        if (defenseEffect != null)
+        {
+            defenseEffect.Stop(
                 true,
                 ParticleSystemStopBehavior.StopEmittingAndClear
             );
@@ -100,8 +124,8 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
-        // Eキー：攻撃力アップスキル
-        if (Input.GetKeyDown(KeyCode.E))
+        // Eキー：攻撃力アップ
+        if (Input.GetKeyDown(KeyCode.R))
         {
             if (!IsDashActive)
             {
@@ -109,10 +133,16 @@ public class PlayerStatus : MonoBehaviour
             }
         }
 
-        // Rキー：高速移動スキル
-        if (Input.GetKeyDown(KeyCode.R))
+        // Rキー：高速移動
+        if (Input.GetKeyDown(KeyCode.T))
         {
             ActivateDashSkill();
+        }
+
+        // Tキー：防御力アップ
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ActivateDefenseSkill();
         }
     }
 
@@ -123,6 +153,17 @@ public class PlayerStatus : MonoBehaviour
         if (IsDashActive) return;
 
         if (!CanControl) return;
+
+        // 防御スキル中はダメージを軽減
+        if (IsDefenseActive)
+        {
+            float reduction =
+                PlayerUpgradeData.DefenseDamageReduction;
+
+            damage = Mathf.CeilToInt(
+                damage * (1f - reduction)
+            );
+        }
 
         currentHP -= damage;
         currentHP = Mathf.Max(0, currentHP);
@@ -151,7 +192,6 @@ public class PlayerStatus : MonoBehaviour
     }
 
     // 死亡処理
-
     private void Die()
     {
         if (isDead) return;
@@ -190,7 +230,6 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-
     // よろけアニメーション終了時
     public void EndHitReaction()
     {
@@ -200,7 +239,6 @@ public class PlayerStatus : MonoBehaviour
     }
 
     // 死亡アニメーション終了時に呼び出す
-
     public void OnDeathAnimationEnd()
     {
         if (!isDead) return;
@@ -222,7 +260,9 @@ public class PlayerStatus : MonoBehaviour
         // FadePanelを探す
         Image fadePanel = null;
 
-        Canvas[] canvases = FindObjectsByType<Canvas>();
+        Canvas[] canvases = FindObjectsByType<Canvas>(
+            FindObjectsInactive.Exclude
+        );
 
         foreach (Canvas canvas in canvases)
         {
@@ -270,44 +310,51 @@ public class PlayerStatus : MonoBehaviour
         SceneManager.LoadScene(gameOverSceneName);
     }
 
-    // スキル発動
+    // 攻撃力アップスキル発動
     private void ActivateSkill()
     {
+        // 解放確認
+        if (!PlayerUpgradeData.IsSkillReleased(
+            PlayerUpgradeData.SkillType.Attack))
+        {
+            Debug.Log("攻撃スキルが解放されていません");
+            return;
+        }
+
         if (!CanControl) return;
-
         if (isSkillActive) return;
-
-        // 高速移動中は発動できない
         if (IsDashActive) return;
-
         if (gameMaster == null) return;
 
-        if (!gameMaster.TryReduceSkillTime(skillTimeCost))
+        // 探索時間を消費
+        if (!gameMaster.TryReduceSkillTime(
+            PlayerUpgradeData.AttackSkillTimeCost))
         {
+            Debug.Log("探索時間が足りません！");
             return;
         }
 
         StartCoroutine(SkillCoroutine());
     }
 
+    // 攻撃力アップスキル本体
     private IEnumerator SkillCoroutine()
     {
         isSkillActive = true;
 
         Debug.Log("現在のスキル効果時間：" + skillDuration);
 
-
         int originalAttackPower1 = attackPower1;
         int originalAttackPower2 = attackPower2;
 
-        // 攻撃力1.5倍
+        // 攻撃力を倍率分アップ
         attackPower1 = Mathf.FloorToInt(
-            originalAttackPower1 * skillAttackMultiplier
-        );
+            originalAttackPower1 *
+            PlayerUpgradeData.AttackSkillMultiplier);
 
         attackPower2 = Mathf.FloorToInt(
-            originalAttackPower2 * skillAttackMultiplier
-        );
+            originalAttackPower2 *
+            PlayerUpgradeData.AttackSkillMultiplier);
 
         // パーティクル表示
         if (skillEffect != null)
@@ -316,7 +363,9 @@ public class PlayerStatus : MonoBehaviour
         }
 
         // スキル効果時間
-        yield return new WaitForSeconds(skillDuration);
+        yield return new WaitForSeconds(
+            PlayerUpgradeData.AttackSkillDuration
+        );
 
         // 攻撃力を元に戻す
         attackPower1 = originalAttackPower1;
@@ -335,8 +384,17 @@ public class PlayerStatus : MonoBehaviour
         isSkillActive = false;
     }
 
+    // 高速移動スキル発動
     private void ActivateDashSkill()
     {
+        // 解放確認
+        if (!PlayerUpgradeData.IsSkillReleased(
+            PlayerUpgradeData.SkillType.Dash))
+        {
+            Debug.Log("高速移動スキルが解放されていません");
+            return;
+        }
+
         if (!CanControl) return;
         if (IsDashActive) return;
         if (playerMovement == null) return;
@@ -347,7 +405,8 @@ public class PlayerStatus : MonoBehaviour
             return;
 
         // 探索時間を10秒消費
-        if (!gameMaster.TryReduceSkillTime(10f))
+        if (!gameMaster.TryReduceSkillTime(
+            PlayerUpgradeData.DashSkillTimeCost))
         {
             Debug.Log("探索時間が足りません！");
             return;
@@ -356,17 +415,22 @@ public class PlayerStatus : MonoBehaviour
         StartCoroutine(DashCoroutine());
     }
 
-
-    // 高速移動スキル
+    // 高速移動スキル本体
     private IEnumerator DashCoroutine()
     {
         IsDashActive = true;
 
         Debug.Log("高速移動スキル開始！");
 
-        // パーティクルを再生
+        // パーティクル設定
         if (dashEffect != null)
         {
+            var main = dashEffect.main;
+
+            // 効果時間中、繰り返し再生
+            main.loop = true;
+
+            // 前回の粒子を消して再スタート
             dashEffect.Stop(
                 true,
                 ParticleSystemStopBehavior.StopEmittingAndClear
@@ -377,18 +441,88 @@ public class PlayerStatus : MonoBehaviour
 
         // 高速移動開始
         playerMovement.StartDash(
-            dashSpeed,
-            dashAnimatorSpeed
+            PlayerUpgradeData.DashSkillSpeed,
+            PlayerUpgradeData.DashAnimatorSpeed
         );
 
-        // 効果時間
-        yield return new WaitForSeconds(dashDuration);
+        // スキル効果時間中待機
+        yield return new WaitForSeconds(
+            PlayerUpgradeData.DashSkillDuration
+        );
 
         // 高速移動終了
         playerMovement.EndDash();
 
         IsDashActive = false;
 
+        // 新しいパーティクルの発生を停止
+        // 既に出ている粒子は自然に消える
+        if (dashEffect != null)
+        {
+            dashEffect.Stop(
+                true,
+                ParticleSystemStopBehavior.StopEmitting
+            );
+        }
+
         Debug.Log("高速移動スキル終了！");
+    }
+
+    // 防御スキル発動
+    private void ActivateDefenseSkill()
+    {
+        // 解放確認
+        if (!PlayerUpgradeData.IsSkillReleased(
+            PlayerUpgradeData.SkillType.Defense))
+        {
+            Debug.Log("防御スキルが解放されていません");
+            return;
+        }
+
+        if (!CanControl) return;
+        if (IsDefenseActive) return;
+        if (gameMaster == null) return;
+
+        // 探索時間を消費
+        if (!gameMaster.TryReduceSkillTime(
+            PlayerUpgradeData.DefenseSkillTimeCost))
+        {
+            Debug.Log("探索時間が足りません！");
+            return;
+        }
+
+        StartCoroutine(DefenseSkillCoroutine());
+    }
+
+    // 防御スキル本体
+    private IEnumerator DefenseSkillCoroutine()
+    {
+        IsDefenseActive = true;
+
+        Debug.Log("防御力上昇スキル開始！");
+
+        // 防御エフェクトを再生
+        if (defenseEffect != null)
+        {
+            defenseEffect.Play();
+        }
+
+        // 強化後の効果時間
+        yield return new WaitForSeconds(
+            PlayerUpgradeData.DefenseSkillDuration
+        );
+
+        // 新しいパーティクルの発生を停止
+        if (defenseEffect != null)
+        {
+            defenseEffect.Stop(
+                true,
+                ParticleSystemStopBehavior.StopEmitting
+            );
+        }
+
+        IsDefenseActive = false;
+
+        Debug.Log("防御力上昇スキル終了！");
     }
 }

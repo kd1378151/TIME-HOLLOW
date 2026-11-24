@@ -194,6 +194,33 @@ MonoBehaviour:
       m_LigatureGlyphID: 7903
     - m_ComponentGlyphIDs: d7030000ec030000b0030000e0030000ec030000u
       m_LigatureGlyphID: 7918
+<<<<<<< HEAD
+=======
+    - m_ComponentGlyphIDs: 2f00000050000000u
+      m_LigatureGlyphID: 7490
+    - m_ComponentGlyphIDs: 4e0000004a0000004f000000u
+      m_LigatureGlyphID: 8047
+    - m_ComponentGlyphIDs: 4e0000004e00000014000000u
+      m_LigatureGlyphID: 8044
+    - m_ComponentGlyphIDs: 4e0000004e00000013000000u
+      m_LigatureGlyphID: 8043
+    - m_ComponentGlyphIDs: 4e00000043000000u
+      m_LigatureGlyphID: 7904
+    - m_ComponentGlyphIDs: 4e00000048000000u
+      m_LigatureGlyphID: 7484
+    - m_ComponentGlyphIDs: 4e0000004d000000u
+      m_LigatureGlyphID: 7905
+    - m_ComponentGlyphIDs: 4e0000004e000000u
+      m_LigatureGlyphID: 7481
+    - m_ComponentGlyphIDs: 4e00000054000000u
+      m_LigatureGlyphID: 7895
+    - m_ComponentGlyphIDs: 4e00000014000000u
+      m_LigatureGlyphID: 7891
+    - m_ComponentGlyphIDs: 4e00000013000000u
+      m_LigatureGlyphID: 7487
+    - m_ComponentGlyphIDs: 540000004600000044000000u
+      m_LigatureGlyphID: 8046
+>>>>>>> save-main-project
     m_GlyphPairAdjustmentRecords: []
     m_MarkToBaseAdjustmentRecords: []
     m_MarkToMarkAdjustmentRecords: []
