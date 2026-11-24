@@ -13,7 +13,6 @@ public class SceneFlowManager : MonoBehaviour
     [SerializeField] private string m_settingSceneName = "Setting";
     [SerializeField] private string m_stageSceneName = "Stage";
     [SerializeField] private string m_resultSceneName = "Result";
-    [SerializeField] private string m_settingSceneName = "Setting";
 
     private bool m_isLoadingScene = false;
 
@@ -47,7 +46,7 @@ public class SceneFlowManager : MonoBehaviour
         {
             m_isLoadingScene = true;
 
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene(sceneName);
 
             m_isLoadingScene = false;
         }
@@ -78,17 +77,5 @@ public class SceneFlowManager : MonoBehaviour
         LoadScene(m_resultSceneName);
     }
 
-<<<<<<< HEAD
-    public void LoadSettingScene()
-    {
-        LoadScene(m_settingSceneName);
-    }
-=======
-    public void LoadSettingsScene()
-    {
-        SceneManager.LoadScene("Settings");
-    }
-
->>>>>>> save-main-project
     #endregion
 }
