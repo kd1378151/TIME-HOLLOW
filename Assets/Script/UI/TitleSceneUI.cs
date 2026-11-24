@@ -23,4 +23,13 @@ public class TitleSceneUI : MonoBehaviour
             _manager.LoadSettingScene();
         }
     }
+
+    public void ToMainMenuButton()
+    {
+        SceneFlowManager _manager = FindAnyObjectByType<SceneFlowManager>();
+        if (_manager != null)
+        {
+            _manager.LoadMainMenuScene();
+        }
+    }
 }
