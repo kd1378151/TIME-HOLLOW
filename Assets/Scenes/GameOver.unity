@@ -766,11 +766,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-<<<<<<< HEAD
-  m_text: "\u30E1\u30CB\u30E5\u30FC\u3078\u623B\u308B"
-=======
   m_text: RETURN TITLE
->>>>>>> save-main-project
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ab3d734a8906e54bb8b84675b16ad55, type: 2}
   m_sharedMaterial: {fileID: -1243368521058547925, guid: 4ab3d734a8906e54bb8b84675b16ad55, type: 2}
