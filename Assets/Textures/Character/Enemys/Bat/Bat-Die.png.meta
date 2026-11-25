@@ -142,12 +142,12 @@ TextureImporter:
       name: Bat-Die_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 23
-        width: 36
-        height: 18
+        x: 15
+        y: 24
+        width: 34
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -164,12 +164,12 @@ TextureImporter:
       name: Bat-Die_1
       rect:
         serializedVersion: 2
-        x: 80
-        y: 29
-        width: 31
-        height: 18
+        x: 81
+        y: 30
+        width: 29
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -186,12 +186,12 @@ TextureImporter:
       name: Bat-Die_2
       rect:
         serializedVersion: 2
-        x: 146
-        y: 34
-        width: 26
-        height: 17
+        x: 147
+        y: 35
+        width: 24
+        height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -208,12 +208,12 @@ TextureImporter:
       name: Bat-Die_3
       rect:
         serializedVersion: 2
-        x: 212
-        y: 35
-        width: 21
-        height: 19
+        x: 213
+        y: 36
+        width: 19
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -230,12 +230,12 @@ TextureImporter:
       name: Bat-Die_4
       rect:
         serializedVersion: 2
-        x: 279
-        y: 33
-        width: 18
-        height: 18
+        x: 280
+        y: 34
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -252,12 +252,12 @@ TextureImporter:
       name: Bat-Die_5
       rect:
         serializedVersion: 2
-        x: 345
-        y: 27
-        width: 17
-        height: 20
+        x: 346
+        y: 28
+        width: 15
+        height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -274,12 +274,12 @@ TextureImporter:
       name: Bat-Die_6
       rect:
         serializedVersion: 2
-        x: 410
-        y: 13
-        width: 15
-        height: 23
+        x: 411
+        y: 14
+        width: 13
+        height: 21
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -296,12 +296,12 @@ TextureImporter:
       name: Bat-Die_7
       rect:
         serializedVersion: 2
-        x: 473
-        y: 9
-        width: 14
-        height: 19
+        x: 474
+        y: 10
+        width: 12
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -318,12 +318,12 @@ TextureImporter:
       name: Bat-Die_8
       rect:
         serializedVersion: 2
-        x: 538
-        y: 6
-        width: 143
-        height: 22
+        x: 539
+        y: 7
+        width: 12
+        height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -340,7 +340,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: bf969c139aa28f84ab7b5106674ab418
     internalID: 0
     vertices: []
     indices: 
@@ -348,7 +348,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Bat-Die_0: 7083965057251802639
       Bat-Die_1: 1753696822303761373

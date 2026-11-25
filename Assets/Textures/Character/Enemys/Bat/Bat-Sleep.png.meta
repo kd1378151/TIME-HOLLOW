@@ -124,12 +124,12 @@ TextureImporter:
       name: Bat-Sleep_0
       rect:
         serializedVersion: 2
-        x: 26
-        y: 25
-        width: 12
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 27
+        y: 26
+        width: 10
+        height: 24
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,12 +146,12 @@ TextureImporter:
       name: Bat-Sleep_1
       rect:
         serializedVersion: 2
-        x: 90
-        y: 25
-        width: 12
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 91
+        y: 26
+        width: 10
+        height: 24
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: Bat-Sleep_2
       rect:
         serializedVersion: 2
-        x: 154
-        y: 25
-        width: 12
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 155
+        y: 26
+        width: 10
+        height: 24
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -190,7 +190,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f6d134b26d2d5054ca88091237c56080
     internalID: 0
     vertices: []
     indices: 
@@ -198,7 +198,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":1.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":2,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Bat-Sleep_0: 5160337174065941027
       Bat-Sleep_1: 5719716247012904364
