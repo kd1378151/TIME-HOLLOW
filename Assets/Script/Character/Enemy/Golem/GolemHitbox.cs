@@ -6,25 +6,26 @@ public class GolemAttackHitbox : MonoBehaviour
     [Header("攻撃判定")]
     public BoxCollider2D attackCollider;
 
-    // ゴーレムのステータスを取得
     private GolemStats golemStats;
-
-    // 同じ攻撃中に何度もダメージを与えない
     private bool hasHit = false;
 
-    private void Start()
+    private void Awake()
     {
-        // 親オブジェクトからゴーレムのステータスを取得
         golemStats = GetComponentInParent<GolemStats>();
 
-        // 開始時は攻撃判定を無効にする
+        if (attackCollider == null)
+        {
+            attackCollider = GetComponent<BoxCollider2D>();
+        }
+
+        // 初期状態は攻撃判定OFF
         if (attackCollider != null)
         {
             attackCollider.enabled = false;
         }
     }
 
-    // Animation Eventから呼ぶ
+    // Animation Event：攻撃判定開始
     public void StartAttackHit()
     {
         hasHit = false;
@@ -35,7 +36,7 @@ public class GolemAttackHitbox : MonoBehaviour
         }
     }
 
-    // Animation Eventから呼ぶ
+    // Animation Event：攻撃判定終了
     public void EndAttackHit()
     {
         if (attackCollider != null)
@@ -44,7 +45,19 @@ public class GolemAttackHitbox : MonoBehaviour
         }
     }
 
+    // 接触した瞬間
     private void OnTriggerEnter2D(Collider2D other)
+    {
+        TryDamagePlayer(other);
+    }
+
+    // 接触中も確認
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        TryDamagePlayer(other);
+    }
+
+    private void TryDamagePlayer(Collider2D other)
     {
         if (attackCollider == null ||
             !attackCollider.enabled ||
@@ -53,16 +66,17 @@ public class GolemAttackHitbox : MonoBehaviour
             return;
         }
 
-        // プレイヤーのステータスを取得
         PlayerStatus player =
             other.GetComponentInParent<PlayerStatus>();
 
-        if (player != null && golemStats != null)
-        {
-            // ゴーレムのステータスに設定された攻撃力を使用
-            player.TakeDamage(golemStats.attackPower);
+        if (player == null) return;
+        if (golemStats == null) return;
 
-            hasHit = true;
-        }
+        // ダメージを与える
+        player.TakeDamage(golemStats.attackPower);
+
+        hasHit = true;
+
+        Debug.Log("ゴーレムの攻撃がプレイヤーに命中！");
     }
 }

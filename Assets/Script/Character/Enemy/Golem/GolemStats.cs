@@ -1,31 +1,40 @@
 
 using UnityEngine;
 
-public class GolemStats : MonoBehaviour
+public class GolemStats : MonoBehaviour, IEnemyStatus
 {
     [Header("ゴーレムのパラメータ")]
     public int maxHP = 100;
     public int currentHP;
     public int attackPower = 10;
 
-    // 被弾時の白色点滅処理
     private DamageFlash damageFlash;
-
     private Animator animator;
+    private GolemAttackHitbox attackHitbox;
+    private GolemChase golemChase;
+
     private bool isDead = false;
 
-    private void Start()
+    public bool IsDead => isDead;
+
+    // 共通HPバー用
+    public int MaxHP => maxHP;
+    public int CurrentHP => currentHP;
+
+    private void Awake()
     {
-        // 初期HPを最大HPにする
-        currentHP = maxHP;
-
-        // Animatorを取得する
         animator = GetComponent<Animator>();
-
+        attackHitbox = GetComponentInChildren<GolemAttackHitbox>(true);
+        golemChase = GetComponent<GolemChase>();
         damageFlash = GetComponentInChildren<DamageFlash>();
     }
 
-    // プレイヤーから攻撃を受けたときに呼び出す
+    private void Start()
+    {
+        currentHP = maxHP;
+    }
+
+    // ダメージを受ける
     public void TakeDamage(int damage)
     {
         if (isDead) return;
@@ -33,13 +42,14 @@ public class GolemStats : MonoBehaviour
         currentHP -= damage;
         currentHP = Mathf.Max(currentHP, 0);
 
-        // ダメージを受けたら白く点滅
-        if (damageFlash != null)
+        Debug.Log("ゴーレムHP：" + currentHP);
+
+        if (damageFlash != null && currentHP > 0)
         {
             damageFlash.Flash();
         }
 
-
+        // HPが0になったら死亡
         if (currentHP <= 0)
         {
             Die();
@@ -49,45 +59,65 @@ public class GolemStats : MonoBehaviour
     // 死亡処理
     private void Die()
     {
+        if (isDead) return;
+
         isDead = true;
 
-        // 死亡アニメーションを再生する
+        Debug.Log("ゴーレム死亡");
+
+        // 移動・追跡AIを停止
+        if (golemChase != null)
+        {
+            golemChase.enabled = false;
+        }
+
+        // Rigidbodyの移動停止
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+
+        // 攻撃判定を停止
+        EndAttackHit();
+
+        // 死亡アニメーション再生
         if (animator != null)
         {
-            animator.SetTrigger("Death");
+            animator.ResetTrigger("Attack");
+            animator.ResetTrigger("Die");
+            animator.SetTrigger("Die");
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
-    // 死亡アニメーション終了時に呼び出す
-    public void FinishDeath()
-    {
-        Destroy(gameObject);
-    }
-
-    // 攻撃判定のスクリプト
-    private GolemAttackHitbox attackHitbox;
-
-    // 攻撃判定を取得
-    private void Awake()
-    {
-        attackHitbox = GetComponentInChildren<GolemAttackHitbox>();
-    }
-
-    // Animation Eventから呼び出す：攻撃判定ON
+    // 攻撃判定ON
     public void StartAttackHit()
     {
+        if (isDead) return;
+
         if (attackHitbox != null)
         {
             attackHitbox.StartAttackHit();
         }
     }
 
-    // Animation Eventから呼び出す：攻撃判定OFF
+    // 攻撃判定OFF
     public void EndAttackHit()
     {
         if (attackHitbox != null)
         {
             attackHitbox.EndAttackHit();
         }
+    }
+
+    // 死亡アニメーション終了時のAnimation Event
+    public void FinishDeath()
+    {
+        Destroy(gameObject);
     }
 }

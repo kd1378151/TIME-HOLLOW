@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHPBar : MonoBehaviour
+public class SlimeHPBar : MonoBehaviour
 {
     [Header("敵のステータス")]
     [SerializeField] private EnemyStats enemyStats;
@@ -25,26 +25,41 @@ public class EnemyHPBar : MonoBehaviour
     [Header("頭上の位置")]
     [SerializeField] private Vector3 offset = new Vector3(0f, 1.2f, 0f);
 
-    void Update()
+    private void Update()
     {
         UpdateHPBar();
     }
 
-    void UpdateHPBar()
+    private void UpdateHPBar()
     {
         if (enemyStats == null)
             return;
 
+        // 最大HPが0以下の場合
+        if (enemyStats.maxHP <= 0)
+        {
+            if (hpSlider != null)
+                hpSlider.value = 0;
+
+            if (hpFill != null)
+                hpFill.color = lowHPColor;
+
+            return;
+        }
+
+        // HPの割合を計算
+        float hpRatio = Mathf.Clamp01(
+            (float)enemyStats.currentHP / enemyStats.maxHP
+        );
+
+        // HPゲージを更新
         if (hpSlider != null)
         {
             hpSlider.maxValue = enemyStats.maxHP;
             hpSlider.value = enemyStats.currentHP;
         }
 
-        float hpRatio = enemyStats.maxHP > 0
-            ? (float)enemyStats.currentHP / enemyStats.maxHP
-            : 0f;
-
+        // HP25%以下なら赤、それ以外は緑
         if (hpFill != null)
         {
             hpFill.color = hpRatio <= lowHPThreshold
@@ -52,8 +67,10 @@ public class EnemyHPBar : MonoBehaviour
                 : normalColor;
         }
     }
-    void LateUpdate()
+
+    private void LateUpdate()
     {
+        // 敵の頭上にHPバーを追従させる
         if (enemyTransform != null)
         {
             transform.position = enemyTransform.position + offset;

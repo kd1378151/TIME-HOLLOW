@@ -22,7 +22,7 @@ public class GolemChase : MonoBehaviour
     [Header("対象")]
     public Transform player;
 
-    [Header("攻撃判定（既存の設定を維持）")]
+    [Header("攻撃判定")]
     public GameObject attackHitbox;
 
     private enum GolemState
@@ -48,7 +48,6 @@ public class GolemChase : MonoBehaviour
 
     private bool wasPlayerDetected = false;
 
-    // 初期設定
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -59,29 +58,40 @@ public class GolemChase : MonoBehaviour
 
         patrolWaitTimer = patrolWaitTime;
 
-        // 攻撃判定は最初は無効
+        // 攻撃判定はColliderを無効にする
         if (attackHitbox != null)
         {
-            attackHitbox.SetActive(false);
+            GolemAttackHitbox hitbox =
+                attackHitbox.GetComponent<GolemAttackHitbox>();
+
+            if (hitbox != null)
+            {
+                hitbox.EndAttackHit();
+            }
+            else
+            {
+                attackHitbox.SetActive(false);
+            }
         }
 
         UpdateMovementAnimation(false);
     }
 
+
     void Update()
     {
         if (player == null || rb == null) return;
 
-        // プレイヤーとの距離を計算
         float distanceX = player.position.x - transform.position.x;
         float distance = Mathf.Abs(distanceX);
 
-        // ゴーレムが向いている方向にプレイヤーがいるか確認
         float facingDirection = Mathf.Sign(transform.localScale.x);
         bool isInFront = distanceX * facingDirection > 0f;
-        bool playerDetected = isInFront && distance <= detectionRange;
 
-        // プレイヤーを初めて発見したとき
+        bool playerDetected =
+            isInFront && distance <= detectionRange;
+
+        // 発見マーク
         if (playerDetected && !wasPlayerDetected)
         {
             Debug.Log("ゴーレムがプレイヤーを発見しました");
@@ -94,11 +104,35 @@ public class GolemChase : MonoBehaviour
 
         wasPlayerDetected = playerDetected;
 
-        // 攻撃中・攻撃後の待機中は新しい行動を開始しない
-        if (currentState == GolemState.Attack ||
-            currentState == GolemState.Cooldown)
+        // 攻撃中は行動を変更しない
+        if (currentState == GolemState.Attack)
         {
+            StopHorizontalMovement();
             UpdateMovementAnimation(false);
+            return;
+        }
+
+        // クールダウン処理
+        if (currentState == GolemState.Cooldown)
+        {
+            cooldownTimer -= Time.deltaTime;
+
+            StopHorizontalMovement();
+            UpdateMovementAnimation(false);
+
+            if (cooldownTimer <= 0f)
+            {
+                if (distance <= detectionRange)
+                {
+                    currentState = GolemState.Chase;
+                }
+                else
+                {
+                    currentState = GolemState.Idle;
+                    patrolWaitTimer = patrolWaitTime;
+                }
+            }
+
             return;
         }
 
@@ -116,19 +150,30 @@ public class GolemChase : MonoBehaviour
             currentState = GolemState.Chase;
         }
 
-        // 現在の行動を処理
         switch (currentState)
         {
             case GolemState.Idle:
+
+                // 待機時間をカウント
                 patrolWaitTimer -= Time.deltaTime;
 
                 if (patrolWaitTimer <= 0f)
                 {
+                    // 待機終了後に反転
+                    patrolDirection *= -1;
+
+                    FaceDirection(patrolDirection);
+
+                    // 現在位置を次の徘徊開始位置にする
+                    patrolStartPosition = transform.position;
+
                     currentState = GolemState.Patrol;
                 }
+
                 break;
 
             case GolemState.Patrol:
+
                 float patrolLimit =
                     patrolStartPosition.x +
                     patrolDirection * patrolDistance;
@@ -140,45 +185,50 @@ public class GolemChase : MonoBehaviour
 
                 if (reachedEdge)
                 {
-                    patrolDirection *= -1;
-                    FaceDirection(patrolDirection);
+                    // 移動を停止
+                    StopHorizontalMovement();
+                    UpdateMovementAnimation(false);
 
+                    // 待機状態に移行
                     patrolWaitTimer = patrolWaitTime;
                     currentState = GolemState.Idle;
                 }
+
                 break;
 
             case GolemState.Chase:
-                // 追尾中に攻撃範囲へ入ったら攻撃
+
                 if (distance <= attackRange)
                 {
                     StartAttack();
                 }
-                // 十分に離れたら追尾を終了
                 else if (distance > detectionRange)
                 {
                     currentState = GolemState.Idle;
                     patrolWaitTimer = patrolWaitTime;
                 }
+
                 break;
         }
     }
+
 
     void FixedUpdate()
     {
         if (rb == null) return;
 
-        // 状態に応じて実際の移動速度を設定
         switch (currentState)
         {
             case GolemState.Idle:
             case GolemState.Attack:
             case GolemState.Cooldown:
+
                 StopHorizontalMovement();
                 UpdateMovementAnimation(false);
                 break;
 
             case GolemState.Patrol:
+
                 rb.linearVelocity = new Vector2(
                     patrolDirection * patrolSpeed,
                     rb.linearVelocity.y
@@ -189,6 +239,7 @@ public class GolemChase : MonoBehaviour
                 break;
 
             case GolemState.Chase:
+
                 if (player == null)
                 {
                     StopHorizontalMovement();
@@ -196,8 +247,8 @@ public class GolemChase : MonoBehaviour
                     break;
                 }
 
-                // プレイヤーの左右に合わせて向きを変える
-                float distanceX = player.position.x - rb.position.x;
+                float distanceX =
+                    player.position.x - rb.position.x;
 
                 if (Mathf.Abs(distanceX) > 0.01f)
                 {
@@ -221,17 +272,17 @@ public class GolemChase : MonoBehaviour
         }
     }
 
-    // 向きを変更
     void FaceDirection(float direction)
     {
         if (direction == 0f) return;
 
         Vector3 scale = originalScale;
+
         scale.x = Mathf.Abs(originalScale.x) * direction;
+
         transform.localScale = scale;
     }
 
-    // 攻撃を開始
     void StartAttack()
     {
         currentState = GolemState.Attack;
@@ -246,7 +297,6 @@ public class GolemChase : MonoBehaviour
         }
     }
 
-    // 移動アニメーションを実際の行動に合わせる
     void UpdateMovementAnimation(bool isMoving)
     {
         if (animator != null)
@@ -255,7 +305,6 @@ public class GolemChase : MonoBehaviour
         }
     }
 
-    // 横方向の移動を停止
     void StopHorizontalMovement()
     {
         if (rb != null)
@@ -267,10 +316,13 @@ public class GolemChase : MonoBehaviour
         }
     }
 
-    // 攻撃アニメーションの終了時に呼ぶ
+    // 攻撃アニメーション終了時のAnimation Event
     public void FinishAttack()
     {
         if (currentState != GolemState.Attack) return;
+
+        // 念のため攻撃判定を終了
+        DisableAttackHitbox();
 
         currentState = GolemState.Cooldown;
         cooldownTimer = cooldownDuration;
@@ -279,19 +331,37 @@ public class GolemChase : MonoBehaviour
         UpdateMovementAnimation(false);
     }
 
-    // 攻撃判定を有効化（既存のAnimation Event用）
+    // 攻撃判定ON
     public void EnableAttackHitbox()
     {
-        if (attackHitbox != null)
+        if (attackHitbox == null) return;
+
+        GolemAttackHitbox hitbox =
+            attackHitbox.GetComponent<GolemAttackHitbox>();
+
+        if (hitbox != null)
+        {
+            hitbox.StartAttackHit();
+        }
+        else
         {
             attackHitbox.SetActive(true);
         }
     }
 
-    // 攻撃判定を無効化（既存のAnimation Event用）
+    // 攻撃判定OFF
     public void DisableAttackHitbox()
     {
-        if (attackHitbox != null)
+        if (attackHitbox == null) return;
+
+        GolemAttackHitbox hitbox =
+            attackHitbox.GetComponent<GolemAttackHitbox>();
+
+        if (hitbox != null)
+        {
+            hitbox.EndAttackHit();
+        }
+        else
         {
             attackHitbox.SetActive(false);
         }

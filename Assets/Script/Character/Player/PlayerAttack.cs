@@ -5,16 +5,17 @@ using System.Collections.Generic;
 public class PlayerAttack : MonoBehaviour
 {
     private Animator animator;
-
     private GameMaster gameMaster;
+    private PlayerStatus playerStatus;
 
     [Header("攻撃判定")]
     public BoxCollider2D attackCollider;
 
-    private PlayerStatus playerStatus;
-
     // 今回の攻撃ですでにダメージを与えた敵
     private HashSet<GameObject> hitEnemies = new HashSet<GameObject>();
+
+    // 攻撃中の種類を保持
+    private bool isStrongAttack = false;
 
     void Start()
     {
@@ -28,24 +29,16 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         if (animator == null) return;
 
-        // 操作不能中は入力を受け付けない
         if (playerStatus != null && !playerStatus.CanControl)
-        {
             return;
-        }
 
-        // 高速移動中は攻撃できない
         if (playerStatus != null && playerStatus.IsDashActive)
-        {
             return;
-        }
 
-        // 攻撃中・攻撃への遷移中は入力を受け付けない
         AnimatorStateInfo state =
             animator.GetCurrentAnimatorStateInfo(0);
 
@@ -56,33 +49,30 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
-        // 空中では攻撃できない
         PlayerMovement movement = GetComponent<PlayerMovement>();
 
         if (movement == null || !movement.IsGrounded)
-        {
             return;
-        }
 
-        // 左クリック：通常攻撃
+        // 通常攻撃
         if (Input.GetMouseButtonDown(0))
         {
             if (gameMaster != null && !gameMaster.CanAttack1())
-            {
                 return;
-            }
+
+            isStrongAttack = false;
 
             animator.ResetTrigger("Attack1");
             animator.ResetTrigger("Attack2");
             animator.SetTrigger("Attack1");
         }
-        // 右クリック：強攻撃
+        // 強攻撃
         else if (Input.GetMouseButtonDown(1))
         {
             if (gameMaster != null && !gameMaster.CanAttack2())
-            {
                 return;
-            }
+
+            isStrongAttack = true;
 
             animator.ResetTrigger("Attack1");
             animator.ResetTrigger("Attack2");
@@ -90,7 +80,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-
+    // Animation Event：攻撃判定開始
     public void StartHit()
     {
         if (attackCollider == null) return;
@@ -100,17 +90,11 @@ public class PlayerAttack : MonoBehaviour
 
         bool success = true;
 
-        AnimatorStateInfo state =
-            animator.GetCurrentAnimatorStateInfo(0);
-
-        if (state.IsName("Attack2"))
+        if (gameMaster != null)
         {
-            if (gameMaster != null)
+            if (isStrongAttack)
                 success = gameMaster.ReduceAttack2Time();
-        }
-        else
-        {
-            if (gameMaster != null)
+            else
                 success = gameMaster.ReduceAttack1Time();
         }
 
@@ -119,43 +103,41 @@ public class PlayerAttack : MonoBehaviour
         attackCollider.enabled = true;
     }
 
+    // Animation Event：攻撃判定終了
     public void EndHit()
     {
-        if (attackCollider == null) return;
-
-        attackCollider.enabled = false;
+        if (attackCollider != null)
+        {
+            attackCollider.enabled = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        TryDamageEnemy(other);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        TryDamageEnemy(other);
+    }
+
+    private void TryDamageEnemy(Collider2D other)
+    {
         if (attackCollider == null || !attackCollider.enabled)
-        {
             return;
-        }
 
-        // 高速移動中は攻撃判定を無効にする
         if (playerStatus != null && playerStatus.IsDashActive)
-        {
             return;
-        }
 
-        if (playerStatus == null || animator == null) return;
+        if (playerStatus == null || animator == null)
+            return;
 
-        AnimatorStateInfo state =
-            animator.GetCurrentAnimatorStateInfo(0);
+        int damage = isStrongAttack
+            ? playerStatus.attackPower2
+            : playerStatus.attackPower1;
 
-        int damage;
-
-        if (state.IsName("Attack2"))
-        {
-            damage = playerStatus.attackPower2;
-        }
-        else
-        {
-            damage = playerStatus.attackPower1;
-        }
-
-        // 死神への攻撃
+        // 死神
         GrimReaperStats grimReaper =
             other.GetComponentInParent<GrimReaperStats>();
 
@@ -163,22 +145,39 @@ public class PlayerAttack : MonoBehaviour
         {
             GameObject enemyObject = grimReaper.gameObject;
 
-            if (!hitEnemies.Add(enemyObject)) return;
+            if (!hitEnemies.Add(enemyObject))
+                return;
 
             grimReaper.TakeDamage(damage);
 
-            DamageFlash damageFlash =
+            DamageFlash flash =
                 grimReaper.GetComponent<DamageFlash>();
 
-            if (damageFlash != null)
-            {
-                damageFlash.Flash();
-            }
+            if (flash != null)
+                flash.Flash();
 
             return;
         }
 
-        // 通常の敵への攻撃
+        // ゴーレム ★追加
+        GolemStats golem =
+            other.GetComponentInParent<GolemStats>();
+
+        if (golem != null)
+        {
+            GameObject enemyObject = golem.gameObject;
+
+            if (!hitEnemies.Add(enemyObject))
+                return;
+
+            golem.TakeDamage(damage);
+
+            Debug.Log("プレイヤーの攻撃がゴーレムに命中！ ダメージ：" + damage);
+
+            return;
+        }
+
+        // 通常の敵
         EnemyStats enemy =
             other.GetComponentInParent<EnemyStats>();
 
@@ -186,7 +185,8 @@ public class PlayerAttack : MonoBehaviour
         {
             GameObject enemyObject = enemy.gameObject;
 
-            if (!hitEnemies.Add(enemyObject)) return;
+            if (!hitEnemies.Add(enemyObject))
+                return;
 
             enemy.TakeDamage(damage);
         }
