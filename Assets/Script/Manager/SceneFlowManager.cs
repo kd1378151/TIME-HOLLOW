@@ -46,7 +46,7 @@ public class SceneFlowManager : MonoBehaviour
         {
             m_isLoadingScene = true;
 
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene(sceneName);
 
             m_isLoadingScene = false;
         }
@@ -75,11 +75,6 @@ public class SceneFlowManager : MonoBehaviour
     public void LoadResultScene()
     {
         LoadScene(m_resultSceneName);
-    }
-
-    public void LoadSettingsScene()
-    {
-        SceneManager.LoadScene("Settings");
     }
 
     #endregion

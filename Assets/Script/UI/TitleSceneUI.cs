@@ -6,11 +6,10 @@ public class TitleSceneUI : MonoBehaviour
     public void StartGameButton()
     {
         SceneFlowManager _manager = FindAnyObjectByType<SceneFlowManager>();
+
         if (_manager != null)
         {
-            _manager.LoadStageScene();
-
-            PlayerExperience.ResetExperience();
+            _manager.LoadMainMenuScene();
         }
     }
 
@@ -18,9 +17,19 @@ public class TitleSceneUI : MonoBehaviour
     public void SettingsButton()
     {
         SceneFlowManager _manager = FindAnyObjectByType<SceneFlowManager>();
+
         if (_manager != null)
         {
-            _manager.LoadSettingsScene();
+            _manager.LoadSettingScene();
+        }
+    }
+
+    public void ToMainMenuButton()
+    {
+        SceneFlowManager _manager = FindAnyObjectByType<SceneFlowManager>();
+        if (_manager != null)
+        {
+            _manager.LoadMainMenuScene();
         }
     }
 }
