@@ -177,6 +177,26 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
+        // コウモリ
+        BatStats bat =
+            other.GetComponentInParent<BatStats>();
+
+        if (bat != null)
+        {
+            GameObject enemyObject = bat.gameObject;
+
+            if (!hitEnemies.Add(enemyObject))
+                return;
+
+            bat.TakeDamage(damage);
+
+            Debug.Log(
+                "プレイヤーの攻撃がコウモリに命中！ ダメージ：" + damage
+            );
+
+            return;
+        }
+
         // 通常の敵
         EnemyStats enemy =
             other.GetComponentInParent<EnemyStats>();

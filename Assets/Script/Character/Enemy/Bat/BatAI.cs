@@ -7,15 +7,16 @@ public class BatAI : MonoBehaviour
 {
     private enum BatState
     {
-        Chase,       // プレイヤー追尾
-        Waiting,     // 突進前の待機
-        Retreating,  // 後退して助走
-        Charging,    // 突進
-        Recovery     // 突進後の待機
+        Chase,
+        Waiting,
+        Retreating,
+        Charging,
+        Recovery
     }
 
     [Header("プレイヤー設定")]
     public Transform player;
+
     [Header("追尾・突進の目標位置")]
     public Vector2 playerTargetOffset = new Vector2(0f, 1f);
 
@@ -43,13 +44,15 @@ public class BatAI : MonoBehaviour
 
     [Header("攻撃判定")]
     public Collider2D attackCollider;
-    public int attackDamage = 10;
 
     [Header("衝突設定")]
     public LayerMask obstacleLayers;
 
     [Header("向き設定")]
     public bool spriteFacesRight = true;
+
+    [Header("気絶エフェクト")]
+    public GameObject stunEffect;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -58,7 +61,17 @@ public class BatAI : MonoBehaviour
     private bool isAwake = false;
     private bool isWakeUpPlaying = false;
 
+    private EnemyAlert enemyAlert;
+    private EnemyHPBar enemyHPBar;
+    private BatStats batStats;
+
     private BatState currentState = BatState.Chase;
+
+    // 現在突進中かどうか
+    public bool IsCharging
+    {
+        get { return currentState == BatState.Charging; }
+    }
 
     private float stateTimer = 0f;
     private float cooldownTimer = 0f;
@@ -74,7 +87,6 @@ public class BatAI : MonoBehaviour
     // 衝突状況の記録
     private bool hasHitPlayer = false;
     private bool hasHitObstacle = false;
-
 
     // =====================================
     // 初期設定
@@ -92,8 +104,23 @@ public class BatAI : MonoBehaviour
         // 最初は攻撃判定OFF
         if (attackCollider != null)
             attackCollider.enabled = false;
-    }
 
+        batStats = GetComponent<BatStats>();
+        enemyAlert = GetComponent<EnemyAlert>();
+
+        enemyHPBar = GetComponentInChildren<EnemyHPBar>(true);
+
+        if (enemyHPBar != null)
+        {
+            enemyHPBar.gameObject.SetActive(false);
+        }
+
+        // 気絶エフェクトは最初は非表示
+        if (stunEffect != null)
+        {
+            stunEffect.SetActive(false);
+        }
+    }
 
     // =====================================
     // Update
@@ -144,7 +171,6 @@ public class BatAI : MonoBehaviour
 
                 break;
 
-
             // -------------------------
             // 突進前の待機
             // -------------------------
@@ -159,7 +185,6 @@ public class BatAI : MonoBehaviour
                 }
 
                 break;
-
 
             // -------------------------
             // 後退・助走
@@ -176,7 +201,6 @@ public class BatAI : MonoBehaviour
 
                 break;
 
-
             // -------------------------
             // 突進
             // -------------------------
@@ -185,7 +209,6 @@ public class BatAI : MonoBehaviour
 
                 stateTimer -= Time.deltaTime;
 
-                // 一定時間経過したら通常終了
                 if (stateTimer <= 0f)
                 {
                     EndCharge();
@@ -193,26 +216,20 @@ public class BatAI : MonoBehaviour
 
                 break;
 
-
             // -------------------------
-            // 突進後の待機
+            // 突進後の待機・気絶
             // -------------------------
 
             case BatState.Recovery:
 
-                // 移動せずプレイヤーの方向だけを向く
-                if (player != null)
-                {
-                    Vector2 direction =
-                        GetPlayerCenter() - rb.position;
-
-                    UpdateFacing(direction);
-                }
-
+                // 気絶中は向きを変更しない
+                // タイマーだけを進める
                 stateTimer -= Time.deltaTime;
 
                 if (stateTimer <= 0f)
                 {
+                    StopStunEffect();
+
                     currentState = BatState.Chase;
 
                     Debug.Log("コウモリが追尾を再開！");
@@ -221,7 +238,6 @@ public class BatAI : MonoBehaviour
                 break;
         }
     }
-
 
     // =====================================
     // FixedUpdate
@@ -238,10 +254,6 @@ public class BatAI : MonoBehaviour
 
         switch (currentState)
         {
-            // -------------------------
-            // 追尾
-            // -------------------------
-
             case BatState.Chase:
 
                 if (player != null)
@@ -254,11 +266,6 @@ public class BatAI : MonoBehaviour
 
                 break;
 
-
-            // -------------------------
-            // 突進前の待機
-            // -------------------------
-
             case BatState.Waiting:
 
                 rb.linearVelocity = Vector2.zero;
@@ -266,10 +273,8 @@ public class BatAI : MonoBehaviour
 
                 break;
 
-
             case BatState.Retreating:
 
-                // プレイヤーとは反対方向に後退
                 rb.linearVelocity =
                     -chargeDirection * retreatSpeed;
 
@@ -277,10 +282,8 @@ public class BatAI : MonoBehaviour
 
                 break;
 
-
             case BatState.Charging:
 
-                // 後退方向の真逆へ突進
                 rb.linearVelocity =
                     chargeDirection * chargeSpeed;
 
@@ -288,17 +291,14 @@ public class BatAI : MonoBehaviour
 
                 break;
 
-
             // -------------------------
-            // 突進後の待機
+            // 突進後の待機・気絶
             // -------------------------
 
             case BatState.Recovery:
 
-                // 完全停止
+                // 気絶中は移動も反転もしない
                 rb.linearVelocity = Vector2.zero;
-
-                // 待機モーション
                 animator.SetBool("IsMoving", false);
 
                 break;
@@ -306,14 +306,9 @@ public class BatAI : MonoBehaviour
     }
 
     // =====================================
-    // プレイヤーの中心座標を取得
+    // プレイヤーの目標座標
     // =====================================
-    // =====================================
-    // プレイヤーのTop座標を取得
-    // =====================================
-    // =====================================
-    // プレイヤーの追尾・突進目標座標
-    // =====================================
+
     Vector2 GetPlayerCenter()
     {
         if (player == null)
@@ -325,9 +320,9 @@ public class BatAI : MonoBehaviour
     // =====================================
     // プレイヤー追尾
     // =====================================
+
     void ChasePlayer()
     {
-        // プレイヤーの中心を取得
         Vector2 targetPosition = GetPlayerCenter();
 
         Vector2 direction =
@@ -348,10 +343,8 @@ public class BatAI : MonoBehaviour
 
         animator.SetBool("IsMoving", true);
 
-        // 追尾中だけ向きを変更
         UpdateFacing(direction);
     }
-
 
     // =====================================
     // 突進前の待機
@@ -367,25 +360,22 @@ public class BatAI : MonoBehaviour
 
         animator.SetBool("IsMoving", false);
 
-        // プレイヤーの方向を記録
         chargeDirection =
             ((Vector2)player.position - rb.position).normalized;
 
-        // プレイヤーの方向を向く
         UpdateFacing(chargeDirection);
 
         Debug.Log("コウモリが突進準備！");
     }
 
-
     // =====================================
     // 後退して助走
     // =====================================
+
     void StartRetreat()
     {
         currentState = BatState.Retreating;
 
-        // 助走開始時にプレイヤーの方向を記録
         if (player != null)
         {
             chargeDirection =
@@ -409,11 +399,9 @@ public class BatAI : MonoBehaviour
     // =====================================
     // 突進開始
     // =====================================
+
     void StartCharge()
     {
-        // chargeDirectionは変更しない
-        // 助走開始時に決めた方向をそのまま使用する
-
         currentState = BatState.Charging;
 
         stateTimer = chargeDuration;
@@ -423,10 +411,14 @@ public class BatAI : MonoBehaviour
 
         hitTargets.Clear();
 
+        if (batStats != null)
+        {
+            batStats.ResetChargeHit();
+        }
+
         if (attackCollider != null)
             attackCollider.enabled = true;
 
-        // 突進方向に向きを合わせる
         UpdateFacing(chargeDirection);
 
         animator.SetBool("IsMoving", true);
@@ -443,25 +435,20 @@ public class BatAI : MonoBehaviour
         FinishCharge(normalRecoveryDuration);
     }
 
-
     // =====================================
     // 突進終了（共通処理）
     // =====================================
 
     void FinishCharge(float recoveryTime)
     {
-        // 突進中でなければ処理しない
         if (currentState != BatState.Charging)
             return;
 
-        // 攻撃判定OFF
         if (attackCollider != null)
             attackCollider.enabled = false;
 
-        // 移動を即座に停止
         rb.linearVelocity = Vector2.zero;
 
-        // 次の突進までのクールタイム
         cooldownTimer = chargeCooldown;
 
         Debug.Log(
@@ -471,10 +458,8 @@ public class BatAI : MonoBehaviour
             hasHitObstacle
         );
 
-        // 終了理由に応じた待機へ
         StartRecovery(recoveryTime);
     }
-
 
     // =====================================
     // 突進後の待機
@@ -486,19 +471,15 @@ public class BatAI : MonoBehaviour
 
         stateTimer = duration;
 
-        // 完全停止
         rb.linearVelocity = Vector2.zero;
 
-        // 攻撃判定を確実にOFF
         if (attackCollider != null)
             attackCollider.enabled = false;
 
-        // 待機モーション
         animator.SetBool("IsMoving", false);
 
         Debug.Log("コウモリが待機！ 時間：" + duration);
     }
-
 
     // =====================================
     // プレイヤー感知
@@ -519,14 +500,12 @@ public class BatAI : MonoBehaviour
         if (yDistance <= 0f)
             return;
 
-        // 四角形の範囲内か確認
         if (xDistance <= detectionWidth / 2f &&
             yDistance <= detectionHeight)
         {
             WakeUp();
         }
     }
-
 
     // =====================================
     // 起床
@@ -542,10 +521,7 @@ public class BatAI : MonoBehaviour
         animator.SetBool("IsMoving", false);
         animator.SetBool("IsAwake", true);
         animator.SetTrigger("WakeUp");
-
-        Debug.Log("コウモリが目を覚ました！");
     }
-
 
     // =====================================
     // 起床アニメーション終了イベント
@@ -555,9 +531,16 @@ public class BatAI : MonoBehaviour
     {
         isWakeUpPlaying = false;
 
-        Debug.Log("コウモリが起き上がった！");
-    }
+        if (enemyAlert != null)
+        {
+            enemyAlert.ShowAlert();
+        }
 
+        if (enemyHPBar != null)
+        {
+            enemyHPBar.gameObject.SetActive(true);
+        }
+    }
 
     // =====================================
     // 左右の向き変更
@@ -575,7 +558,6 @@ public class BatAI : MonoBehaviour
             : direction.x > 0f;
     }
 
-
     // =====================================
     // プレイヤーへの攻撃判定
     // =====================================
@@ -588,15 +570,13 @@ public class BatAI : MonoBehaviour
         if (player == null)
             return;
 
-        // プレイヤー本体または子オブジェクトか確認
         if (other.transform != player &&
             !other.transform.IsChildOf(player))
             return;
 
-        // プレイヤーを識別
-        EntityId targetID = player.gameObject.GetEntityId();
+        EntityId targetID =
+            player.gameObject.GetEntityId();
 
-        // 同じ突進で重複攻撃しない
         if (hitTargets.Contains(targetID))
             return;
 
@@ -604,17 +584,16 @@ public class BatAI : MonoBehaviour
 
         hasHitPlayer = true;
 
-        Debug.Log(
-            "コウモリがプレイヤーに命中！ ダメージ：" +
-            attackDamage
-        );
+        // 気絶エフェクト表示
+        PlayStunEffect();
 
-        // ここにPlayerStatusのダメージ処理を接続する
+        if (batStats != null)
+        {
+            batStats.TryDamagePlayer(other);
+        }
 
-        // プレイヤー命中時は即座に突進を中止
         FinishCharge(playerHitRecoveryDuration);
     }
-
 
     // =====================================
     // 壁・床との衝突判定
@@ -640,10 +619,35 @@ public class BatAI : MonoBehaviour
 
         Debug.Log("コウモリが壁・床に衝突！");
 
-        // 壁・床に当たったら即座に突進を中止
+        // 気絶エフェクト表示
+        PlayStunEffect();
+
         FinishCharge(obstacleHitRecoveryDuration);
     }
 
+    // =====================================
+    // 気絶エフェクト表示
+    // =====================================
+
+    void PlayStunEffect()
+    {
+        if (stunEffect != null)
+        {
+            stunEffect.SetActive(true);
+        }
+    }
+
+    // =====================================
+    // 気絶エフェクト非表示
+    // =====================================
+
+    void StopStunEffect()
+    {
+        if (stunEffect != null)
+        {
+            stunEffect.SetActive(false);
+        }
+    }
 
     // =====================================
     // 感知範囲の表示
@@ -651,7 +655,6 @@ public class BatAI : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // 感知範囲
         Gizmos.color = Color.green;
 
         Vector3 center = transform.position;
@@ -671,7 +674,6 @@ public class BatAI : MonoBehaviour
             )
         );
 
-        // 突進範囲
         Gizmos.color = Color.red;
 
         Gizmos.DrawWireSphere(
