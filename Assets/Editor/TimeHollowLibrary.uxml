@@ -9,6 +9,10 @@
                     <uie:ToolbarSearchField name="enemy-search" tooltip="名前で検索する" class="enemy-search"/>
                     <ui:Button name="refresh-enemies" text="更新"/>
                 </ui:VisualElement>
+                <ui:VisualElement name="enemy-add-row" class="enemy-add-row">
+                    <uie:ObjectField name="enemy-source" label="追加する敵" tooltip="Project のプレハブまたは Hierarchy のゲームオブジェクトを選択します。"/>
+                    <ui:Button name="add-enemy" text="追加" tooltip="選択した敵をプレハブとしてライブラリに追加します。"/>
+                </ui:VisualElement>
                 <uie:ObjectField name="scene-player" label="シ-ンプレーヤ" tooltip="オプションです。同じシーンに新たに配置された敵にA Iプレーヤー参照を割り当てます。"/>
                 <ui:Label name="enemy-count" text="敵プレハブ" class="enemy-count"/>
                 <ui:ScrollView name="enemies-list" class="enemies-list"/>

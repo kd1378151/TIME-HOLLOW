@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -63,6 +64,23 @@ public class TimeHollowLibrary : EditorWindow
         });
         root.Q<Button>("refresh-enemies").clicked += RefreshEnemies;
 
+        var source = root.Q<ObjectField>("enemy-source");
+        source.objectType = typeof(GameObject);
+        source.allowSceneObjects = true;
+        var add = root.Q<Button>("add-enemy");
+        add.SetEnabled(source.value != null);
+        source.RegisterValueChangedCallback(evt => add.SetEnabled(evt.newValue != null));
+        add.clicked += () =>
+        {
+            if (!TryAddEnemy(source.value as GameObject))
+                return;
+
+            source.value = null;
+            m_Search = "";
+            search.SetValueWithoutNotify(m_Search);
+            RefreshEnemies();
+        };
+
         if (m_ScenePlayer == null)
             m_ScenePlayer = GameObject.FindGameObjectsWithTag("Player")
                 .FirstOrDefault(player => player.scene == SceneManager.GetActiveScene())?.transform;
@@ -80,6 +98,8 @@ public class TimeHollowLibrary : EditorWindow
         if (m_EnemyList == null || m_Count == null)
             return;
 
+        rootVisualElement.Q<VisualElement>("enemy-add-row")
+            .SetEnabled(!EditorApplication.isPlayingOrWillChangePlaymode);
         m_EnemyList.Clear();
         if (!AssetDatabase.IsValidFolder(EnemyFolder))
         {
@@ -175,6 +195,69 @@ public class TimeHollowLibrary : EditorWindow
             }
         }
         return "Enemy prefab";
+    }
+
+    private bool TryAddEnemy(GameObject source)
+    {
+        if (source == null || EditorApplication.isPlayingOrWillChangePlaymode)
+            return false;
+        if (!AssetDatabase.IsValidFolder(EnemyFolder))
+        {
+            ShowNotification(new GUIContent("Missing folder: " + EnemyFolder));
+            return false;
+        }
+
+        var sourcePath = AssetDatabase.GetAssetPath(source);
+        bool isAsset = EditorUtility.IsPersistent(source);
+        string fileName;
+        if (isAsset)
+        {
+            if (!AssetDatabase.IsMainAsset(source)
+                || !string.Equals(Path.GetExtension(sourcePath), ".prefab", StringComparison.OrdinalIgnoreCase))
+            {
+                ShowNotification(new GUIContent("Choose a .prefab asset from the Project window."));
+                return false;
+            }
+
+            if (sourcePath.StartsWith(EnemyFolder + "/", StringComparison.OrdinalIgnoreCase))
+            {
+                ShowNotification(new GUIContent(source.name + " is already in the library."));
+                return true;
+            }
+
+            fileName = Path.GetFileName(sourcePath);
+        }
+        else
+        {
+            if (!source.scene.IsValid() || !source.scene.isLoaded
+                || EditorSceneManager.IsPreviewScene(source.scene))
+            {
+                ShowNotification(new GUIContent("Choose a GameObject from a regular scene."));
+                return false;
+            }
+
+            var prefabRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(source);
+            if (prefabRoot != null && prefabRoot != source)
+            {
+                ShowNotification(new GUIContent("Choose the root of the prefab instance."));
+                return false;
+            }
+
+            var name = string.Join("_", source.name.Split(Path.GetInvalidFileNameChars())).Trim().TrimEnd('.');
+            fileName = (name.Length == 0 ? "Enemy" : name) + ".prefab";
+        }
+
+        var destination = AssetDatabase.GenerateUniqueAssetPath(EnemyFolder + "/" + fileName);
+        bool saved;
+        if (isAsset)
+            saved = AssetDatabase.CopyAsset(sourcePath, destination);
+        else
+            PrefabUtility.SaveAsPrefabAsset(source, destination, out saved);
+
+        ShowNotification(new GUIContent(saved
+            ? "Added " + Path.GetFileNameWithoutExtension(destination) + " to the library."
+            : "Could not add " + source.name + ". See the Console for details."));
+        return saved;
     }
 
     private void PlaceEnemy(GameObject prefab)
